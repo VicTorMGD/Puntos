@@ -11,13 +11,13 @@
 
 ### 1. Configurar Base de Datos
 
-1. Crear una base de datos MySQL llamada `tienda_ci4`
+1. Crear una base de datos MySQL llamada `puntos`
 2. Copiar el archivo `env` a `.env` en la raíz del proyecto
 3. Configurar las credenciales de base de datos en `.env`:
 
 ```env
 database.default.hostname = localhost
-database.default.database = tienda_ci4
+database.default.database = puntos
 database.default.username = tu_usuario
 database.default.password = tu_password
 ```
@@ -69,7 +69,7 @@ El archivo `.htaccess` ya está configurado en la carpeta `public/`.
 server {
     listen 80;
     server_name tu-dominio.com;
-    root /ruta/a/tienda-ci4/public;
+    root /ruta/a/puntos/public;
     index index.php;
 
     location / {
