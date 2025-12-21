@@ -27,7 +27,7 @@
     <!-- Sidebar -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <a href="<?= base_url('dashboard') ?>" class="brand-link">
-        <span class="brand-text font-weight-light">Mi Tienda</span>
+        <span class="brand-text font-weight-light" style="display: flex; justify-content:center;">Mi Tienda</span>
       </a>
       <div class="sidebar">
         <nav>

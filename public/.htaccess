@@ -15,6 +15,9 @@ Options -Indexes
 	# change the following line to match the subfolder you need.
 	# http://httpd.apache.org/docs/current/mod/mod_rewrite.html#rewritebase
 	# RewriteBase /
+	# Si la aplicación está en un subdirectorio (por ejemplo /puntos/public/),
+	# descomenta y ajusta la siguiente línea:
+	RewriteBase /puntos/public/
 
 	# Redirect Trailing Slashes...
 	RewriteCond %{REQUEST_FILENAME} !-d
