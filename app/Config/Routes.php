@@ -38,3 +38,17 @@ $routes->get('users/delete/(:num)', 'User::delete/$1', ['filter' => 'auth']);
 
 $routes->get('export/products', 'ExportController::exportProducts', ['filter' => 'auth']);
 $routes->get('export/products-pdf', 'ExportController::exportProductsPdf', ['filter' => 'auth']);
+
+$routes->post('clientes/buscar-dni', 'ClientesController::buscarPorDocumento');
+$routes->post('compras/registrar', 'ComprasController::registrar');
+
+$routes->post('clientes/guardar', 'ClientesController::guardar');
+
+// Endpoint para obtener token CSRF via AJAX
+$routes->get('csrf/token', 'CsrfController::token');
+
+$routes->get('compras', 'ComprasController::index');
+$routes->get('clientes', 'ClientesController::index');
+
+$routes->get('compras/ticket/(:num)', 'ComprasController::ticket/$1');
+
