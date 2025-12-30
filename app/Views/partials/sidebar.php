@@ -10,23 +10,23 @@
     <nav>
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview">
 
-        <!-- Categorías -->
+        <!-- Categorías 
         <li class="nav-item">
           <a href="<?= base_url('categories') ?>"
              class="nav-link <?= uri_string() == 'categories' ? 'active' : '' ?>">
             <i class="nav-icon fas fa-tags"></i>
             <p>Categorías</p>
           </a>
-        </li>
+        </li> -->
 
-        <!-- Productos -->
+        <!-- Productos 
         <li class="nav-item">
           <a href="<?= base_url('products') ?>"
              class="nav-link <?= uri_string() == 'products' ? 'active' : '' ?>">
             <i class="nav-icon fas fa-box"></i>
             <p>Productos</p>
           </a>
-        </li>
+        </li> -->
 
         <!-- NUEVO: Puntos / Compras -->
         <li class="nav-item">

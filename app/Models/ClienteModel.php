@@ -17,4 +17,16 @@ class ClienteModel extends Model
                     ->where('id', $clienteId)
                     ->update();
     }
+
+    // app/Models/ClienteModel.php
+    public function getPuntosAcumulados(int $clienteId): int
+    {
+        return (int) $this->db->table('puntos')
+            ->selectSum('puntos')
+            ->where('cliente_id', $clienteId)
+            ->get()
+            ->getRow()
+            ->puntos ?? 0;
+    }
+
 }

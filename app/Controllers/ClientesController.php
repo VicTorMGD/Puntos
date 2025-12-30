@@ -62,4 +62,19 @@ class ClientesController extends BaseController
         ]);
     }
 
+    // app/Models/ClienteModel.php
+    public function show($id)
+    {
+        $clienteModel = new ClienteModel();
+
+        $cliente = $clienteModel->find($id);
+        $puntos  = $clienteModel->getPuntosAcumulados($id);
+
+        return view('clientes/show', [
+            'cliente' => $cliente,
+            'puntos_acumulados' => $puntos
+        ]);
+    }
+
+
 }
