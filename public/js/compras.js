@@ -29,7 +29,8 @@ $(function() {
     });
   }
 
-  $('#buscarCliente').on('click', function () {
+  // Función para buscar cliente (reutilizable)
+  function buscarCliente() {
     const dni = $('#dni').val().trim();
 
     if (!dni) return;
@@ -67,6 +68,17 @@ $(function() {
       console.error('Error en /clientes/buscar-dni:', status, error);
       Swal.fire('Error', 'No se pudo buscar el cliente. Revisa la consola.', 'error');
     }).always(function() { refreshCsrf(); });
+  }
+
+  // Event listener para el botón "Buscar"
+  $('#buscarCliente').on('click', buscarCliente);
+
+  // Event listener para presionar Enter en el input del DNI
+  $('#dni').on('keypress', function (e) {
+    if (e.which === 13 || e.keyCode === 13) { // Enter key
+      e.preventDefault();
+      buscarCliente();
+    }
   });
 
   $('#guardarCompra').on('click', function () {
@@ -116,6 +128,25 @@ $(function() {
     .always(function () {
       refreshCsrf();
     });
+  });
+
+  // Event listener para el botón "Imprimir"
+  $('#imprimir').on('click', function () {
+    if (!clienteId) {
+      Swal.fire({
+        title: 'Sin cliente',
+        text: 'Debes buscar un cliente primero',
+        icon: 'warning',
+        confirmButtonText: 'Entendido'
+      });
+      return;
+    }
+
+    // Abre el ticket del cliente con sus puntos actuales (sin necesidad de compra_id)
+    window.open(
+      buildUrl('compras/ticket-cliente/' + clienteId),
+      '_blank'
+    );
   });
 
 

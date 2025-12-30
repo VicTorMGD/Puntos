@@ -51,4 +51,8 @@ $routes->get('compras', 'ComprasController::index');
 $routes->get('clientes', 'ClientesController::index');
 
 $routes->get('compras/ticket/(:num)', 'ComprasController::ticket/$1');
+$routes->get('compras/ticket-cliente/(:num)', 'ComprasController::ticketCliente/$1');
+
+$routes->get('clientes/(:num)/puntos', 'ClientesController::puntos/$1');
+
 
