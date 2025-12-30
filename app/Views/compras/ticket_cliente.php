@@ -12,7 +12,10 @@
 <body onload="window.print()">
   <div class="ticket">
     <div class="center">
-      <strong>MI TIENDA</strong><br>
+      <strong>PHARMALIVET</strong><br>
+      <div class="img-logo mt-2" style="display:flex;justify-content:center; margin: 10px;">
+        <img src="<?= base_url('assets/img/pharmalivet.png') ?>" alt="Logo" style="width: 10%; height: 10%; ">
+      </div>
       Sistema de Puntos
     </div>
     <hr>

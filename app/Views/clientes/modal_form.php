@@ -7,7 +7,7 @@
   }
 
   .modal-cliente-custom .modal-header {
-    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+    background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
     border: none;
     padding: 25px 30px;
     color: #fff;
@@ -34,7 +34,7 @@
   }
 
   .modal-cliente-custom .modal-body {
-    background: linear-gradient(to bottom, #f8f9ff 0%, #ffffff 100%);
+    background: linear-gradient(to bottom, #E0F4F8 0%, #ffffff 100%);
     padding: 30px;
   }
 
@@ -60,7 +60,7 @@
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: #b8b8d4;
+    color: #3A7A9A;
     font-size: 1rem;
     z-index: 1;
   }
@@ -68,7 +68,7 @@
   .form-group-custom input {
     width: 100%;
     padding: 12px 15px 12px 45px;
-    border: 2px solid #e8e8f5;
+    border: 2px solid #B8D4E0;
     border-radius: 12px;
     font-size: 0.95rem;
     transition: all 0.3s ease;
@@ -78,16 +78,16 @@
 
   .form-group-custom input:focus {
     outline: none;
-    border-color: #ff9a9e;
-    box-shadow: 0 0 0 4px rgba(255, 154, 158, 0.1);
+    border-color: #1B5E7C;
+    box-shadow: 0 0 0 4px rgba(27, 94, 124, 0.1);
     background: #fff;
   }
 
   .form-group-custom input:read-only {
-    background: linear-gradient(135deg, #f5f5ff 0%, #fafaff 100%);
-    color: #6c6c8a;
+    background: linear-gradient(135deg, #E0F4F8 0%, #F0F9FB 100%);
+    color: #3A7A9A;
     cursor: not-allowed;
-    border-color: #d8d8e8;
+    border-color: #B8D4E0;
   }
 
   .form-group-custom input::placeholder {
@@ -95,14 +95,14 @@
   }
 
   .modal-cliente-custom .modal-footer {
-    background: linear-gradient(to top, #f8f9ff 0%, #ffffff 100%);
+    background: linear-gradient(to top, #E0F4F8 0%, #ffffff 100%);
     border: none;
     padding: 20px 30px;
     border-radius: 0 0 20px 20px;
   }
 
   .btn-save-custom {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
     border: none;
     color: #fff;
     padding: 12px 35px;
@@ -110,14 +110,14 @@
     font-weight: 600;
     font-size: 1rem;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 4px 15px rgba(27, 94, 124, 0.4);
     transition: all 0.3s ease;
     text-transform: uppercase;
   }
 
   .btn-save-custom:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    box-shadow: 0 6px 20px rgba(27, 94, 124, 0.5);
     color: #fff;
   }
 
@@ -126,7 +126,7 @@
   }
 
   .btn-cancel-custom {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #3A7A9A 0%, #87CEEB 100%);
     border: none;
     color: #fff;
     padding: 12px 35px;
@@ -134,7 +134,7 @@
     font-weight: 600;
     font-size: 1rem;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+    box-shadow: 0 4px 15px rgba(58, 122, 154, 0.4);
     transition: all 0.3s ease;
     text-transform: uppercase;
     margin-right: 10px;
@@ -142,7 +142,7 @@
 
   .btn-cancel-custom:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(245, 87, 108, 0.5);
+    box-shadow: 0 6px 20px rgba(58, 122, 154, 0.5);
     color: #fff;
   }
 </style>
