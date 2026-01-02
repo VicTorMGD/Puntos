@@ -9,8 +9,15 @@ class ClientesController extends BaseController
 {
     public function index()
     {
-        return view('clientes/index');
+        $clienteModel = new ClienteModel();
+
+        $clientes = $clienteModel->getClientesConPuntos();
+
+        return view('clientes/index', [
+            'clientes' => $clientes
+        ]);
     }
+
     
     public function buscarPorDocumento()
     {
@@ -63,7 +70,7 @@ class ClientesController extends BaseController
         ]);
     }
 
-    // app/Models/ClienteModel.php
+    // MOstrar el detalle del cliente
     public function show($id)
     {
         $clienteModel = new ClienteModel();

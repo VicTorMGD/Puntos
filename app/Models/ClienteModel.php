@@ -29,4 +29,20 @@ class ClienteModel extends Model
             ->puntos ?? 0;
     }
 
+    // obtener los clientes
+    public function getClientesConPuntos()
+    {
+        return $this->select('
+                clientes.id,
+                clientes.numero_documento,
+                clientes.nombres,
+                clientes.apellidos,
+                COALESCE(SUM(p.puntos), 0) AS puntos
+            ')
+            ->join('puntos p', 'p.cliente_id = clientes.id', 'left')
+            ->groupBy('clientes.id')
+            ->findAll();
+    }
+
+
 }
