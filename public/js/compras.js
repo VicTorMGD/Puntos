@@ -81,6 +81,19 @@ $(function() {
     }
   });
 
+  // Función para limpiar el formulario después de guardar
+  function limpiarFormulario() {
+    // Limpiar campo de monto
+    $('#monto').val('');
+
+    // Resetear variables de estado
+    clienteId = null;
+    datosCliente = null;
+
+    // Ocultar sección de información del cliente
+    $('#infoCliente').hide();
+  }
+
   $('#guardarCompra').on('click', function () {
     const monto = $('#monto').val();
 
@@ -118,6 +131,8 @@ $(function() {
             '_blank'
           );
         }
+        // Limpiar formulario después de cerrar la alerta
+        limpiarFormulario();
       });
 
     }, 'json')

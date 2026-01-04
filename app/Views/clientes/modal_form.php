@@ -195,11 +195,11 @@
 
           <div class="form-group-custom">
             <label for="telefono">
-              <i class="fas fa-phone mr-1"></i> Teléfono
+              <i class="fas fa-phone mr-1"></i> Celular
             </label>
             <div class="input-wrapper">
               <i class="fas fa-phone input-icon"></i>
-              <input type="text" name="telefono" id="telefono" placeholder="Ingrese el teléfono">
+              <input type="text" name="telefono" id="telefono" placeholder="Ingrese el teléfono" maxlength="9">
             </div>
           </div>
 
