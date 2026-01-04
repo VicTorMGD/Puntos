@@ -55,4 +55,9 @@ $routes->get('compras/ticket-cliente/(:num)', 'ComprasController::ticketCliente/
 
 $routes->get('clientes/(:num)/puntos', 'ClientesController::puntos/$1');
 
+$routes->get('clientes/(:num)/edit', 'ClientesController::edit/$1');
+$routes->post('clientes/(:num)/update', 'ClientesController::update/$1');
+$routes->post('clientes/(:num)/delete', 'ClientesController::delete/$1');
+
+
 
