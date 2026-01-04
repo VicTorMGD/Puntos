@@ -1,12 +1,12 @@
 <!-- Sidebar -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-  <a href="<?= base_url('dashboard') ?>" class="brand-link">
+  <a href="<?= base_url('compras') ?>" class="brand-link">
     <span class="brand-text font-weight-light" style="display:flex;justify-content:center; font-size: 1.5rem; font-weight: bold; border-radius: 15px; padding: 10px; border: 1px solid #fff; background-color: #000;">
       PHARMALIVET
       <br>
     </span>
     <div class="img-logo mt-2" style="display:flex;justify-content:center;">
-      <img src="<?= base_url('assets/img/pharmalivet.png') ?>" alt="Logo" style="width: 50%; height: 50%; ">
+      <img src="<?= base_url('assets/img/pharmalivet.png') ?>" alt="Logo" style="width: 50%; height: 50%; padding: 10px; margin: 15px; ">
     </div>
   </a>
 

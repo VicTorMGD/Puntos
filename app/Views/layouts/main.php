@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title><?= $title ?? 'Panel' ?></title>
+  <title><?= $title ?? 'Pharmalivet' ?></title>
   <link rel="stylesheet" href="<?= base_url('AdminLTE/plugins/fontawesome-free/css/all.min.css') ?>">
   <link rel="stylesheet" href="<?= base_url('AdminLTE/dist/css/adminlte.min.css') ?>">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">

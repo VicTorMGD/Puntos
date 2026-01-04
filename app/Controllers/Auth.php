@@ -34,7 +34,7 @@ class Auth extends Controller
             'logged_in' => true
         ]);
 
-        return redirect()->to('/dashboard'); // Redirige a tu panel principal
+        return redirect()->to('/compras'); // Redirige a tu panel principal
     }
 
     public function logout()
