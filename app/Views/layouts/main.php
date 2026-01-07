@@ -185,7 +185,7 @@
 
   <script>
     // Variables globales para JavaScript
-    const BASE_URL = '<?= base_url() ?>';
+    const BASE_URL = '<?= base_url() ?>/';
     const CSRF_TOKEN_NAME = '<?= csrf_token() ?>';
     const CSRF_TOKEN_VALUE = '<?= csrf_hash() ?>';
   </script>

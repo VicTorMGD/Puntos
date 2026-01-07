@@ -16,6 +16,9 @@ $routes->get('logout', 'Auth::logout');
 $routes->get('dashboard', 'DashboardController::index', ['filter' => 'auth']);
 $routes->get('dashboard/puntos-por-dia', 'DashboardController::puntosPorDia', ['filter' => 'auth']);
 $routes->get('dashboard/compras-por-dia', 'DashboardController::comprasPorDia', ['filter' => 'auth']);
+$routes->get('dashboard/top-clientes', 'DashboardController::topClientes', ['filter' => 'auth']);
+$routes->get('dashboard/puntos-por-mes', 'DashboardController::puntosPorMes', ['filter' => 'auth']);
+$routes->get('dashboard/compras-por-mes', 'DashboardController::comprasPorMes', ['filter' => 'auth']);
 
 $routes->get('categories', 'Category::index', ['filter' => 'auth']);
 $routes->get('categories/create', 'Category::create', ['filter' => 'auth']);

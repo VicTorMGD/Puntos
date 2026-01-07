@@ -3,6 +3,39 @@
 
 <h2>Dashboard</h2>
 
+
+
+
+<div class="row mb-3">
+    <div class="col-md-3">
+        <input type="date" id="fechaInicio" class="form-control">
+    </div>
+    <div class="col-md-3">
+        <input type="date" id="fechaFin" class="form-control">
+    </div>
+    <div class="col-md-2">
+        <button id="btnFiltrar" class="btn btn-primary">
+            Filtrar
+        </button>
+    </div>
+    <div class="col-md-2">
+        <select id="tipoAgrupacion" class="form-control">
+            <option value="dia" selected>Por Día</option>
+            <option value="mes">Por Mes</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <button id="btnLimpiarFiltros" class="btn btn-secondary" style="display:none;">
+            <i class="fas fa-times-circle"></i> Limpiar Filtros
+        </button>
+    </div>
+    <div class="col-md-12 mt-3">
+        <div id="filtroActivo" class="alert alert-info" role="alert" style="display:none; padding: 1rem 1.5rem; font-size: 1.1rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            <i class="fas fa-filter"></i> <strong>Filtrando datos</strong><span id="rangoFechas"></span>
+        </div>
+    </div>
+</div>
+
 <div class="row mb-4">
 
     <div class="col-md-3">
@@ -48,12 +81,27 @@
     <div class="col-md-12">
         <div id="chartPuntos" style="height:400px;"></div>
     </div>
+    <button class="btn btn-sm btn-success" id="exportPuntos">
+        Exportar Grafico de Puntos
+    </button>
 </div>
 
 <div class="row mt-4">
     <div class="col-md-12">
         <div id="chartCompras" style="height:400px;"></div>
     </div>
+    <button class="btn btn-sm btn-success" id="exportCompras">
+        Exportar Grafico de Compras
+    </button>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div id="chartTopClientes" style="height:400px;"></div>
+    </div>
+    <button class="btn btn-sm btn-success" id="exportTopClientes">
+        Exportar Grafico de Top Clientes
+    </button>
 </div>
 
 
