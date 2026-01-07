@@ -343,24 +343,7 @@ class ClientesController extends BaseController
         ]);
     }
 
-    // public function puntos($id)
-    // {
-    //     $clienteModel = new ClienteModel();
-    //     $puntosModel  = new PuntosModel();
-    
-    //     $cliente = $clienteModel->find($id);
-    
-    //     if (!$cliente) {
-    //         throw new \CodeIgniter\Exceptions\PageNotFoundException('Cliente no encontrado');
-    //     }
-    
-    //     $movimientos = $puntosModel->getByCliente($id);
-    
-    //     return view('clientes/puntos', [
-    //         'cliente'     => $cliente,
-    //         'movimientos' => $movimientos
-    //     ]);
-    // }
+   
 
     public function puntos($id)
     {

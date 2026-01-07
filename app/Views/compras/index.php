@@ -127,8 +127,10 @@
         type="text"
         id="dni"
         class="form-control compras-input"
-        placeholder="Ingrese DNI"
+        placeholder="Ingrese DNI (8 dígitos)"
         maxlength="8"
+        pattern="[0-9]{8}"
+        inputmode="numeric"
       >
     </div>
 

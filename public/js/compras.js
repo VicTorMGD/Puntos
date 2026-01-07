@@ -3,6 +3,16 @@ $(function() {
   let clienteId = null;
   let datosCliente = null;
 
+  // Validar que el DNI solo acepte números y máximo 8 dígitos
+  $('#dni').on('input', function() {
+    // Eliminar cualquier carácter que no sea número
+    this.value = this.value.replace(/[^0-9]/g, '');
+    // Limitar a 8 caracteres
+    if (this.value.length > 8) {
+      this.value = this.value.slice(0, 8);
+    }
+  });
+
   function buildUrl(path) {
     if (typeof BASE_URL === 'undefined') return path;
     return BASE_URL.replace(/\/$/, '') + '/' + path.replace(/^\/+/, '');
@@ -96,6 +106,12 @@ $(function() {
 
   $('#guardarCompra').on('click', function () {
     const monto = $('#monto').val();
+
+    // Validar que se haya seleccionado un cliente
+    if (!clienteId) {
+      Swal.fire('Error', 'Debe seleccionar un cliente', 'error');
+      return;
+    }
 
     if (!monto || monto <= 0) {
       Swal.fire('Error', 'Monto inválido', 'error');

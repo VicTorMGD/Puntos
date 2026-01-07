@@ -53,6 +53,25 @@ class ComprasController extends BaseController
         $clienteId = (int) $this->request->getPost('cliente_id');
         $monto     = (float) $this->request->getPost('monto');
 
+        // Validar datos básicos
+        if ($clienteId <= 0 || $monto <= 0) {
+            return $this->response->setJSON([
+                'success' => false,
+                'msg' => 'Datos inválidos'
+            ]);
+        }
+
+        // Validar que el cliente existe y está activo
+        $clienteModel = new \App\Models\ClienteModel();
+        $cliente = $clienteModel->where('id', $clienteId)->where('estado', 1)->first();
+
+        if (!$cliente) {
+            return $this->response->setJSON([
+                'success' => false,
+                'msg' => 'Cliente no encontrado o inactivo'
+            ]);
+        }
+
         $db = db_connect();
         $db->transStart();
 
