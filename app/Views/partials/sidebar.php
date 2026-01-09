@@ -1,7 +1,7 @@
 <!-- Sidebar -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <a href="<?= base_url('dashboard') ?>" class="brand-link">
-    <span class="brand-text font-weight-light" style="display:flex;justify-content:center; font-size: 1.5rem; font-weight: bold; border-radius: 15px; padding: 10px; border: 1px solid #fff; background-color: #000;">
+    <span class="brand-text font-weight-light" style="display:flex;justify-content:center; font-size: 1.5rem; font-weight: bold; border-radius: 15px; padding: 10px; border: 1px solid #fff; background-color: #ac1a1aff;">
       PHARMALIVET
       <br>
     </span>

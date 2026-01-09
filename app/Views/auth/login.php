@@ -3,16 +3,8 @@
 <?= $this->section('content') ?>
 
 <style>
-  .login-wrapper {
-    min-height: 60vh;
-    background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
-    border-radius: 18px;
-    padding: 40px 20px;
-  }
-
   .login-card {
     width: 100%;
-    max-width: 420px;
     border: none;
     border-radius: 18px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -34,17 +26,18 @@
   .login-card-header h4 {
     color: #1B5E7C;
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin-bottom: 5px;
   }
 
   .login-card-header p {
     color: #6c757d;
     font-size: 0.9rem;
+    margin-bottom: 0;
   }
 
   .login-card-body {
-    padding: 25px 30px 30px;
+    padding: 25px 20px 30px;
     background-color: #ffffff;
   }
 
@@ -52,6 +45,7 @@
     color: #1B5E7C;
     font-weight: 600;
     margin-bottom: 8px;
+    font-size: 0.95rem;
   }
 
   .login-card-body .input-group-text {
@@ -59,12 +53,14 @@
     color: #fff;
     border: none;
     border-radius: 8px 0 0 8px;
+    padding: 12px 14px;
   }
 
   .login-card-body .form-control {
     border: 1px solid #87CEEB;
     border-radius: 0 8px 8px 0;
-    padding: 10px 15px;
+    padding: 12px 14px;
+    font-size: 16px;
   }
 
   .login-card-body .form-control:focus {
@@ -78,6 +74,7 @@
     border-left: none;
     border-radius: 0 8px 8px 0;
     color: #1B5E7C;
+    padding: 12px 14px;
   }
 
   .btn-toggle-password:hover {
@@ -91,12 +88,14 @@
     color: #fff;
     font-weight: 600;
     border-radius: 8px;
-    padding: 12px 24px;
+    padding: 14px 24px;
     box-shadow: 0 4px 10px rgba(27, 94, 124, 0.4);
     transition: all 0.2s ease;
+    font-size: 1rem;
   }
 
-  .btn-login:hover {
+  .btn-login:hover,
+  .btn-login:active {
     transform: translateY(-1px);
     box-shadow: 0 6px 16px rgba(27, 94, 124, 0.5);
     color: #fff;
@@ -108,6 +107,7 @@
     border-radius: 8px;
     padding: 12px;
     margin-bottom: 15px;
+    font-size: 0.9rem;
   }
 
   .alert-custom-warning {
@@ -116,6 +116,7 @@
     border-radius: 8px;
     padding: 12px;
     margin-bottom: 15px;
+    font-size: 0.9rem;
   }
 
   .form-check-input:checked {
@@ -127,17 +128,43 @@
     color: #1B5E7C;
     text-decoration: none;
     font-weight: 500;
+    font-size: 0.85rem;
   }
 
   .link-password:hover {
     color: #87CEEB;
     text-decoration: underline;
   }
+
+  .form-check-label {
+    font-size: 0.9rem;
+  }
+
+  .text-muted.small {
+    font-size: 0.85rem;
+  }
+
+  @media (min-width: 576px) {
+    .login-card-header {
+      padding: 35px 25px 25px;
+    }
+
+    .login-card-header img {
+      height: 70px;
+    }
+
+    .login-card-header h4 {
+      font-size: 1.6rem;
+    }
+
+    .login-card-body {
+      padding: 30px 35px 35px;
+    }
+  }
 </style>
 
-<div class="d-flex justify-content-center align-items-center login-wrapper">
-  <div class="card login-card">
-    <div class="login-card-header">
+<div class="card login-card">
+  <div class="login-card-header">
       <img src="<?= base_url('assets/img/pharmalivet.png') ?>" alt="Logo">
       <h4>Iniciar sesión</h4>
       <p>Accede a tu panel de administración</p>
@@ -193,7 +220,6 @@
 
       <div class="text-center mt-3 small text-muted">¿No tienes cuenta? Contacta al administrador.</div>
     </div>
-  </div>
 </div>
 
 <script>

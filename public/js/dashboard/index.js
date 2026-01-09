@@ -86,7 +86,13 @@ $(function () {
     let clientesData = [];
 
     chartTop.setOption({
-        title: { text: 'Top 5 clientes por puntos' },
+        title: {
+            text: 'Top 5 clientes por puntos',
+            textStyle: {
+                fontSize: 18,
+                fontWeight: 'bold'
+            }
+        },
         tooltip: {
             trigger: 'axis',
             formatter: function(params) {
@@ -99,24 +105,52 @@ $(function () {
                         </div>`;
             }
         },
+        grid: {
+            left: '3%',
+            right: '10%',
+            containLabel: true
+        },
         xAxis: { type: 'value' },
-        yAxis: { type: 'category', data: [] },
+        yAxis: {
+            type: 'category',
+            data: [],
+            axisLabel: {
+                fontSize: 13,
+                fontWeight: 'bold',
+                color: '#333'
+            }
+        },
         series: [{
             type: 'bar',
-            data: []
+            data: [],
+            label: {
+                show: true,
+                position: 'insideRight',
+                formatter: '{c}',
+                fontSize: 14,
+                fontWeight: 'bold',
+                color: '#fff'
+            },
+            itemStyle: {
+                color: '#5470c6'
+            }
         }]
     });
 
     $.get('dashboard/top-clientes', function (data) {
         clientesData = data;
+        // Invertir el orden para que el mayor quede arriba
+        const reversed = [...data].reverse();
         chartTop.setOption({
-            yAxis: { data: data.map(d => d.cliente) },
-            series: [{ data: data.map(d => d.total) }]
+            yAxis: { data: reversed.map(d => d.cliente) },
+            series: [{ data: reversed.map(d => parseInt(d.total)) }]
         });
     });
 
     chartTop.on('click', function (params) {
-        const cliente = clientesData[params.dataIndex];
+        // Como el array está invertido, calculamos el índice correcto
+        const reversedIndex = clientesData.length - 1 - params.dataIndex;
+        const cliente = clientesData[reversedIndex];
 
         if (!cliente || !cliente.id) {
             console.error('Cliente sin ID');
@@ -155,9 +189,11 @@ $(function () {
     function cargarTopClientes(inicio = '', fin = '') {
         $.get('dashboard/top-clientes', { inicio, fin }, function (data) {
             clientesData = data;
+            // Invertir el orden para que el mayor quede arriba
+            const reversed = [...data].reverse();
             chartTop.setOption({
-                yAxis: { data: data.map(d => d.cliente) },
-                series: [{ data: data.map(d => d.total) }]
+                yAxis: { data: reversed.map(d => d.cliente) },
+                series: [{ data: reversed.map(d => parseInt(d.total)) }]
             });
         });
     }

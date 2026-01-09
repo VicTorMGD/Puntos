@@ -44,25 +44,25 @@ $routes->get('users/delete/(:num)', 'User::delete/$1', ['filter' => 'auth']);
 $routes->get('export/products', 'ExportController::exportProducts', ['filter' => 'auth']);
 $routes->get('export/products-pdf', 'ExportController::exportProductsPdf', ['filter' => 'auth']);
 
-$routes->post('clientes/buscar-dni', 'ClientesController::buscarPorDocumento');
-$routes->post('compras/registrar', 'ComprasController::registrar');
+$routes->post('clientes/buscar-dni', 'ClientesController::buscarPorDocumento', ['filter' => 'auth']);
+$routes->post('compras/registrar', 'ComprasController::registrar', ['filter' => 'auth']);
 
-$routes->post('clientes/guardar', 'ClientesController::guardar');
+$routes->post('clientes/guardar', 'ClientesController::guardar', ['filter' => 'auth']);
 
 // Endpoint para obtener token CSRF via AJAX
-$routes->get('csrf/token', 'CsrfController::token');
+$routes->get('csrf/token', 'CsrfController::token', ['filter' => 'auth']);
 
-$routes->get('compras', 'ComprasController::index');
-$routes->get('clientes', 'ClientesController::index');
+$routes->get('compras', 'ComprasController::index', ['filter' => 'auth']);
+$routes->get('clientes', 'ClientesController::index', ['filter' => 'auth']);
 
-$routes->get('compras/ticket/(:num)', 'ComprasController::ticket/$1');
-$routes->get('compras/ticket-cliente/(:num)', 'ComprasController::ticketCliente/$1');
+$routes->get('compras/ticket/(:num)', 'ComprasController::ticket/$1', ['filter' => 'auth']);
+$routes->get('compras/ticket-cliente/(:num)', 'ComprasController::ticketCliente/$1', ['filter' => 'auth']);
 
-$routes->get('clientes/(:num)/puntos', 'ClientesController::puntos/$1');
+$routes->get('clientes/(:num)/puntos', 'ClientesController::puntos/$1', ['filter' => 'auth']);
 
-$routes->get('clientes/(:num)/edit', 'ClientesController::edit/$1');
-$routes->post('clientes/(:num)/update', 'ClientesController::update/$1');
-$routes->post('clientes/(:num)/delete', 'ClientesController::delete/$1');
+$routes->get('clientes/(:num)/edit', 'ClientesController::edit/$1', ['filter' => 'auth']);
+$routes->post('clientes/(:num)/update', 'ClientesController::update/$1', ['filter' => 'auth']);
+$routes->post('clientes/(:num)/delete', 'ClientesController::delete/$1', ['filter' => 'auth']);
 
 
 
