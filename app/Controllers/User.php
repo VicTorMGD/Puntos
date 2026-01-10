@@ -3,14 +3,9 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
-use CodeIgniter\Controller;
 
-class User extends Controller
+class User extends BaseController
 {
-    public function __construct()
-    {
-        helper('url');
-    }
 
     private function checkAuth()
     {

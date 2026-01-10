@@ -8,6 +8,7 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use App\Models\UserModel;
 
 /**
  * Class BaseController
@@ -29,6 +30,13 @@ abstract class BaseController extends Controller
     protected $request;
 
     /**
+     * Datos del usuario autenticado
+     *
+     * @var array|null
+     */
+    protected $userData = null;
+
+    /**
      * An array of helpers to be loaded automatically upon
      * class instantiation. These helpers will be available
      * to all other controllers that extend BaseController.
@@ -36,7 +44,7 @@ abstract class BaseController extends Controller
      * @var list<string>
      */
     protected $helpers = ['url', 'form', 'session'];
-    
+
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
@@ -52,8 +60,54 @@ abstract class BaseController extends Controller
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
 
-        // Preload any models, libraries, etc, here.
+        // Cargar datos del usuario autenticado
+        $this->loadUserData();
+    }
 
-        // E.g.: $this->session = service('session');
+    /**
+     * Carga los datos completos del usuario autenticado
+     * y los hace disponibles globalmente en las vistas
+     */
+    protected function loadUserData()
+    {
+        $session = session();
+
+        if ($session->get('logged_in') && $session->get('user_id')) {
+            $userModel = new UserModel();
+            $user = $userModel->find($session->get('user_id'));
+
+            if ($user) {
+                // Remover datos sensibles
+                unset($user['password']);
+                unset($user['session_token']);
+
+                $this->userData = $user;
+
+                // Hacer disponible en todas las vistas
+                $renderer = service('renderer');
+                $renderer->setVar('currentUser', $this->userData);
+            }
+        }
+    }
+
+    /**
+     * Obtener datos del usuario actual
+     */
+    protected function getCurrentUser(): ?array
+    {
+        return $this->userData;
+    }
+
+    /**
+     * Obtener URL del avatar del usuario
+     */
+    protected function getAvatarUrl(?string $avatar = null): string
+    {
+        if ($avatar && file_exists(WRITEPATH . 'uploads/avatars/' . $avatar)) {
+            return base_url('uploads/avatars/' . $avatar);
+        }
+
+        // Avatar por defecto (iniciales)
+        return '';
     }
 }

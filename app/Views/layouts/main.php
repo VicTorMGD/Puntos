@@ -79,6 +79,83 @@
     .navbar-nav .nav-link[data-widget="pushmenu"] i {
       font-size: 1.2rem;
     }
+
+    /* Estilos para el avatar mini en el header */
+    .user-avatar-mini {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .user-avatar-mini:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+
+    .user-avatar-initials-mini {
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .user-avatar-initials-mini:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+
+    .user-name {
+      font-weight: 500;
+      color: #333;
+    }
+
+    /* Animación pulse suave para el avatar */
+    @keyframes pulse-soft {
+      0%, 100% {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      }
+      50% {
+        box-shadow: 0 2px 15px rgba(102, 126, 234, 0.4);
+      }
+    }
+
+    .user-avatar-mini,
+    .user-avatar-initials-mini {
+      animation: pulse-soft 3s ease-in-out infinite;
+    }
+
+    /* Dropdown menu styling */
+    .dropdown-menu {
+      border: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      border-radius: 8px;
+    }
+
+    .dropdown-item {
+      padding: 10px 20px;
+      transition: background-color 0.2s ease;
+    }
+
+    .dropdown-item:hover {
+      background-color: #f8f9fa;
+    }
+
+    .dropdown-item.text-danger:hover {
+      background-color: #fff5f5;
+    }
   </style>
 
 </head>
@@ -97,8 +174,33 @@
       </ul>
 
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a href="<?= base_url('logout') ?>" class="nav-link text-danger">Cerrar Sesión</a>
+        <!-- Dropdown de usuario -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <?php
+              $currentUser = $currentUser ?? null;
+              $userName = $currentUser['name'] ?? session()->get('name') ?? 'Usuario';
+              $userAvatar = $currentUser['avatar'] ?? null;
+              $initials = strtoupper(substr($userName, 0, 1));
+            ?>
+            <?php if ($userAvatar && file_exists(WRITEPATH . 'uploads/avatars/' . $userAvatar)): ?>
+              <img src="<?= base_url('uploads/avatars/' . $userAvatar) ?>"
+                   class="user-avatar-mini"
+                   alt="Avatar">
+            <?php else: ?>
+              <span class="user-avatar-initials-mini"><?= $initials ?></span>
+            <?php endif; ?>
+            <span class="ml-2 d-none d-md-inline user-name"><?= esc($userName) ?></span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="<?= base_url('perfil') ?>">
+              <i class="fas fa-user-circle mr-2"></i> Mi Perfil
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" href="<?= base_url('logout') ?>">
+              <i class="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión
+            </a>
+          </div>
         </li>
       </ul>
     </nav>

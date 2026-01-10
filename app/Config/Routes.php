@@ -64,5 +64,15 @@ $routes->get('clientes/(:num)/edit', 'ClientesController::edit/$1', ['filter' =>
 $routes->post('clientes/(:num)/update', 'ClientesController::update/$1', ['filter' => 'auth']);
 $routes->post('clientes/(:num)/delete', 'ClientesController::delete/$1', ['filter' => 'auth']);
 
+// Rutas del módulo Perfil (accesible para todos los usuarios autenticados)
+$routes->get('perfil', 'Profile::index', ['filter' => 'auth']);
+$routes->post('perfil/update', 'Profile::update', ['filter' => 'auth']);
+$routes->post('perfil/avatar', 'Profile::uploadAvatar', ['filter' => 'auth']);
+$routes->post('perfil/avatar/delete', 'Profile::deleteAvatar', ['filter' => 'auth']);
+$routes->post('perfil/password', 'Profile::changePassword', ['filter' => 'auth']);
+
+// Ruta para servir archivos de uploads (avatars)
+$routes->get('uploads/avatars/(:any)', 'Uploads::avatar/$1');
+
 
 

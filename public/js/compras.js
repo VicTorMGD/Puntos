@@ -76,7 +76,7 @@ $(function() {
 
     }, 'json').fail(function (xhr, status, error) {
       console.error('Error en /clientes/buscar-dni:', status, error);
-      Swal.fire('Error', 'No se pudo buscar el cliente. Revisa la consola.', 'error');
+      Swal.fire('Error', 'No se pudo buscar el cliente. Verifica si tu Sesión sigue activa.', 'error');
     }).always(function() { refreshCsrf(); });
   }
 
