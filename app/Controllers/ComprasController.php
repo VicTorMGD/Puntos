@@ -72,35 +72,26 @@ class ComprasController extends BaseController
             ]);
         }
 
-        $db = db_connect();
-        $db->transStart();
-
-        // 1. Registrar compra
+        // Usar el servicio de puntos que ahora maneja campañas
         $puntosService = new PuntosService();
-        $puntos = $puntosService->calcularPuntos($monto);
-
-        $db->table('compras')->insert([
-            'cliente_id'       => $clienteId,
-            'usuario_id'       => session()->get('user_id'),
-            'monto_compra'     => $monto,
-            'puntos_generados' => $puntos
-        ]);
-
-        $compraId = $db->insertID();
-
-        // 2. Registrar movimiento de puntos
-        $puntosService->registrarMovimiento(
+        $resultado = $puntosService->registrarCompra(
             $clienteId,
-            $monto,
-            $compraId
+            session()->get('user_id'),
+            $monto
         );
 
-        $db->transComplete();
+        if (!$resultado['success']) {
+            return $this->response->setJSON([
+                'success' => false,
+                'msg' => $resultado['message']
+            ]);
+        }
 
         return $this->response->setJSON([
-            'success'        => true,
-            'puntos_generados'=> $puntos,
-            'compra_id'      => $compraId
+            'success'         => true,
+            'puntos_generados' => $resultado['puntos'],
+            'compra_id'       => $resultado['compra_id'],
+            'campania'        => $resultado['campania'] ?? null
         ]);
     }
 

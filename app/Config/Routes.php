@@ -74,5 +74,23 @@ $routes->post('perfil/password', 'Profile::changePassword', ['filter' => 'auth']
 // Ruta para servir archivos de uploads (avatars)
 $routes->get('uploads/avatars/(:any)', 'Uploads::avatar/$1');
 
+// Rutas del módulo Campañas (solo administradores)
+$routes->get('campanias', 'Campanias::index', ['filter' => 'auth']);
+$routes->get('campanias/crear', 'Campanias::create', ['filter' => 'auth']);
+$routes->post('campanias/store', 'Campanias::store', ['filter' => 'auth']);
+$routes->get('campanias/editar/(:num)', 'Campanias::edit/$1', ['filter' => 'auth']);
+$routes->post('campanias/update/(:num)', 'Campanias::update/$1', ['filter' => 'auth']);
+$routes->post('campanias/cerrar/(:num)', 'Campanias::cerrar/$1', ['filter' => 'auth']);
+$routes->get('campanias/gestionar-puntos/(:num)', 'Campanias::gestionarPuntos/$1', ['filter' => 'auth']);
+$routes->post('campanias/migrar-puntos', 'Campanias::migrarPuntosCliente', ['filter' => 'auth']);
+
+// Rutas del módulo Canjes (todos los usuarios autenticados)
+$routes->get('canjes', 'Canjes::index', ['filter' => 'auth']);
+$routes->post('canjes/buscar-cliente', 'Canjes::buscarCliente', ['filter' => 'auth']);
+$routes->post('canjes/registrar', 'Canjes::registrar', ['filter' => 'auth']);
+$routes->post('canjes/ajustar', 'Canjes::ajustar', ['filter' => 'auth']);
+$routes->get('canjes/ticket/(:num)', 'Canjes::ticket/$1', ['filter' => 'auth']);
+$routes->get('canjes/historial/(:num)', 'Canjes::historial/$1', ['filter' => 'auth']);
+
 
 
