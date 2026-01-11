@@ -155,15 +155,17 @@ class Canjes extends BaseController
             ]);
 
             // 4. Registrar en historial de puntos (tabla puntos)
+            // IMPORTANTE: Los canjes se registran con valor NEGATIVO para que el SUM refleje correctamente el saldo
+            // El tipo debe ser 'USADO' según el ENUM de la BD (GANADO, USADO, AJUSTE)
             $descripcionCanje = "Canje - {$campaniaNombre}";
             if ($observacion) {
                 $descripcionCanje .= " ({$observacion})";
             }
             $this->puntosModel->registrar(
                 $clienteId,
-                $puntosCanjear,
+                -$puntosCanjear, // Valor negativo para reflejar descuento de puntos
                 null,
-                'CANJEADO',
+                'USADO', // Tipo correcto según ENUM de la BD
                 $descripcionCanje
             );
 
@@ -276,13 +278,14 @@ class Canjes extends BaseController
             ]);
 
             // 4. Registrar en historial de puntos (tabla puntos)
-            $tipoAjuste = $diferencia >= 0 ? 'AJUSTE_POSITIVO' : 'AJUSTE_NEGATIVO';
+            // IMPORTANTE: Se usa el valor real de la diferencia (positivo o negativo) para que el SUM sea correcto
+            // El tipo debe ser 'AJUSTE' según el ENUM de la BD (GANADO, USADO, AJUSTE)
             $descripcionAjuste = "Ajuste - {$campaniaNombre}: {$puntosAntes} -> {$nuevosPuntos} ({$observacion})";
             $this->puntosModel->registrar(
                 $clienteId,
-                abs($diferencia),
+                $diferencia, // Valor real (positivo si aumenta, negativo si disminuye)
                 null,
-                $tipoAjuste,
+                'AJUSTE', // Tipo correcto según ENUM de la BD
                 $descripcionAjuste
             );
 

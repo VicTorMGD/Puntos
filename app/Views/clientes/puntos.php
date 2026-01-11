@@ -419,7 +419,7 @@
                         $badgeText = 'Ganado';
                     } elseif ($esCanje) {
                         $badgeClass = 'badge-info';
-                        $badgeText = 'Canjeado';
+                        $badgeText = 'Usado';
                     } elseif ($esAjuste) {
                         $badgeClass = 'badge-warning';
                         $badgeText = $tipoUpper === 'AJUSTE_POSITIVO' ? 'Ajuste (+)' : 'Ajuste (-)';
@@ -454,6 +454,7 @@
 <script>
 $(document).ready(function() {
   $('#tablaPuntos').DataTable({
+    autoWidth: false,
     language: {
       url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
     },

@@ -5,18 +5,21 @@ namespace App\Controllers;
 use App\Models\CampaniaModel;
 use App\Models\PuntosCampaniaModel;
 use App\Models\AjustePuntosModel;
+use App\Models\PuntosModel;
 use App\Services\AuditoriaService;
 
 class Campanias extends BaseController
 {
     protected $campaniaModel;
     protected $puntosCampaniaModel;
+    protected $puntosModel;
     protected $auditoriaService;
 
     public function __construct()
     {
         $this->campaniaModel = new CampaniaModel();
         $this->puntosCampaniaModel = new PuntosCampaniaModel();
+        $this->puntosModel = new PuntosModel();
         $this->auditoriaService = new AuditoriaService();
     }
 
@@ -314,6 +317,10 @@ class Campanias extends BaseController
             // Eliminar puntos
             $this->puntosCampaniaModel->eliminarPuntos($clienteId, $campaniaOrigenId);
 
+            // Obtener nombre de campaña origen
+            $campaniaOrigen = $this->campaniaModel->find($campaniaOrigenId);
+            $campaniaOrigenNombre = $campaniaOrigen ? $campaniaOrigen['nombre'] : 'Campaña #' . $campaniaOrigenId;
+
             // Registrar ajuste
             $ajustePuntosModel->registrarAjuste(
                 $clienteId,
@@ -324,6 +331,25 @@ class Campanias extends BaseController
                 "Puntos eliminados por cierre de campaña",
                 session()->get('user_id')
             );
+
+            // Registrar en historial de puntos (valor negativo para reflejar eliminación)
+            // El tipo debe ser 'AJUSTE' según el ENUM de la BD (GANADO, USADO, AJUSTE)
+            $this->puntosModel->registrar(
+                $clienteId,
+                -$puntosAntes, // Valor negativo para que el SUM refleje la reducción
+                null,
+                'AJUSTE', // Tipo correcto según ENUM de la BD
+                "Puntos eliminados - {$campaniaOrigenNombre}"
+            );
+
+            // Actualizar cache de puntos del cliente
+            $clienteModel = new \App\Models\ClienteModel();
+            $cliente = $clienteModel->find($clienteId);
+            if ($cliente) {
+                $clienteModel->update($clienteId, [
+                    'puntos_acumulados' => max(0, $cliente['puntos_acumulados'] - $puntosAntes)
+                ]);
+            }
 
             $this->auditoriaService->registrarAccion('campanias', 'eliminar_puntos', 'puntos_campania', $clienteId, [
                 'puntos_eliminados' => $puntosAntes,

@@ -8,41 +8,43 @@
     border-radius: 18px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
-    margin-bottom: 20px;
   }
 
   .canjes-card-header {
     background: linear-gradient(135deg, #1A6BA8 0%, #4A9DD9 100%);
     color: #fff;
     padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
-  .canjes-card-header .card-title {
+  .canjes-card-header h3 {
     margin: 0;
-    font-size: 1.3rem;
+    font-size: 1.35rem;
     font-weight: 600;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
   }
 
   .canjes-card-body {
     background: linear-gradient(to bottom, #D4E8F5 0%, #ffffff 100%);
-    padding: 20px;
+    padding: 20px 22px 24px;
   }
 
-  .canjes-card .form-group label {
-    color: #1A6BA8;
+  .canjes-form-label {
     font-weight: 600;
-    margin-bottom: 8px;
+    color: #1A6BA8;
   }
 
-  .canjes-card .form-control {
-    border-radius: 8px;
-    border: 1px solid #4A9DD9;
+  .canjes-input {
+    border-radius: 12px;
+    border: 2px solid #4A9DD9;
+    transition: all 0.2s ease;
   }
 
-  .canjes-card .form-control:focus {
+  .canjes-input:focus {
     border-color: #1A6BA8;
-    box-shadow: 0 0 0 0.2rem rgba(26, 107, 168, 0.25);
+    box-shadow: 0 0 0 4px rgba(26, 107, 168, 0.12);
   }
 
   .btn-buscar-canje {
@@ -51,7 +53,7 @@
     color: #ffffff;
     font-weight: 600;
     border-radius: 50px;
-    padding: 10px 20px;
+    padding: 12px 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -65,22 +67,17 @@
     color: #ffffff;
   }
 
-  .cliente-info-card {
-    background: linear-gradient(to bottom, #D4E8F5 0%, #ffffff 100%);
+  .info-cliente-box {
+    background-color: #ffffff;
+    border-radius: 14px;
+    padding: 16px 18px 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #C8E0F0;
+    margin-top: 15px;
   }
 
-  .cliente-info-card .card-header {
-    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-    color: #fff;
-  }
-
-  .puntos-campania-card {
-    background: linear-gradient(to bottom, #D4E8F5 0%, #ffffff 100%);
-  }
-
-  .puntos-campania-card .card-header {
-    background: linear-gradient(135deg, #1A6BA8 0%, #4A9DD9 100%);
-    color: #fff;
+  .info-cliente-box p {
+    margin-bottom: 6px;
   }
 
   .campania-item-card {
@@ -213,57 +210,35 @@
   }
 </style>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      <div class="canjes-card">
-        <div class="canjes-card-header">
-          <h2 class="card-title"><i class="fas fa-exchange-alt mr-2"></i>Canje de Puntos</h2>
-        </div>
-      </div>
-    </div>
+<div class="card canjes-card">
+  <div class="canjes-card-header">
+    <h3><i class="fas fa-exchange-alt mr-2"></i>Canje de Puntos</h3>
   </div>
 
-  <?php if (!$campaniaActiva): ?>
-  <div class="row mb-3">
-    <div class="col-12">
-      <div class="alert alert-warning-custom">
-        <i class="fas fa-exclamation-triangle"></i>
-        <strong>Atención:</strong> No hay campaña activa. Los canjes solo pueden realizarse sobre puntos existentes.
-      </div>
+  <div class="canjes-card-body">
+    <?php if (!$campaniaActiva): ?>
+    <div class="alert alert-warning-custom mb-3">
+      <i class="fas fa-exclamation-triangle"></i>
+      <strong>Atención:</strong> No hay campaña activa. Los canjes solo pueden realizarse sobre puntos existentes.
     </div>
-  </div>
-  <?php endif; ?>
+    <?php endif; ?>
 
-  <div class="row">
-    <!-- Panel de búsqueda -->
-    <div class="col-md-4">
-      <div class="canjes-card">
-        <div class="canjes-card-header">
-          <h3 class="card-title"><i class="fas fa-search mr-2"></i>Buscar Cliente</h3>
+    <div class="row">
+      <!-- Panel de búsqueda -->
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="canjes-form-label" for="documento">DNI del Cliente</label>
+          <input type="text" class="form-control canjes-input" id="documento"
+                 placeholder="Ingrese DNI (8 dígitos)" maxlength="8" autofocus>
         </div>
-        <div class="canjes-card-body">
-          <div class="form-group">
-            <label for="documento">DNI del Cliente</label>
-            <div class="input-group">
-              <input type="text" class="form-control" id="documento"
-                     placeholder="Ingrese DNI" maxlength="8" autofocus>
-              <div class="input-group-append">
-                <button class="btn btn-buscar-canje" type="button" id="btnBuscar">
-                  <i class="fas fa-search"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Info del cliente -->
-      <div id="clienteInfo" class="canjes-card cliente-info-card" style="display: none; margin-top: 20px;">
-        <div class="card-header">
-          <h3 class="card-title"><i class="fas fa-user mr-2"></i>Cliente Encontrado</h3>
-        </div>
-        <div class="card-body">
+        <button class="btn btn-buscar-canje mb-3" type="button" id="btnBuscar">
+          <i class="fas fa-search mr-1"></i> Buscar
+        </button>
+
+        <!-- Info del cliente -->
+        <div id="clienteInfo" class="info-cliente-box" style="display: none;">
+          <h5 class="mb-2" style="color: #1A6BA8; font-weight: 600;"><i class="fas fa-user mr-2"></i>Cliente Encontrado</h5>
           <h4 id="clienteNombre" class="mb-2" style="color: #333;"></h4>
           <p class="mb-1"><strong style="color: #1A6BA8;">DNI:</strong> <span id="clienteDni"></span></p>
           <p class="mb-0">
@@ -273,24 +248,20 @@
           <input type="hidden" id="clienteId" value="">
         </div>
       </div>
-    </div>
 
-    <!-- Panel de puntos por campaña -->
-    <div class="col-md-8">
-      <div id="panelPuntos" class="canjes-card puntos-campania-card" style="display: none;">
-        <div class="card-header">
-          <h3 class="card-title"><i class="fas fa-coins mr-2"></i>Puntos por Campaña</h3>
-        </div>
-        <div class="card-body">
+      <!-- Panel de puntos por campaña -->
+      <div class="col-md-8">
+        <div id="panelPuntos" style="display: none;">
+          <h5 class="mb-3" style="color: #1A6BA8; font-weight: 600;"><i class="fas fa-coins mr-2"></i>Puntos por Campaña</h5>
           <div id="listaPuntosCampania">
             <!-- Se llena dinámicamente -->
           </div>
         </div>
-      </div>
 
-      <!-- Sin puntos -->
-      <div id="sinPuntos" class="alert alert-info-custom" style="display: none;">
-        <i class="fas fa-info-circle"></i> Este cliente no tiene puntos disponibles para canjear.
+        <!-- Sin puntos -->
+        <div id="sinPuntos" class="alert alert-info-custom" style="display: none;">
+          <i class="fas fa-info-circle"></i> Este cliente no tiene puntos disponibles para canjear.
+        </div>
       </div>
     </div>
   </div>
