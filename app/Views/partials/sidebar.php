@@ -58,7 +58,26 @@
           </a>
         </li>
 
+        <!-- Canjes de Puntos -->
+        <li class="nav-item">
+          <a href="<?= base_url('canjes') ?>"
+             class="nav-link <?= str_starts_with(uri_string(), 'canjes') ? 'active' : '' ?>">
+            <i class="nav-icon fas fa-gift"></i>
+            <p>Canjes</p>
+          </a>
+        </li>
+
         <?php if (session()->get('role') === 'administrador'): ?>
+          <!-- Campañas (solo admin) -->
+          <li class="nav-item">
+            <a href="<?= base_url('campanias') ?>"
+               class="nav-link <?= str_starts_with(uri_string(), 'campanias') ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-bullhorn"></i>
+              <p>Campañas</p>
+            </a>
+          </li>
+
+          <!-- Usuarios (solo admin) -->
           <li class="nav-item">
             <a href="<?= base_url('users') ?>"
                class="nav-link <?= uri_string() == 'users' ? 'active' : '' ?>">

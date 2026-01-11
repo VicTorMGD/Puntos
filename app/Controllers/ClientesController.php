@@ -4,6 +4,9 @@ namespace App\Controllers;
 
 use App\Models\ClienteModel;
 use App\Models\PuntosModel;
+use App\Models\PuntosCampaniaModel;
+use App\Models\CanjeModel;
+use App\Models\AjustePuntosModel;
 
 class ClientesController extends BaseController
 {
@@ -349,6 +352,9 @@ class ClientesController extends BaseController
     {
         $clienteModel = new ClienteModel();
         $puntosModel  = new PuntosModel();
+        $puntosCampaniaModel = new PuntosCampaniaModel();
+        $canjeModel = new CanjeModel();
+        $ajusteModel = new AjustePuntosModel();
 
         $cliente = $clienteModel
             ->where('id', $id)
@@ -359,15 +365,39 @@ class ClientesController extends BaseController
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Cliente no encontrado');
         }
 
-        // Obtener movimientos de puntos del cliente
+        // Obtener puntos por campaña
+        $puntosPorCampania = $puntosCampaniaModel->getPuntosClienteConCampanias($id);
+
+        // Obtener movimientos de puntos del cliente (historial original)
         $movimientos = $puntosModel
             ->where('cliente_id', $id)
             ->orderBy('id', 'DESC')
             ->findAll();
 
+        // Obtener canjes del cliente
+        $canjes = $canjeModel
+            ->select('canjes.*, campanias.nombre as campania_nombre, users.name as usuario_nombre')
+            ->join('campanias', 'campanias.id = canjes.campania_id')
+            ->join('users', 'users.id = canjes.usuario_id')
+            ->where('canjes.cliente_id', $id)
+            ->orderBy('canjes.id', 'DESC')
+            ->findAll();
+
+        // Obtener ajustes del cliente
+        $ajustes = $ajusteModel
+            ->select('ajustes_puntos.*, campanias.nombre as campania_nombre, users.name as usuario_nombre')
+            ->join('campanias', 'campanias.id = ajustes_puntos.campania_id')
+            ->join('users', 'users.id = ajustes_puntos.usuario_id')
+            ->where('ajustes_puntos.cliente_id', $id)
+            ->orderBy('ajustes_puntos.id', 'DESC')
+            ->findAll();
+
         return view('clientes/puntos', [
-            'cliente'     => $cliente,
-            'movimientos' => $movimientos
+            'cliente'            => $cliente,
+            'movimientos'        => $movimientos,
+            'puntosPorCampania'  => $puntosPorCampania,
+            'canjes'             => $canjes,
+            'ajustes'            => $ajustes
         ]);
     }
 }

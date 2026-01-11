@@ -161,9 +161,28 @@
 
 <?= $this->section('scripts') ?>
 <script>
-const CSRF_TOKEN = '<?= csrf_hash() ?>';
+let csrfToken = '<?= csrf_hash() ?>';
+const csrfName = '<?= csrf_token() ?>';
 let clienteActual = null;
 let puntosPorCampania = [];
+
+// Función para obtener un token CSRF fresco
+function getNewCsrfToken() {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: '<?= base_url('csrf/token') ?>',
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                csrfToken = response.csrf_hash;
+                resolve(csrfToken);
+            },
+            error: function() {
+                reject('Error al obtener token');
+            }
+        });
+    });
+}
 
 $(document).ready(function() {
     // Buscar con Enter
@@ -178,7 +197,7 @@ $(document).ready(function() {
     $('#btnConfirmarAjuste').on('click', confirmarAjuste);
 });
 
-function buscarCliente() {
+async function buscarCliente() {
     const documento = $('#documento').val().trim();
 
     if (!documento || documento.length < 8) {
@@ -186,11 +205,18 @@ function buscarCliente() {
         return;
     }
 
+    // Obtener token fresco
+    try {
+        await getNewCsrfToken();
+    } catch (e) {
+        console.error(e);
+    }
+
     $.ajax({
         url: '<?= base_url('canjes/buscar-cliente') ?>',
         method: 'POST',
         data: {
-            '<?= csrf_token() ?>': CSRF_TOKEN,
+            [csrfName]: csrfToken,
             documento: documento
         },
         dataType: 'json',
@@ -287,7 +313,7 @@ function abrirModalAjuste(campaniaId, campaniaNombre, puntosActuales) {
     $('#modalAjuste').modal('show');
 }
 
-function confirmarCanje() {
+async function confirmarCanje() {
     const clienteId = $('#clienteId').val();
     const campaniaId = $('#canjeCampaniaId').val();
     const puntos = parseInt($('#puntosACanjear').val());
@@ -304,7 +330,7 @@ function confirmarCanje() {
         return;
     }
 
-    Swal.fire({
+    const result = await Swal.fire({
         title: '¿Confirmar canje?',
         html: `Se descontarán <strong>${puntos} puntos</strong> del cliente.`,
         icon: 'question',
@@ -313,47 +339,54 @@ function confirmarCanje() {
         cancelButtonColor: '#6c757d',
         confirmButtonText: 'Sí, canjear',
         cancelButtonText: 'Cancelar'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: '<?= base_url('canjes/registrar') ?>',
-                method: 'POST',
-                data: {
-                    '<?= csrf_token() ?>': CSRF_TOKEN,
-                    cliente_id: clienteId,
-                    campania_id: campaniaId,
-                    puntos: puntos,
-                    observacion: observacion
-                },
-                dataType: 'json',
-                success: function(response) {
-                    if (response.success) {
-                        $('#modalCanje').modal('hide');
-
-                        Swal.fire({
-                            title: 'Canje Exitoso',
-                            html: `${response.message}<br><br>
-                                   <a href="<?= base_url('canjes/ticket/') ?>${response.canje_id}" target="_blank" class="btn btn-primary">
-                                       <i class="fas fa-print"></i> Imprimir Comprobante
-                                   </a>`,
-                            icon: 'success'
-                        });
-
-                        // Recargar datos del cliente
-                        buscarCliente();
-                    } else {
-                        Swal.fire('Error', response.message, 'error');
-                    }
-                },
-                error: function() {
-                    Swal.fire('Error', 'Error al procesar el canje', 'error');
-                }
-            });
-        }
     });
+
+    if (result.isConfirmed) {
+        // Obtener token fresco antes de enviar
+        try {
+            await getNewCsrfToken();
+        } catch (e) {
+            console.error(e);
+        }
+
+        $.ajax({
+            url: '<?= base_url('canjes/registrar') ?>',
+            method: 'POST',
+            data: {
+                [csrfName]: csrfToken,
+                cliente_id: clienteId,
+                campania_id: campaniaId,
+                puntos: puntos,
+                observacion: observacion
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    $('#modalCanje').modal('hide');
+
+                    Swal.fire({
+                        title: 'Canje Exitoso',
+                        html: `${response.message}<br><br>
+                               <a href="<?= base_url('canjes/ticket/') ?>${response.canje_id}" target="_blank" class="btn btn-primary">
+                                   <i class="fas fa-print"></i> Imprimir Comprobante
+                               </a>`,
+                        icon: 'success'
+                    });
+
+                    // Recargar datos del cliente
+                    buscarCliente();
+                } else {
+                    Swal.fire('Error', response.message, 'error');
+                }
+            },
+            error: function() {
+                Swal.fire('Error', 'Error al procesar el canje', 'error');
+            }
+        });
+    }
 }
 
-function confirmarAjuste() {
+async function confirmarAjuste() {
     const clienteId = $('#clienteId').val();
     const campaniaId = $('#ajusteCampaniaId').val();
     const nuevosPuntos = parseInt($('#nuevosPuntos').val());
@@ -369,7 +402,7 @@ function confirmarAjuste() {
         return;
     }
 
-    Swal.fire({
+    const result = await Swal.fire({
         title: '¿Confirmar ajuste?',
         html: `Los puntos se ajustarán a <strong>${nuevosPuntos}</strong>.`,
         icon: 'warning',
@@ -378,34 +411,41 @@ function confirmarAjuste() {
         cancelButtonColor: '#6c757d',
         confirmButtonText: 'Sí, ajustar',
         cancelButtonText: 'Cancelar'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: '<?= base_url('canjes/ajustar') ?>',
-                method: 'POST',
-                data: {
-                    '<?= csrf_token() ?>': CSRF_TOKEN,
-                    cliente_id: clienteId,
-                    campania_id: campaniaId,
-                    nuevos_puntos: nuevosPuntos,
-                    observacion: observacion
-                },
-                dataType: 'json',
-                success: function(response) {
-                    if (response.success) {
-                        $('#modalAjuste').modal('hide');
-                        Swal.fire('Ajuste Realizado', response.message, 'success');
-                        buscarCliente();
-                    } else {
-                        Swal.fire('Error', response.message, 'error');
-                    }
-                },
-                error: function() {
-                    Swal.fire('Error', 'Error al procesar el ajuste', 'error');
-                }
-            });
-        }
     });
+
+    if (result.isConfirmed) {
+        // Obtener token fresco antes de enviar
+        try {
+            await getNewCsrfToken();
+        } catch (e) {
+            console.error(e);
+        }
+
+        $.ajax({
+            url: '<?= base_url('canjes/ajustar') ?>',
+            method: 'POST',
+            data: {
+                [csrfName]: csrfToken,
+                cliente_id: clienteId,
+                campania_id: campaniaId,
+                nuevos_puntos: nuevosPuntos,
+                observacion: observacion
+            },
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    $('#modalAjuste').modal('hide');
+                    Swal.fire('Ajuste Realizado', response.message, 'success');
+                    buscarCliente();
+                } else {
+                    Swal.fire('Error', response.message, 'error');
+                }
+            },
+            error: function() {
+                Swal.fire('Error', 'Error al procesar el ajuste', 'error');
+            }
+        });
+    }
 }
 
 function limpiarCliente() {

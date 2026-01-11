@@ -7,6 +7,7 @@ use App\Models\CampaniaModel;
 use App\Models\PuntosCampaniaModel;
 use App\Models\CanjeModel;
 use App\Models\AjustePuntosModel;
+use App\Models\PuntosModel;
 use App\Services\AuditoriaService;
 
 class Canjes extends BaseController
@@ -16,6 +17,7 @@ class Canjes extends BaseController
     protected $puntosCampaniaModel;
     protected $canjeModel;
     protected $ajustePuntosModel;
+    protected $puntosModel;
     protected $auditoriaService;
 
     public function __construct()
@@ -25,6 +27,7 @@ class Canjes extends BaseController
         $this->puntosCampaniaModel = new PuntosCampaniaModel();
         $this->canjeModel = new CanjeModel();
         $this->ajustePuntosModel = new AjustePuntosModel();
+        $this->puntosModel = new PuntosModel();
         $this->auditoriaService = new AuditoriaService();
     }
 
@@ -126,6 +129,10 @@ class Canjes extends BaseController
             ]);
         }
 
+        // Obtener nombre de la campaña para la descripción
+        $campania = $this->campaniaModel->find($campaniaId);
+        $campaniaNombre = $campania ? $campania['nombre'] : 'Campaña #' . $campaniaId;
+
         $db = db_connect();
         $db->transStart();
 
@@ -147,7 +154,20 @@ class Canjes extends BaseController
                 'puntos_acumulados' => $cliente['puntos_acumulados'] - $puntosCanjear
             ]);
 
-            // 4. Registrar en auditoría
+            // 4. Registrar en historial de puntos (tabla puntos)
+            $descripcionCanje = "Canje - {$campaniaNombre}";
+            if ($observacion) {
+                $descripcionCanje .= " ({$observacion})";
+            }
+            $this->puntosModel->registrar(
+                $clienteId,
+                $puntosCanjear,
+                null,
+                'CANJEADO',
+                $descripcionCanje
+            );
+
+            // 5. Registrar en auditoría
             $this->auditoriaService->registrarAccion('canjes', 'canjear', 'canjes', $canjeId, [
                 'cliente_id' => $clienteId,
                 'campania_id' => $campaniaId,
@@ -226,6 +246,11 @@ class Canjes extends BaseController
             ]);
         }
 
+        // Obtener nombre de la campaña para la descripción
+        $campania = $this->campaniaModel->find($campaniaId);
+        $campaniaNombre = $campania ? $campania['nombre'] : 'Campaña #' . $campaniaId;
+        $diferencia = $nuevosPuntos - $puntosAntes;
+
         $db = db_connect();
         $db->transStart();
 
@@ -246,12 +271,22 @@ class Canjes extends BaseController
 
             // 3. Actualizar cache del cliente
             $cliente = $this->clienteModel->find($clienteId);
-            $diferencia = $nuevosPuntos - $puntosAntes;
             $this->clienteModel->update($clienteId, [
                 'puntos_acumulados' => $cliente['puntos_acumulados'] + $diferencia
             ]);
 
-            // 4. Registrar en auditoría
+            // 4. Registrar en historial de puntos (tabla puntos)
+            $tipoAjuste = $diferencia >= 0 ? 'AJUSTE_POSITIVO' : 'AJUSTE_NEGATIVO';
+            $descripcionAjuste = "Ajuste - {$campaniaNombre}: {$puntosAntes} -> {$nuevosPuntos} ({$observacion})";
+            $this->puntosModel->registrar(
+                $clienteId,
+                abs($diferencia),
+                null,
+                $tipoAjuste,
+                $descripcionAjuste
+            );
+
+            // 5. Registrar en auditoría
             $this->auditoriaService->registrarAccion('canjes', 'ajustar', 'puntos_campania', $clienteId, [
                 'campania_id' => $campaniaId,
                 'puntos_antes' => $puntosAntes,

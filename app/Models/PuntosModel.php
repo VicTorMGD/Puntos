@@ -14,10 +14,13 @@ class PuntosModel extends Model
         'compra_id',
         'puntos',
         'tipo',
-        'descripcion'
+        'descripcion',
+        'created_at'
     ];
 
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
+    protected $createdField  = 'created_at';
+    protected $updatedField  = '';
 
     /**
      * Registra un movimiento de puntos
