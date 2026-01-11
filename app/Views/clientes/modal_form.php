@@ -7,7 +7,7 @@
   }
 
   .modal-cliente-custom .modal-header {
-    background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
+    background: linear-gradient(135deg, #1A6BA8 0%, #4A9DD9 100%);
     border: none;
     padding: 25px 30px;
     color: #fff;
@@ -34,7 +34,7 @@
   }
 
   .modal-cliente-custom .modal-body {
-    background: linear-gradient(to bottom, #E0F4F8 0%, #ffffff 100%);
+    background: linear-gradient(to bottom, #D4E8F5 0%, #ffffff 100%);
     padding: 30px;
   }
 
@@ -45,7 +45,7 @@
   .form-group-custom label {
     display: block;
     font-weight: 600;
-    color: #5a5a5a;
+    color: #1A6BA8;
     margin-bottom: 8px;
     font-size: 0.95rem;
     letter-spacing: 0.3px;
@@ -60,7 +60,7 @@
     left: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: #3A7A9A;
+    color: #1A6BA8;
     font-size: 1rem;
     z-index: 1;
   }
@@ -68,7 +68,7 @@
   .form-group-custom input {
     width: 100%;
     padding: 12px 15px 12px 45px;
-    border: 2px solid #B8D4E0;
+    border: 2px solid #4A9DD9;
     border-radius: 12px;
     font-size: 0.95rem;
     transition: all 0.3s ease;
@@ -78,16 +78,16 @@
 
   .form-group-custom input:focus {
     outline: none;
-    border-color: #1B5E7C;
-    box-shadow: 0 0 0 4px rgba(27, 94, 124, 0.1);
+    border-color: #1A6BA8;
+    box-shadow: 0 0 0 4px rgba(26, 107, 168, 0.1);
     background: #fff;
   }
 
   .form-group-custom input:read-only {
-    background: linear-gradient(135deg, #E0F4F8 0%, #F0F9FB 100%);
-    color: #3A7A9A;
+    background: linear-gradient(135deg, #D4E8F5 0%, #F0F7FB 100%);
+    color: #1A6BA8;
     cursor: not-allowed;
-    border-color: #B8D4E0;
+    border-color: #C8E0F0;
   }
 
   .form-group-custom input::placeholder {
@@ -95,30 +95,31 @@
   }
 
   .modal-cliente-custom .modal-footer {
-    background: linear-gradient(to top, #E0F4F8 0%, #ffffff 100%);
+    background: linear-gradient(to top, #D4E8F5 0%, #ffffff 100%);
     border: none;
     padding: 20px 30px;
     border-radius: 0 0 20px 20px;
   }
 
   .btn-save-custom {
-    background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
+    background: linear-gradient(90deg, #ff6b35 0%, #ffa500 100%);
     border: none;
-    color: #fff;
-    padding: 12px 35px;
-    border-radius: 25px;
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 50px;
     font-weight: 600;
     font-size: 1rem;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 15px rgba(27, 94, 124, 0.4);
-    transition: all 0.3s ease;
-    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   .btn-save-custom:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(27, 94, 124, 0.5);
-    color: #fff;
+    background: linear-gradient(90deg, #ff7a45 0%, #ffb319 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(255, 107, 53, 0.3);
+    color: #ffffff;
   }
 
   .btn-save-custom:active {
@@ -126,23 +127,22 @@
   }
 
   .btn-cancel-custom {
-    background: linear-gradient(135deg, #3A7A9A 0%, #87CEEB 100%);
+    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
     border: none;
     color: #fff;
-    padding: 12px 35px;
-    border-radius: 25px;
+    padding: 12px 20px;
+    border-radius: 50px;
     font-weight: 600;
     font-size: 1rem;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 15px rgba(58, 122, 154, 0.4);
-    transition: all 0.3s ease;
-    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
     margin-right: 10px;
   }
 
   .btn-cancel-custom:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(58, 122, 154, 0.5);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(108, 117, 125, 0.3);
     color: #fff;
   }
 </style>

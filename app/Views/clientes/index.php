@@ -10,7 +10,7 @@
   }
 
   .clientes-card-header {
-    background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
+    background: linear-gradient(135deg, #1A6BA8 0%, #4A9DD9 100%);
     color: #fff;
     padding: 18px 24px;
     display: flex;
@@ -26,7 +26,7 @@
   }
 
   .clientes-card-body {
-    background: linear-gradient(to bottom, #E0F4F8 0%, #ffffff 100%);
+    background: linear-gradient(to bottom, #D4E8F5 0%, #ffffff 100%);
     padding: 18px 22px 22px;
   }
 
@@ -37,7 +37,7 @@
   }
 
   #tablaClientes thead {
-    background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
+    background: linear-gradient(135deg, #1A6BA8 0%, #4A9DD9 100%);
     color: #fff;
   }
 
@@ -47,11 +47,11 @@
   }
 
   #tablaClientes tbody tr:nth-child(even) {
-    background-color: #F5FAFC;
+    background-color: #F0F7FB;
   }
 
   #tablaClientes tbody tr:hover {
-    background-color: #E3F2F9;
+    background-color: #C8E0F0;
   }
 
   #tablaClientes td,
@@ -62,7 +62,7 @@
 
 <div class="card clientes-card">
   <div class="clientes-card-header">
-    <h2>Módulo de Clientes</h2>
+    <h2><i class="fas fa-users mr-2"></i>Módulo de Clientes</h2>
   </div>
 
   <div class="clientes-card-body">

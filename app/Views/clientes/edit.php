@@ -10,7 +10,7 @@
   }
 
   .edit-clientes-card-header {
-    background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
+    background: linear-gradient(135deg, #1A6BA8 0%, #4A9DD9 100%);
     color: #fff;
     padding: 18px 24px;
     display: flex;
@@ -26,7 +26,7 @@
   }
 
   .edit-clientes-card-body {
-    background: linear-gradient(to bottom, #E0F4F8 0%, #ffffff 100%);
+    background: linear-gradient(to bottom, #D4E8F5 0%, #ffffff 100%);
     padding: 28px 32px 32px;
   }
 
@@ -43,13 +43,13 @@
 
   .edit-form-wrapper label {
     font-weight: 600;
-    color: #1B5E7C;
+    color: #1A6BA8;
     margin-bottom: 8px;
     font-size: 0.95rem;
   }
 
   .edit-form-wrapper .form-control {
-    border: 2px solid #E0F4F8;
+    border: 2px solid #4A9DD9;
     border-radius: 8px;
     padding: 10px 14px;
     transition: all 0.3s ease;
@@ -57,8 +57,8 @@
   }
 
   .edit-form-wrapper .form-control:focus {
-    border-color: #1B5E7C;
-    box-shadow: 0 0 0 0.2rem rgba(27, 94, 124, 0.15);
+    border-color: #1A6BA8;
+    box-shadow: 0 0 0 0.2rem rgba(26, 107, 168, 0.25);
   }
 
   .edit-form-wrapper .form-control:read-only {
@@ -67,37 +67,40 @@
   }
 
   .btn-guardar {
-    background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
+    background: linear-gradient(90deg, #ff6b35 0%, #ffa500 100%);
     border: none;
-    color: white;
-    padding: 10px 28px;
+    color: #ffffff;
+    padding: 12px 20px;
     font-weight: 600;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(27, 94, 124, 0.3);
-    transition: all 0.3s ease;
+    border-radius: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: 0.5px;
   }
 
   .btn-guardar:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(27, 94, 124, 0.4);
-    color: white;
+    background: linear-gradient(90deg, #ff7a45 0%, #ffb319 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(255, 107, 53, 0.3);
+    color: #ffffff;
   }
 
   .btn-volver {
     background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
     border: none;
-    color: white;
-    padding: 10px 28px;
+    color: #fff;
+    padding: 12px 20px;
     font-weight: 600;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
-    transition: all 0.3s ease;
+    border-radius: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
   }
 
   .btn-volver:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(108, 117, 125, 0.4);
-    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(108, 117, 125, 0.3);
+    color: #fff;
   }
 
   .form-buttons {
@@ -197,7 +200,7 @@
 
 <div class="card edit-clientes-card">
   <div class="edit-clientes-card-header">
-    <h2>Editar Cliente</h2>
+    <h2><i class="fas fa-user-edit mr-2"></i>Editar Cliente</h2>
   </div>
 
   <div class="edit-clientes-card-body">

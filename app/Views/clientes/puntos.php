@@ -10,8 +10,9 @@
     margin-bottom: 20px;
   }
 
+
   .puntos-card-header {
-    background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
+    background: linear-gradient(135deg, #1A6BA8 0%, #4A9DD9 100%);
     color: #fff;
     padding: 18px 24px;
   }
@@ -24,7 +25,7 @@
   }
 
   .puntos-card-body {
-    background: linear-gradient(to bottom, #E0F4F8 0%, #ffffff 100%);
+    background: linear-gradient(to bottom, #D4E8F5 0%, #ffffff 100%);
     padding: 18px 22px 22px;
   }
 
@@ -37,7 +38,7 @@
   }
 
   .info-puntos strong {
-    color: #1B5E7C;
+    color: #1A6BA8;
     font-size: 1.1rem;
   }
 
@@ -47,7 +48,7 @@
     padding: 15px 20px;
     margin-bottom: 15px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    border-left: 4px solid #1B5E7C;
+    border-left: 4px solid #1A6BA8;
   }
 
   .campania-card.activa {
@@ -63,7 +64,7 @@
   .campania-nombre {
     font-weight: 600;
     font-size: 1.1rem;
-    color: #1B5E7C;
+    color: #1A6BA8;
   }
 
   .campania-estado {
@@ -101,7 +102,7 @@
   .puntos-item .numero {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #1B5E7C;
+    color: #1A6BA8;
   }
 
   .puntos-item .label {
@@ -124,7 +125,7 @@
   }
 
   .table-styled thead {
-    background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
+    background: linear-gradient(135deg, #1A6BA8 0%, #4A9DD9 100%);
     color: #fff;
   }
 
@@ -134,11 +135,11 @@
   }
 
   .table-styled tbody tr:nth-child(even) {
-    background-color: #F5FAFC;
+    background-color: #F0F7FB;
   }
 
   .table-styled tbody tr:hover {
-    background-color: #E3F2F9;
+    background-color: #C8E0F0;
   }
 
   .table-styled td,
@@ -147,20 +148,20 @@
   }
 
   .nav-tabs .nav-link {
-    color: #1B5E7C;
+    color: #1A6BA8;
     border: none;
     border-bottom: 2px solid transparent;
   }
 
   .nav-tabs .nav-link.active {
-    color: #1B5E7C;
+    color: #1A6BA8;
     font-weight: 600;
-    border-bottom: 2px solid #1B5E7C;
+    border-bottom: 2px solid #1A6BA8;
     background: transparent;
   }
 
   .nav-tabs .nav-link:hover {
-    border-bottom: 2px solid #87CEEB;
+    border-bottom: 2px solid #4A9DD9;
   }
 
   .tab-content {
@@ -168,7 +169,7 @@
   }
 
   .total-general {
-    background: linear-gradient(135deg, #1B5E7C 0%, #2d7d9a 100%);
+    background: linear-gradient(135deg, #1A6BA8 0%, #4A9DD9 100%);
     color: #fff;
     padding: 20px;
     border-radius: 12px;
@@ -186,12 +187,26 @@
   }
 
   .btn-volver {
+    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 50px;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
     margin-bottom: 15px;
+  }
+
+  .btn-volver:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(108, 117, 125, 0.3);
+    color: #fff;
   }
 </style>
 
-<a href="<?= site_url('clientes') ?>" class="btn btn-secondary btn-volver">
-  <i class="fas fa-arrow-left"></i> Volver a Clientes
+<a href="<?= site_url('clientes') ?>" class="btn btn-volver">
+  <i class="fas fa-arrow-left mr-1"></i> Volver a Clientes
 </a>
 
 <div class="card puntos-card">

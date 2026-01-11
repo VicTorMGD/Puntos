@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title><?= $title ?? 'Iniciar Sesión' ?></title>
+  <title><?= $title ?? 'Iniciar Sesión | Pharmalivet' ?></title>
+  <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('logo_pharmalivet.ico') ?>">
+  <link rel="icon" type="image/x-icon" href="<?= base_url('logo_pharmalivet.ico') ?>">
   <link rel="stylesheet" href="<?= base_url('AdminLTE/plugins/fontawesome-free/css/all.min.css') ?>">
   <link rel="stylesheet" href="<?= base_url('AdminLTE/dist/css/adminlte.min.css') ?>">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">

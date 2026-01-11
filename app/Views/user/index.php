@@ -10,7 +10,7 @@
   }
 
   .usuarios-card-header {
-    background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
+    background: linear-gradient(135deg, #1A6BA8 0%, #4A9DD9 100%);
     color: #fff;
     padding: 18px 24px;
     display: flex;
@@ -26,24 +26,27 @@
   }
 
   .btn-nuevo-usuario {
-    background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
+    background: linear-gradient(90deg, #ff6b35 0%, #ffa500 100%);
     border: none;
-    color: #fff;
+    color: #ffffff;
     font-weight: 600;
-    border-radius: 999px;
-    padding: 8px 18px;
-    box-shadow: 0 4px 10px rgba(27, 94, 124, 0.4);
+    border-radius: 50px;
+    padding: 12px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: 0.5px;
   }
 
   .btn-nuevo-usuario:hover {
+    background: linear-gradient(90deg, #ff7a45 0%, #ffb319 100%);
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(27, 94, 124, 0.5);
-    color: #fff;
+    box-shadow: 0 6px 12px rgba(255, 107, 53, 0.3);
+    color: #ffffff;
   }
 
   .usuarios-card-body {
-    background: linear-gradient(to bottom, #E0F4F8 0%, #ffffff 100%);
+    background: linear-gradient(to bottom, #D4E8F5 0%, #ffffff 100%);
     padding: 18px 22px 22px;
   }
 
@@ -54,7 +57,7 @@
   }
 
   #userTable thead {
-    background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
+    background: linear-gradient(135deg, #1A6BA8 0%, #4A9DD9 100%);
     color: #fff;
   }
 
@@ -64,11 +67,11 @@
   }
 
   #userTable tbody tr:nth-child(even) {
-    background-color: #F5FAFC;
+    background-color: #F0F7FB;
   }
 
   #userTable tbody tr:hover {
-    background-color: #E3F2F9;
+    background-color: #C8E0F0;
   }
 
   #userTable td,

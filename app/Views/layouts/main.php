@@ -4,6 +4,8 @@
 <head>
   <meta charset="utf-8">
   <title><?= $title ?? 'Pharmalivet' ?></title>
+  <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('logo_pharmalivet.ico') ?>">
+  <link rel="icon" type="image/x-icon" href="<?= base_url('logo_pharmalivet.ico') ?>">
   <link rel="stylesheet" href="<?= base_url('AdminLTE/plugins/fontawesome-free/css/all.min.css') ?>">
   <link rel="stylesheet" href="<?= base_url('AdminLTE/dist/css/adminlte.min.css') ?>">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
@@ -155,6 +157,41 @@
 
     .dropdown-item.text-danger:hover {
       background-color: #fff5f5;
+    }
+
+    /* Estilos para el navbar con fondo azul claro */
+    .main-header.navbar {
+      background-color: #E0F4F8 !important;
+      border-bottom: 1px solid #B8D4E0;
+    }
+
+    .main-header .navbar-nav .nav-link {
+      color: #1B5E7C !important;
+    }
+
+    .main-header .navbar-nav .nav-link:hover {
+      color: #0d4a63 !important;
+      background-color: rgba(27, 94, 124, 0.1);
+    }
+
+    .main-header .navbar-nav .nav-link i {
+      color: #1B5E7C;
+    }
+
+    .user-name {
+      font-weight: 500;
+      color: #1B5E7C !important;
+    }
+
+    /* Estilos para el botón PHARMALIVET en el sidebar */
+    .pharmalivet-brand-btn {
+      transition: all 0.3s ease;
+    }
+
+    .pharmalivet-brand-btn:hover {
+      background: linear-gradient(90deg, #ff7a45 0%, #ffb319 100%) !important;
+      box-shadow: 0 6px 12px rgba(255, 107, 53, 0.3);
+      transform: translateY(-1px);
     }
   </style>
 

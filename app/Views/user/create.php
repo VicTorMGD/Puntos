@@ -10,7 +10,7 @@
   }
 
   .user-card-header {
-    background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
+    background: linear-gradient(135deg, #1A6BA8 0%, #4A9DD9 100%);
     color: #fff;
     padding: 18px 24px;
   }
@@ -23,7 +23,7 @@
   }
 
   .user-card-body {
-    background: linear-gradient(to bottom, #E0F4F8 0%, #ffffff 100%);
+    background: linear-gradient(to bottom, #D4E8F5 0%, #ffffff 100%);
     padding: 18px 22px 22px;
   }
 
@@ -35,7 +35,7 @@
   }
 
   .form-wrapper .mb-3 label {
-    color: #1B5E7C;
+    color: #1A6BA8;
     font-weight: 600;
     margin-bottom: 8px;
   }
@@ -43,29 +43,33 @@
   .form-wrapper .form-control,
   .form-wrapper .form-select {
     border-radius: 8px;
-    border: 1px solid #87CEEB;
+    border: 1px solid #4A9DD9;
   }
 
   .form-wrapper .form-control:focus,
   .form-wrapper .form-select:focus {
-    border-color: #1B5E7C;
-    box-shadow: 0 0 0 0.2rem rgba(27, 94, 124, 0.25);
+    border-color: #1A6BA8;
+    box-shadow: 0 0 0 0.2rem rgba(26, 107, 168, 0.25);
   }
 
   .btn-registrar {
-    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    background: linear-gradient(90deg, #ff6b35 0%, #ffa500 100%);
     border: none;
-    color: #fff;
+    color: #ffffff;
     font-weight: 600;
-    border-radius: 8px;
-    padding: 10px 24px;
-    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+    border-radius: 50px;
+    padding: 12px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: 0.5px;
   }
 
   .btn-registrar:hover {
+    background: linear-gradient(90deg, #ff7a45 0%, #ffb319 100%);
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(40, 167, 69, 0.4);
-    color: #fff;
+    box-shadow: 0 6px 12px rgba(255, 107, 53, 0.3);
+    color: #ffffff;
   }
 
   .btn-cancelar {
@@ -73,14 +77,15 @@
     border: none;
     color: #fff;
     font-weight: 600;
-    border-radius: 8px;
-    padding: 10px 24px;
-    box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
+    border-radius: 50px;
+    padding: 12px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
   }
 
   .btn-cancelar:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(108, 117, 125, 0.4);
+    box-shadow: 0 6px 12px rgba(108, 117, 125, 0.3);
     color: #fff;
   }
 
@@ -96,7 +101,7 @@
 
 <div class="card user-card">
   <div class="user-card-header">
-    <h2>Nuevo Usuario</h2>
+    <h2><i class="fas fa-user-plus mr-2"></i>Nuevo Usuario</h2>
   </div>
 
   <div class="user-card-body">

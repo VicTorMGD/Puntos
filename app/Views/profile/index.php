@@ -2,15 +2,87 @@
 
 <?= $this->section('content') ?>
 
+<style>
+  .profile-card {
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    margin-bottom: 20px;
+  }
+
+  .profile-card-header {
+    background: linear-gradient(135deg, #1A6BA8 0%, #4A9DD9 100%);
+    color: #fff;
+    padding: 18px 24px;
+  }
+
+  .profile-card-header .card-title {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  }
+
+  .profile-card-body {
+    background: linear-gradient(to bottom, #D4E8F5 0%, #ffffff 100%);
+    padding: 20px;
+  }
+
+  .profile-card .form-group label {
+    color: #1A6BA8;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .profile-card .form-control {
+    border-radius: 8px;
+    border: 1px solid #4A9DD9;
+  }
+
+  .profile-card .form-control:focus {
+    border-color: #1A6BA8;
+    box-shadow: 0 0 0 0.2rem rgba(26, 107, 168, 0.25);
+  }
+
+  .btn-guardar, .btn-cambiar {
+    background: linear-gradient(90deg, #ff6b35 0%, #ffa500 100%);
+    border: none;
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 50px;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-guardar:hover, .btn-cambiar:hover {
+    background: linear-gradient(90deg, #ff7a45 0%, #ffb319 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 12px rgba(255, 107, 53, 0.3);
+    color: #ffffff;
+  }
+
+  .box-profile {
+    background: linear-gradient(to bottom, #D4E8F5 0%, #ffffff 100%);
+  }
+</style>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <h2 class="mb-4"><i class="fas fa-user-circle"></i> Mi Perfil</h2>
+            <div class="card profile-card">
+                <div class="profile-card-header">
+                    <h2 class="card-title"><i class="fas fa-user-circle mr-2"></i> Mi Perfil</h2>
+                </div>
+            </div>
         </div>
     </div>
 
     <?php if (session('errors')): ?>
-        <div class="alert alert-danger">
+        <div class="alert alert-danger" style="border-radius: 10px; border-left: 4px solid #dc3545;">
             <ul class="mb-0">
                 <?php foreach (session('errors') as $error): ?>
                     <li><?= esc($error) ?></li>
@@ -22,7 +94,7 @@
     <div class="row">
         <!-- Columna izquierda: Avatar -->
         <div class="col-md-4">
-            <div class="card card-primary card-outline">
+            <div class="card profile-card">
                 <div class="card-body box-profile">
                     <div class="text-center">
                         <?php if ($user['avatar'] && file_exists(WRITEPATH . 'uploads/avatars/' . $user['avatar'])): ?>
@@ -57,7 +129,7 @@
                             </div>
                             <small class="form-text text-muted">JPG, PNG, GIF o WEBP. Máximo 2MB.</small>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">
+                        <button type="submit" class="btn btn-guardar btn-block">
                             <i class="fas fa-upload"></i> Subir foto
                         </button>
                     </form>
@@ -78,8 +150,8 @@
         <!-- Columna derecha: Datos y contraseña -->
         <div class="col-md-8">
             <!-- Datos personales -->
-            <div class="card card-primary">
-                <div class="card-header">
+            <div class="card profile-card">
+                <div class="profile-card-header">
                     <h3 class="card-title"><i class="fas fa-edit"></i> Datos Personales</h3>
                 </div>
                 <form action="<?= base_url('perfil/update') ?>" method="post">
@@ -107,8 +179,8 @@
                             <small class="form-text text-muted">El rol solo puede ser modificado por un administrador.</small>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">
+                    <div class="card-footer" style="background: #ffffff; border-top: 1px solid #D4E8F5;">
+                        <button type="submit" class="btn btn-guardar">
                             <i class="fas fa-save"></i> Guardar cambios
                         </button>
                     </div>
@@ -116,8 +188,8 @@
             </div>
 
             <!-- Cambiar contraseña -->
-            <div class="card card-warning">
-                <div class="card-header">
+            <div class="card profile-card">
+                <div class="profile-card-header">
                     <h3 class="card-title"><i class="fas fa-lock"></i> Cambiar Contraseña</h3>
                 </div>
                 <form action="<?= base_url('perfil/password') ?>" method="post">
@@ -144,8 +216,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-warning">
+                    <div class="card-footer" style="background: #ffffff; border-top: 1px solid #D4E8F5;">
+                        <button type="submit" class="btn btn-cambiar">
                             <i class="fas fa-key"></i> Cambiar contraseña
                         </button>
                     </div>

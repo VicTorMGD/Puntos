@@ -126,6 +126,9 @@
     <div class="ticket">
         <div class="header">
             <h1>PHARMALIVET</h1>
+                <div class="img-logo mt-2" style="display:flex;justify-content:center; margin: 10px;">
+                    <img src="<?= base_url('assets/img/pharmalivet.png') ?>" alt="Logo" style="width: 10%; height: 10%; ">
+                </div>
             <h2>COMPROBANTE DE CANJE</h2>
             <p>N° <?= str_pad($canje['id'], 8, '0', STR_PAD_LEFT) ?></p>
         </div>

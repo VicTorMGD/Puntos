@@ -10,7 +10,7 @@
   }
 
   .compras-card-header {
-    background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
+    background: linear-gradient(135deg, #1A6BA8 0%, #4A9DD9 100%);
     color: #fff;
     padding: 18px 24px;
     display: flex;
@@ -26,41 +26,44 @@
   }
 
   .compras-card-body {
-    background: linear-gradient(to bottom, #E0F4F8 0%, #ffffff 100%);
+    background: linear-gradient(to bottom, #D4E8F5 0%, #ffffff 100%);
     padding: 20px 22px 24px;
   }
 
   .compras-form-label {
     font-weight: 600;
-    color: #1B5E7C;
+    color: #1A6BA8;
   }
 
   .compras-input {
     border-radius: 12px;
-    border: 2px solid #B8D4E0;
+    border: 2px solid #4A9DD9;
     transition: all 0.2s ease;
   }
 
   .compras-input:focus {
-    border-color: #1B5E7C;
-    box-shadow: 0 0 0 4px rgba(27, 94, 124, 0.12);
+    border-color: #1A6BA8;
+    box-shadow: 0 0 0 4px rgba(26, 107, 168, 0.12);
   }
 
   .btn-buscar-cliente {
-    background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
+    background: linear-gradient(90deg, #ff6b35 0%, #ffa500 100%);
     border: none;
-    color: #fff;
+    color: #ffffff;
     font-weight: 600;
-    border-radius: 999px;
-    padding: 8px 18px;
-    box-shadow: 0 4px 10px rgba(27, 94, 124, 0.4);
+    border-radius: 50px;
+    padding: 12px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: 0.5px;
   }
 
   .btn-buscar-cliente:hover {
+    background: linear-gradient(90deg, #ff7a45 0%, #ffb319 100%);
     transform: translateY(-1px);
-    box-shadow: 0 6px 14px rgba(27, 94, 124, 0.5);
-    color: #fff;
+    box-shadow: 0 6px 12px rgba(255, 107, 53, 0.3);
+    color: #ffffff;
   }
 
   .info-cliente-box {
@@ -68,7 +71,7 @@
     border-radius: 14px;
     padding: 16px 18px 18px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    border: 1px solid #D4E7F0;
+    border: 1px solid #C8E0F0;
   }
 
   .info-cliente-box p {
@@ -77,40 +80,43 @@
 
   .puntos-actuales {
     font-weight: 700;
-    color: #1B5E7C;
+    color: #1A6BA8;
   }
 
   .btn-guardar-compra {
-    background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
+    background: linear-gradient(90deg, #ff6b35 0%, #ffa500 100%);
     border: none;
-    color: #fff;
+    color: #ffffff;
     font-weight: 600;
-    border-radius: 999px;
-    padding: 8px 22px;
-    box-shadow: 0 4px 10px rgba(27, 94, 124, 0.4);
+    border-radius: 50px;
+    padding: 12px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    letter-spacing: 0.5px;
   }
 
   .btn-guardar-compra:hover {
+    background: linear-gradient(90deg, #ff7a45 0%, #ffb319 100%);
     transform: translateY(-1px);
-    box-shadow: 0 6px 14px rgba(27, 94, 124, 0.5);
-    color: #fff;
+    box-shadow: 0 6px 12px rgba(255, 107, 53, 0.3);
+    color: #ffffff;
   }
 
   .btn-imprimir-ticket {
-    background: linear-gradient(135deg, #3A7A9A 0%, #87CEEB 100%);
+    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
     border: none;
     color: #fff;
     font-weight: 600;
-    border-radius: 999px;
-    padding: 8px 20px;
-    box-shadow: 0 4px 10px rgba(58, 122, 154, 0.4);
+    border-radius: 50px;
+    padding: 12px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
   }
 
   .btn-imprimir-ticket:hover {
     transform: translateY(-1px);
-    box-shadow: 0 6px 14px rgba(58, 122, 154, 0.5);
+    box-shadow: 0 6px 12px rgba(108, 117, 125, 0.3);
     color: #fff;
   }
 </style>

@@ -48,24 +48,56 @@
     font-size: 0.95rem;
   }
 
+  .login-card-body .input-group {
+    display: flex;
+    align-items: stretch;
+  }
+
   .login-card-body .input-group-text {
     background: linear-gradient(135deg, #1B5E7C 0%, #87CEEB 100%);
     color: #fff;
-    border: none;
+    border: 1px solid #87CEEB;
+    border-right: none;
     border-radius: 8px 0 0 8px;
     padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    z-index: 2;
   }
 
   .login-card-body .form-control {
     border: 1px solid #87CEEB;
-    border-radius: 0 8px 8px 0;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
     padding: 12px 14px;
     font-size: 16px;
+    flex: 1;
+    height: auto;
+  }
+
+  .login-card-body .input-group-simple .form-control {
+    border-right: 1px solid #87CEEB;
+    border-radius: 0 8px 8px 0;
   }
 
   .login-card-body .form-control:focus {
     border-color: #1B5E7C;
     box-shadow: 0 0 0 0.2rem rgba(27, 94, 124, 0.25);
+    z-index: 3;
+    outline: none;
+  }
+
+  .login-card-body .input-group:focus-within .input-group-text {
+    border-color: #1B5E7C;
+    z-index: 4;
+  }
+
+  .login-card-body .input-group:focus-within .btn-toggle-password {
+    border-color: #1B5E7C;
+    z-index: 4;
   }
 
   .btn-toggle-password {
@@ -75,11 +107,24 @@
     border-radius: 0 8px 8px 0;
     color: #1B5E7C;
     padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    height: auto;
+    cursor: pointer;
   }
 
   .btn-toggle-password:hover {
     background-color: #E0F4F8;
     color: #1B5E7C;
+    border-color: #87CEEB;
+  }
+
+  .btn-toggle-password:focus {
+    border-color: #1B5E7C;
+    box-shadow: 0 0 0 0.2rem rgba(27, 94, 124, 0.25);
+    z-index: 3;
   }
 
   .btn-login {
@@ -190,7 +235,7 @@
 
         <div class="mb-3">
           <label class="form-label">Correo electrónico</label>
-          <div class="input-group">
+          <div class="input-group input-group-simple">
             <span class="input-group-text"><i class="fas fa-envelope"></i></span>
             <input type="email" name="email" class="form-control" placeholder="tucorreo@ejemplo.com" required value="<?= esc(old('email')) ?>">
           </div>
@@ -200,7 +245,7 @@
           <label class="form-label">Contraseña</label>
           <div class="input-group">
             <span class="input-group-text"><i class="fas fa-lock"></i></span>
-            <input id="password" type="password" name="password" class="form-control" placeholder="Contraseña" required style="border-right: none;">
+            <input id="password" type="password" name="password" class="form-control" placeholder="Contraseña" required>
             <button type="button" class="btn btn-toggle-password" id="togglePassword" title="Mostrar / ocultar">
               <i class="fas fa-eye"></i>
             </button>

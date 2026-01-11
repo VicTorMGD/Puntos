@@ -1,10 +1,16 @@
 <!-- Sidebar -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <a href="<?= base_url('dashboard') ?>" class="brand-link">
-    <span class="brand-text font-weight-light" style="display:flex;justify-content:center; font-size: 1.5rem; font-weight: bold; border-radius: 15px; padding: 10px; border: 1px solid #fff; background-color: #ac1a1aff;">
-      PHARMALIVET
-      <br>
-    </span>
+    <div style="display: flex; align-items: center; justify-content: center; padding: 5px;">
+      <div class="pharmalivet-brand-btn" style="display: flex; align-items: center; background: linear-gradient(90deg, #ff6b35 0%, #ffa500 100%); border-radius: 50px; padding: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 100%; max-width: 280px; transition: all 0.3s ease;">
+        <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #ffffff; display: flex; align-items: center; justify-content: center; margin-right: 12px; flex-shrink: 0;">
+          <i class="fas fa-home" style="color: #ff6b35; font-size: 18px;"></i>
+        </div>
+        <span style="color: #ffffff; font-size: 1.2rem; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; letter-spacing: 0.5px;">
+          PHARMALIVET
+        </span>
+      </div>
+    </div>
     <div class="img-logo mt-2" style="display:flex;justify-content:center;">
       <img src="<?= base_url('assets/img/pharmalivet.png') ?>" alt="Logo" style="width: 50%; height: 50%; padding: 10px; margin: 15px; ">
     </div>
