@@ -291,6 +291,10 @@ class Campanias extends BaseController
         $ajustePuntosModel = new AjustePuntosModel();
 
         if ($accion === 'migrar' && $campaniaActiva) {
+            // Obtener nombre de campaña origen
+            $campaniaOrigen = $this->campaniaModel->find($campaniaOrigenId);
+            $campaniaOrigenNombre = $campaniaOrigen ? $campaniaOrigen['nombre'] : 'Campaña #' . $campaniaOrigenId;
+
             // Migrar puntos a la campaña activa
             $this->puntosCampaniaModel->migrarPuntos($clienteId, $campaniaOrigenId, $campaniaActiva['id'], $puntosAntes);
 
@@ -303,6 +307,16 @@ class Campanias extends BaseController
                 'migracion',
                 "Puntos migrados a campaña: {$campaniaActiva['nombre']}",
                 session()->get('user_id')
+            );
+
+            // Registrar en historial de puntos (la migración no cambia el total, solo mueve entre campañas)
+            // Registramos como MIGRACION con valor 0 para dejar constancia
+            $this->puntosModel->registrar(
+                $clienteId,
+                0, // La migración no cambia el total de puntos
+                null,
+                'MIGRACION',
+                "Migración: {$puntosAntes} pts de {$campaniaOrigenNombre} a {$campaniaActiva['nombre']}"
             );
 
             $this->auditoriaService->registrarAccion('campanias', 'migrar_puntos', 'puntos_campania', $clienteId, [
@@ -333,12 +347,11 @@ class Campanias extends BaseController
             );
 
             // Registrar en historial de puntos (valor negativo para reflejar eliminación)
-            // El tipo debe ser 'AJUSTE' según el ENUM de la BD (GANADO, USADO, AJUSTE)
             $this->puntosModel->registrar(
                 $clienteId,
                 -$puntosAntes, // Valor negativo para que el SUM refleje la reducción
                 null,
-                'AJUSTE', // Tipo correcto según ENUM de la BD
+                'ELIMINADO', // Tipo descriptivo para puntos eliminados
                 "Puntos eliminados - {$campaniaOrigenNombre}"
             );
 

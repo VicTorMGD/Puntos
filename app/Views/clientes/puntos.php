@@ -203,6 +203,12 @@
     box-shadow: 0 6px 12px rgba(108, 117, 125, 0.3);
     color: #fff;
   }
+
+  /* Badge personalizado para migración */
+  .badge-purple {
+    background-color: #6f42c1;
+    color: #fff;
+  }
 </style>
 
 <a href="<?= site_url('clientes') ?>" class="btn btn-volver">
@@ -408,24 +414,44 @@
                     // Determinar el tipo de movimiento
                     $tipo = trim($m['tipo'] ?? '');
                     $tipoUpper = strtoupper($tipo);
-                    $esPositivo = in_array($tipoUpper, ['GANADO', 'ACUMULADO', 'AJUSTE_POSITIVO', 'MIGRACION_ENTRADA']);
-                    $esAjuste = in_array($tipoUpper, ['AJUSTE_POSITIVO', 'AJUSTE_NEGATIVO']);
-                    $esCanje = in_array($tipoUpper, ['CANJEADO', 'CANJE']);
+                    $puntos = (int) $m['puntos'];
+                    $esPositivo = $puntos > 0;
 
-                    // Determinar badge según tipo
-                    // Verde = Ganado, Azul = Canje, Amarillo = Ajuste
-                    if ($esPositivo && !$esAjuste) {
-                        $badgeClass = 'badge-success';
-                        $badgeText = 'Ganado';
-                    } elseif ($esCanje) {
-                        $badgeClass = 'badge-info';
-                        $badgeText = 'Usado';
-                    } elseif ($esAjuste) {
-                        $badgeClass = 'badge-warning';
-                        $badgeText = $tipoUpper === 'AJUSTE_POSITIVO' ? 'Ajuste (+)' : 'Ajuste (-)';
-                    } else {
-                        $badgeClass = 'badge-secondary';
-                        $badgeText = !empty($tipo) ? ucfirst(strtolower($tipo)) : 'Sin tipo';
+                    // Determinar badge según tipo específico
+                    switch ($tipoUpper) {
+                        case 'GANADO':
+                            $badgeClass = 'badge-success';
+                            $badgeText = 'Ganado';
+                            break;
+                        case 'CANJEADO':
+                        case 'USADO':
+                            $badgeClass = 'badge-info';
+                            $badgeText = 'Canjeado';
+                            break;
+                        case 'AJUSTE_POSITIVO':
+                            $badgeClass = 'badge-warning';
+                            $badgeText = 'Ajuste (+)';
+                            break;
+                        case 'AJUSTE_NEGATIVO':
+                            $badgeClass = 'badge-secondary';
+                            $badgeText = 'Ajuste (-)';
+                            break;
+                        case 'AJUSTE':
+                            // Compatibilidad con registros antiguos
+                            $badgeClass = 'badge-warning';
+                            $badgeText = $esPositivo ? 'Ajuste (+)' : 'Ajuste (-)';
+                            break;
+                        case 'ELIMINADO':
+                            $badgeClass = 'badge-danger';
+                            $badgeText = 'Eliminado';
+                            break;
+                        case 'MIGRACION':
+                            $badgeClass = 'badge-purple';
+                            $badgeText = 'Migración';
+                            break;
+                        default:
+                            $badgeClass = 'badge-black';
+                            $badgeText = !empty($tipo) ? ucfirst(strtolower($tipo)) : 'Sin tipo';
                     }
                   ?>
                   <tr>
@@ -434,7 +460,7 @@
                       <span class="badge <?= $badgeClass ?>"><?= $badgeText ?></span>
                     </td>
                     <td class="<?= $esPositivo ? 'text-success' : 'text-danger' ?> font-weight-bold">
-                      <?= $esPositivo ? '+' : '-' ?><?= number_format(abs($m['puntos'])) ?>
+                      <?= $esPositivo ? '+' : '' ?><?= number_format($puntos) ?>
                     </td>
                     <td><?= esc($m['descripcion']) ?></td>
                   </tr>

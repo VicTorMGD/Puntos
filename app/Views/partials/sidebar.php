@@ -1,6 +1,6 @@
 <!-- Sidebar -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-  <a href="<?= base_url('dashboard') ?>" class="brand-link">
+  <a href="<?= base_url('inicio') ?>" class="brand-link">
     <div style="display: flex; align-items: center; justify-content: center; padding: 5px;">
       <div class="pharmalivet-brand-btn" style="display: flex; align-items: center; background: linear-gradient(90deg, #ff6b35 0%, #ffa500 100%); border-radius: 50px; padding: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 100%; max-width: 280px; transition: all 0.3s ease;">
         <div style="width: 40px; height: 40px; border-radius: 50%; background-color: #ffffff; display: flex; align-items: center; justify-content: center; margin-right: 12px; flex-shrink: 0;">
@@ -20,27 +20,19 @@
     <nav>
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview">
 
-        <!-- Categorías 
+        <!-- Inicio -->
         <li class="nav-item">
-          <a href="<?= base_url('categories') ?>"
-             class="nav-link <?= uri_string() == 'categories' ? 'active' : '' ?>">
-            <i class="nav-icon fas fa-tags"></i>
-            <p>Categorías</p>
+          <a href="<?= base_url('inicio') ?>"
+             class="nav-link <?= uri_string() == 'inicio' ? 'active' : '' ?>">
+            <i class="nav-icon fas fa-home"></i>
+            <p>Inicio</p>
           </a>
-        </li> -->
-
-        <!-- Productos 
-        <li class="nav-item">
-          <a href="<?= base_url('products') ?>"
-             class="nav-link <?= uri_string() == 'products' ? 'active' : '' ?>">
-            <i class="nav-icon fas fa-box"></i>
-            <p>Productos</p>
-          </a>
-        </li> -->
+        </li>
 
         <!-- Dashboard -->
         <li class="nav-item">
-          <a href="<?= base_url('dashboard') ?>" class="nav-link">
+          <a href="<?= base_url('dashboard') ?>"
+             class="nav-link <?= uri_string() == 'dashboard' ? 'active' : '' ?>">
             <i class="nav-icon fas fa-chart-line"></i>
             <p>Dashboard</p>
           </a>

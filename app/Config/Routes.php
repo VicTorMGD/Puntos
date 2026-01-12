@@ -13,6 +13,10 @@ $routes->get('login', 'Auth::login');
 $routes->post('login', 'Auth::doLogin');
 $routes->get('logout', 'Auth::logout');
 
+// Página de inicio (bienvenida)
+$routes->get('/', 'InicioController::index', ['filter' => 'auth']);
+$routes->get('inicio', 'InicioController::index', ['filter' => 'auth']);
+
 $routes->get('dashboard', 'DashboardController::index', ['filter' => 'auth']);
 $routes->get('dashboard/puntos-por-dia', 'DashboardController::puntosPorDia', ['filter' => 'auth']);
 $routes->get('dashboard/compras-por-dia', 'DashboardController::comprasPorDia', ['filter' => 'auth']);
