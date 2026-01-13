@@ -23,6 +23,16 @@ $routes->get('dashboard/compras-por-dia', 'DashboardController::comprasPorDia', 
 $routes->get('dashboard/top-clientes', 'DashboardController::topClientes', ['filter' => 'auth']);
 $routes->get('dashboard/puntos-por-mes', 'DashboardController::puntosPorMes', ['filter' => 'auth']);
 $routes->get('dashboard/compras-por-mes', 'DashboardController::comprasPorMes', ['filter' => 'auth']);
+// Nuevos endpoints para gráficos adicionales
+$routes->get('dashboard/distribucion-tipos', 'DashboardController::distribucionTiposPuntos', ['filter' => 'auth']);
+$routes->get('dashboard/canjes-por-dia', 'DashboardController::canjesPorDia', ['filter' => 'auth']);
+$routes->get('dashboard/canjes-por-mes', 'DashboardController::canjesPorMes', ['filter' => 'auth']);
+$routes->get('dashboard/comparativa-puntos', 'DashboardController::comparativaPuntosGanadosVsCanjeados', ['filter' => 'auth']);
+$routes->get('dashboard/estadisticas-campanias', 'DashboardController::estadisticasCampanias', ['filter' => 'auth']);
+$routes->get('dashboard/monto-compras-por-dia', 'DashboardController::montoComprasPorDia', ['filter' => 'auth']);
+$routes->get('dashboard/monto-compras-por-mes', 'DashboardController::montoComprasPorMes', ['filter' => 'auth']);
+$routes->get('dashboard/actividad-por-hora', 'DashboardController::actividadPorHora', ['filter' => 'auth']);
+$routes->get('dashboard/kpis-resumen', 'DashboardController::kpisResumen', ['filter' => 'auth']);
 
 $routes->get('categories', 'Category::index', ['filter' => 'auth']);
 $routes->get('categories/create', 'Category::create', ['filter' => 'auth']);

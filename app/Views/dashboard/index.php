@@ -286,6 +286,113 @@
   </div>
 </div>
 
+<!-- NUEVOS GRÁFICOS -->
+
+<!-- Fila de tarjetas KPIs adicionales -->
+<div class="row mb-4">
+  <div class="col-md-3">
+    <div class="stats-card" style="background: linear-gradient(135deg, #e83e8c 0%, #f06595 100%); color: #fff;">
+      <div class="stats-card-body">
+        <h6><i class="fas fa-gift mr-1"></i>Total Canjes</h6>
+        <h3 id="kpiTotalCanjes">-</h3>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="stats-card" style="background: linear-gradient(135deg, #6f42c1 0%, #8b5cf6 100%); color: #fff;">
+      <div class="stats-card-body">
+        <h6><i class="fas fa-exchange-alt mr-1"></i>Puntos Canjeados</h6>
+        <h3 id="kpiPuntosCanjeados">-</h3>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="stats-card" style="background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%); color: #fff;">
+      <div class="stats-card-body">
+        <h6><i class="fas fa-dollar-sign mr-1"></i>Monto Total Compras</h6>
+        <h3 id="kpiMontoTotal">-</h3>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="stats-card" style="background: linear-gradient(135deg, #fd7e14 0%, #ffc107 100%); color: #fff;">
+      <div class="stats-card-body">
+        <h6><i class="fas fa-user-check mr-1"></i>Promedio Pts/Cliente</h6>
+        <h3 id="kpiPromedioCliente">-</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Gráficos de Pastel y Dona -->
+<div class="row">
+  <div class="col-md-6">
+    <div class="chart-container">
+      <h4 style="color: #1A6BA8; font-weight: 600; margin-bottom: 15px;">
+        <i class="fas fa-chart-pie mr-2"></i>Distribución de Movimientos
+      </h4>
+      <div id="chartDistribucionTipos" style="height:350px;"></div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="chart-container">
+      <h4 style="color: #1A6BA8; font-weight: 600; margin-bottom: 15px;">
+        <i class="fas fa-ring mr-2"></i>Balance de Puntos
+      </h4>
+      <div id="chartComparativaPuntos" style="height:350px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Gráfico de Canjes -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="chart-container">
+      <h4 style="color: #1A6BA8; font-weight: 600; margin-bottom: 15px;">
+        <i class="fas fa-gift mr-2"></i>Canjes Realizados
+      </h4>
+      <div id="chartCanjes" style="height:400px;"></div>
+      <button class="btn btn-exportar" id="exportCanjes">
+        <i class="fas fa-download mr-1"></i> Exportar Gráfico de Canjes
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Gráfico de Montos de Compras -->
+<div class="row">
+  <div class="col-md-12">
+    <div class="chart-container">
+      <h4 style="color: #1A6BA8; font-weight: 600; margin-bottom: 15px;">
+        <i class="fas fa-money-bill-wave mr-2"></i>Montos de Compras (S/)
+      </h4>
+      <div id="chartMontoCompras" style="height:400px;"></div>
+      <button class="btn btn-exportar" id="exportMontoCompras">
+        <i class="fas fa-download mr-1"></i> Exportar Gráfico de Montos
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Gráfico de Actividad por Hora y Campañas -->
+<div class="row">
+  <div class="col-md-6">
+    <div class="chart-container">
+      <h4 style="color: #1A6BA8; font-weight: 600; margin-bottom: 15px;">
+        <i class="fas fa-clock mr-2"></i>Actividad por Hora del Día
+      </h4>
+      <div id="chartActividadHora" style="height:380px;"></div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="chart-container">
+      <h4 style="color: #1A6BA8; font-weight: 600; margin-bottom: 15px;">
+        <i class="fas fa-bullhorn mr-2"></i>Puntos por Campaña
+      </h4>
+      <div id="chartCampanias" style="height:380px;"></div>
+    </div>
+  </div>
+</div>
 
 <?= $this->endSection() ?>
 
