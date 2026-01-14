@@ -253,8 +253,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="chart-container">
-      <h4 style="color: #1A6BA8; font-weight: 600; margin-bottom: 15px;"><i class="fas fa-chart-area mr-2"></i>Puntos generados por día</h4>
-      <div id="chartPuntos" style="height:400px;"></div>
+      <div id="chartPuntos" style="height:420px;"></div>
       <button class="btn btn-exportar" id="exportPuntos">
         <i class="fas fa-download mr-1"></i> Exportar Gráfico de Puntos
       </button>
@@ -265,8 +264,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="chart-container">
-      <h4 style="color: #1A6BA8; font-weight: 600; margin-bottom: 15px;"><i class="fas fa-chart-bar mr-2"></i>Compras realizadas</h4>
-      <div id="chartCompras" style="height:400px;"></div>
+      <div id="chartCompras" style="height:420px;"></div>
       <button class="btn btn-exportar" id="exportCompras">
         <i class="fas fa-download mr-1"></i> Exportar Gráfico de Compras
       </button>
@@ -277,8 +275,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="chart-container">
-      <h4 style="color: #1A6BA8; font-weight: 600; margin-bottom: 15px;"><i class="fas fa-trophy mr-2"></i>Top Clientes</h4>
-      <div id="chartTopClientes" style="height:400px;"></div>
+      <div id="chartTopClientes" style="height:420px;"></div>
       <button class="btn btn-exportar" id="exportTopClientes">
         <i class="fas fa-download mr-1"></i> Exportar Gráfico de Top Clientes
       </button>

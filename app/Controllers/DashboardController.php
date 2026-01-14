@@ -358,7 +358,7 @@ class DashboardController extends BaseController
 
         $db = \Config\Database::connect();
         $builder = $db->table('compras')
-            ->select('DATE(created_at) as fecha, SUM(monto) as total_monto, COUNT(*) as cantidad');
+            ->select('DATE(created_at) as fecha, SUM(monto_compra) as total_monto, COUNT(*) as cantidad');
 
         if ($inicio && $fin) {
             $builder->where('created_at >=', $inicio)
@@ -385,7 +385,7 @@ class DashboardController extends BaseController
 
         $db = \Config\Database::connect();
         $builder = $db->table('compras')
-            ->select("DATE_FORMAT(created_at, '%Y-%m') as fecha, SUM(monto) as total_monto, COUNT(*) as cantidad");
+            ->select("DATE_FORMAT(created_at, '%Y-%m') as fecha, SUM(monto_compra) as total_monto, COUNT(*) as cantidad");
 
         if ($inicio && $fin) {
             $builder->where('created_at >=', $inicio)
@@ -466,39 +466,54 @@ class DashboardController extends BaseController
      */
     public function kpisResumen()
     {
-        $db = \Config\Database::connect();
+        try {
+            $db = \Config\Database::connect();
 
-        // Total canjes
-        $totalCanjes = $db->table('canjes')->countAllResults();
+            // Total canjes
+            $totalCanjes = $db->table('canjes')->countAllResults();
 
-        // Puntos canjeados total
-        $puntosCanjeados = (int) ($db->table('canjes')
-            ->selectSum('puntos_canjeados')
-            ->get()->getRow()->puntos_canjeados ?? 0);
+            // Puntos canjeados total
+            $rowCanjes = $db->table('canjes')
+                ->selectSum('puntos_canjeados')
+                ->get()->getRow();
+            $puntosCanjeados = (int) ($rowCanjes->puntos_canjeados ?? 0);
 
-        // Monto total de compras
-        $montoTotal = (float) ($db->table('compras')
-            ->selectSum('monto')
-            ->get()->getRow()->monto ?? 0);
+            // Monto total de compras
+            $rowCompras = $db->table('compras')
+                ->selectSum('monto_compra')
+                ->get()->getRow();
+            $montoTotal = (float) ($rowCompras->monto_compra ?? 0);
 
-        // Promedio de puntos por cliente
-        $promedioCliente = (float) ($db->table('clientes')
-            ->selectAvg('puntos_acumulados')
-            ->where('estado', 1)
-            ->get()->getRow()->puntos_acumulados ?? 0);
+            // Promedio de puntos por cliente
+            $rowPromedio = $db->table('clientes')
+                ->selectAvg('puntos_acumulados')
+                ->where('estado', 1)
+                ->get()->getRow();
+            $promedioCliente = (float) ($rowPromedio->puntos_acumulados ?? 0);
 
-        // Canjes hoy
-        $hoy = date('Y-m-d');
-        $canjesHoy = $db->table('canjes')
-            ->where('DATE(created_at)', $hoy)
-            ->countAllResults();
+            // Canjes hoy
+            $hoy = date('Y-m-d');
+            $canjesHoy = $db->table('canjes')
+                ->where('DATE(created_at)', $hoy)
+                ->countAllResults();
 
-        return $this->response->setJSON([
-            'total_canjes' => $totalCanjes,
-            'puntos_canjeados' => $puntosCanjeados,
-            'monto_total_compras' => $montoTotal,
-            'promedio_puntos_cliente' => round($promedioCliente, 0),
-            'canjes_hoy' => $canjesHoy
-        ]);
+            return $this->response->setJSON([
+                'total_canjes' => $totalCanjes,
+                'puntos_canjeados' => $puntosCanjeados,
+                'monto_total_compras' => $montoTotal,
+                'promedio_puntos_cliente' => round($promedioCliente, 0),
+                'canjes_hoy' => $canjesHoy
+            ]);
+        } catch (\Exception $e) {
+            log_message('error', 'Error en kpisResumen: ' . $e->getMessage());
+            return $this->response->setJSON([
+                'total_canjes' => 0,
+                'puntos_canjeados' => 0,
+                'monto_total_compras' => 0,
+                'promedio_puntos_cliente' => 0,
+                'canjes_hoy' => 0,
+                'error' => $e->getMessage()
+            ]);
+        }
     }
 }

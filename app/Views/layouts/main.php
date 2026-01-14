@@ -323,13 +323,6 @@
   </script>
 
   <script>
-    // Variables globales para JavaScript
-    const BASE_URL = '<?= base_url() ?>/';
-    const CSRF_TOKEN_NAME = '<?= csrf_token() ?>';
-    const CSRF_TOKEN_VALUE = '<?= csrf_hash() ?>';
-  </script>
-
-  <script>
     // Control del sidebar responsive
     $(document).ready(function() {
       // Función para cerrar el sidebar en móviles al hacer clic fuera de él
@@ -380,6 +373,14 @@
         }
       });
     });
+  </script>
+
+  <!-- Variables globales para JavaScript (IMPORTANTE: debe estar antes de otros scripts específicos) -->
+  <script>
+    var BASE_URL = '<?= rtrim(base_url(), '/') ?>/';
+    var CSRF_TOKEN_NAME = '<?= csrf_token() ?>';
+    var CSRF_TOKEN_VALUE = '<?= csrf_hash() ?>';
+    console.log('BASE_URL configurado:', BASE_URL);
   </script>
 
   <?= $this->renderSection('scripts') ?>

@@ -1,37 +1,103 @@
 $(function () {
 
-    const baseUrl = BASE_URL;
+    // Verificar que BASE_URL esté definido
+    if (typeof BASE_URL === 'undefined') {
+        console.error('BASE_URL no está definido');
+        return;
+    }
 
+    const baseUrl = BASE_URL;
+    console.log('Dashboard inicializado con baseUrl:', baseUrl);
 
     if (typeof echarts === 'undefined') {
         alert('ECharts no está cargado');
         return;
     }
 
-    // === PUNTOS POR DÍA ===
+    // === PUNTOS POR DÍA (MEJORADO) ===
     const chartPuntos = echarts.init(document.getElementById('chartPuntos'));
 
     chartPuntos.setOption({
-        title: { text: 'Puntos generados por día' },
+        title: {
+            text: 'Puntos generados por día',
+            textStyle: {
+                fontSize: 16,
+                fontWeight: 'bold',
+                color: '#1A6BA8'
+            },
+            left: 'center'
+        },
         tooltip: {
             trigger: 'axis',
+            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            borderColor: '#1A6BA8',
+            borderWidth: 1,
+            textStyle: { color: '#333' },
             formatter: function(params) {
                 let fecha = params[0].name;
-                let puntos = params[0].value;
-                return `<div style="padding: 5px;">
-                          <b style="color: #28a745;">📅 ${fecha}</b><br/>
-                          <span style="font-size: 14px;">Puntos generados: <b>${puntos.toLocaleString('es-PE')}</b></span><br/>
-                          <small style="color: #666;">Click para ver detalles</small>
+                let puntos = params[0].value || 0;
+                return `<div style="padding: 8px;">
+                          <div style="font-weight: bold; color: #1A6BA8; margin-bottom: 5px;">📅 ${fecha}</div>
+                          <div style="font-size: 14px;">
+                            <span style="display: inline-block; width: 10px; height: 10px; background: linear-gradient(135deg, #28a745, #20c997); border-radius: 50%; margin-right: 5px;"></span>
+                            Puntos generados: <b style="color: #28a745;">${puntos.toLocaleString('es-PE')}</b>
+                          </div>
+                          <div style="font-size: 11px; color: #888; margin-top: 5px;">Click para ver detalles</div>
                         </div>`;
             }
         },
-        xAxis: { type: 'category', data: [] },
-        yAxis: { type: 'value' },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '10%',
+            top: '15%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            data: [],
+            axisLine: { lineStyle: { color: '#ddd' } },
+            axisLabel: { color: '#666', rotate: 45 },
+            axisTick: { show: false }
+        },
+        yAxis: {
+            type: 'value',
+            axisLine: { show: false },
+            axisLabel: { color: '#666' },
+            splitLine: { lineStyle: { color: '#eee', type: 'dashed' } }
+        },
         series: [{
             name: 'Puntos',
             type: 'line',
             smooth: true,
-            data: []
+            data: [],
+            symbol: 'circle',
+            symbolSize: 8,
+            lineStyle: {
+                width: 3,
+                color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                    { offset: 0, color: '#28a745' },
+                    { offset: 1, color: '#20c997' }
+                ])
+            },
+            itemStyle: {
+                color: '#28a745',
+                borderColor: '#fff',
+                borderWidth: 2
+            },
+            areaStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                    { offset: 0, color: 'rgba(40, 167, 69, 0.4)' },
+                    { offset: 1, color: 'rgba(40, 167, 69, 0.05)' }
+                ])
+            },
+            emphasis: {
+                scale: true,
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(40, 167, 69, 0.5)'
+                }
+            }
         }]
     });
 
@@ -44,29 +110,89 @@ $(function () {
         window.location.href = baseUrl + 'compras?fecha=' + fecha;
     });
 
-    // === COMPRAS POR DÍA ===
+    // === COMPRAS POR DÍA (MEJORADO) ===
     const chartCompras = echarts.init(document.getElementById('chartCompras'));
 
     chartCompras.setOption({
-        title: { text: 'Compras por día' },
+        title: {
+            text: 'Compras por día',
+            textStyle: {
+                fontSize: 16,
+                fontWeight: 'bold',
+                color: '#1A6BA8'
+            },
+            left: 'center'
+        },
         tooltip: {
             trigger: 'axis',
+            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            borderColor: '#1A6BA8',
+            borderWidth: 1,
+            textStyle: { color: '#333' },
             formatter: function(params) {
                 let fecha = params[0].name;
-                let compras = params[0].value;
-                return `<div style="padding: 5px;">
-                          <b style="color: #007bff;">📅 ${fecha}</b><br/>
-                          <span style="font-size: 14px;">Total compras: <b>${compras}</b></span><br/>
-                          <small style="color: #666;">Click para filtrar esta fecha</small>
+                let compras = params[0].value || 0;
+                return `<div style="padding: 8px;">
+                          <div style="font-weight: bold; color: #1A6BA8; margin-bottom: 5px;">📅 ${fecha}</div>
+                          <div style="font-size: 14px;">
+                            <span style="display: inline-block; width: 10px; height: 10px; background: linear-gradient(135deg, #007bff, #17a2b8); border-radius: 50%; margin-right: 5px;"></span>
+                            Total compras: <b style="color: #007bff;">${compras}</b>
+                          </div>
+                          <div style="font-size: 11px; color: #888; margin-top: 5px;">Click para filtrar esta fecha</div>
                         </div>`;
             }
         },
-        xAxis: { type: 'category', data: [] },
-        yAxis: { type: 'value' },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '10%',
+            top: '15%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            data: [],
+            axisLine: { lineStyle: { color: '#ddd' } },
+            axisLabel: { color: '#666', rotate: 45 },
+            axisTick: { show: false }
+        },
+        yAxis: {
+            type: 'value',
+            axisLine: { show: false },
+            axisLabel: { color: '#666' },
+            splitLine: { lineStyle: { color: '#eee', type: 'dashed' } }
+        },
         series: [{
             name: 'Compras',
             type: 'bar',
-            data: []
+            data: [],
+            barWidth: '60%',
+            itemStyle: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                    { offset: 0, color: '#4A9DD9' },
+                    { offset: 0.5, color: '#1A6BA8' },
+                    { offset: 1, color: '#135a8a' }
+                ]),
+                borderRadius: [6, 6, 0, 0]
+            },
+            emphasis: {
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        { offset: 0, color: '#5cb3eb' },
+                        { offset: 0.5, color: '#2080c0' },
+                        { offset: 1, color: '#1A6BA8' }
+                    ]),
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(26, 107, 168, 0.5)'
+                }
+            },
+            label: {
+                show: true,
+                position: 'top',
+                color: '#1A6BA8',
+                fontWeight: 'bold',
+                fontSize: 11
+            }
         }]
     });
 
@@ -81,69 +207,155 @@ $(function () {
     });
 
 
-    // === TOP 5 CLIENTES ===
+    // === TOP 5 CLIENTES (MEJORADO) ===
     const chartTop = echarts.init(document.getElementById('chartTopClientes'));
     let clientesData = [];
+
+    // Colores para las barras del top clientes (degradados)
+    const topClientesColors = [
+        new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+            { offset: 0, color: '#ffc107' },
+            { offset: 1, color: '#ffdb58' }
+        ]),
+        new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+            { offset: 0, color: '#fd7e14' },
+            { offset: 1, color: '#ffa726' }
+        ]),
+        new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+            { offset: 0, color: '#e83e8c' },
+            { offset: 1, color: '#f06595' }
+        ]),
+        new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+            { offset: 0, color: '#6f42c1' },
+            { offset: 1, color: '#8b5cf6' }
+        ]),
+        new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+            { offset: 0, color: '#17a2b8' },
+            { offset: 1, color: '#20c997' }
+        ])
+    ];
+
+    // Función para obtener medalla y posición
+    function getMedalInfo(rank) {
+        switch(rank) {
+            case 1: return { medal: '🥇', pos: '1ro' };
+            case 2: return { medal: '🥈', pos: '2do' };
+            case 3: return { medal: '🥉', pos: '3ro' };
+            case 4: return { medal: '🏅', pos: '4to' };
+            case 5: return { medal: '🏅', pos: '5to' };
+            default: return { medal: '🏅', pos: rank + '°' };
+        }
+    }
 
     chartTop.setOption({
         title: {
             text: 'Top 5 clientes por puntos',
             textStyle: {
-                fontSize: 18,
-                fontWeight: 'bold'
-            }
+                fontSize: 16,
+                fontWeight: 'bold',
+                color: '#1A6BA8'
+            },
+            left: 'center'
         },
         tooltip: {
             trigger: 'axis',
+            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            borderColor: '#ffc107',
+            borderWidth: 1,
+            textStyle: { color: '#333' },
             formatter: function(params) {
-                let cliente = params[0].name;
-                let puntos = params[0].value;
-                return `<div style="padding: 5px;">
-                          <b style="color: #ffc107;">👤 ${cliente}</b><br/>
-                          <span style="font-size: 14px;">Puntos acumulados: <b>${puntos.toLocaleString('es-PE')}</b></span><br/>
-                          <small style="color: #666;">Click para ver historial</small>
+                let puntos = params[0].value || 0;
+                let rank = clientesData.length - params[0].dataIndex;
+                let info = getMedalInfo(rank);
+                // Obtener nombre original sin la medalla
+                let nombreOriginal = clientesData[clientesData.length - 1 - params[0].dataIndex]?.cliente || params[0].name;
+                return `<div style="padding: 8px;">
+                          <div style="font-weight: bold; color: #1A6BA8; margin-bottom: 5px;">${info.medal} ${info.pos} - ${nombreOriginal}</div>
+                          <div style="font-size: 14px;">
+                            <span style="display: inline-block; width: 10px; height: 10px; background: linear-gradient(135deg, #ffc107, #ffdb58); border-radius: 50%; margin-right: 5px;"></span>
+                            Puntos acumulados: <b style="color: #ffc107;">${puntos.toLocaleString('es-PE')}</b>
+                          </div>
+                          <div style="font-size: 11px; color: #888; margin-top: 5px;">Click para ver historial</div>
                         </div>`;
             }
         },
         grid: {
-            left: '3%',
-            right: '10%',
+            left: '2%',
+            right: '3%',
+            top: '15%',
+            bottom: '5%',
             containLabel: true
         },
-        xAxis: { type: 'value' },
+        xAxis: {
+            type: 'value',
+            axisLine: { show: false },
+            axisLabel: { color: '#666' },
+            splitLine: { lineStyle: { color: '#eee', type: 'dashed' } }
+        },
         yAxis: {
             type: 'category',
             data: [],
-            axisLabel: {
-                fontSize: 13,
-                fontWeight: 'bold',
-                color: '#333'
-            }
+            axisLine: { show: false },
+            axisLabel: { show: false },
+            axisTick: { show: false }
         },
         series: [{
             type: 'bar',
             data: [],
+            barWidth: '70%',
             label: {
                 show: true,
-                position: 'insideRight',
-                formatter: '{c}',
-                fontSize: 14,
+                position: 'insideLeft',
+                formatter: function(params) {
+                    // params.name ya tiene el formato "🥇 1ro - Nombre"
+                    return params.name;
+                },
+                fontSize: 12,
                 fontWeight: 'bold',
-                color: '#fff'
+                color: '#fff',
+                textShadowColor: 'rgba(0,0,0,0.3)',
+                textShadowBlur: 2,
+                padding: [0, 0, 0, 10]
             },
             itemStyle: {
-                color: '#5470c6'
+                borderRadius: [0, 8, 8, 0]
+            },
+            emphasis: {
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(255, 193, 7, 0.5)'
+                }
             }
         }]
     });
 
-    $.get('dashboard/top-clientes', function (data) {
+    $.get(baseUrl + 'dashboard/top-clientes', function (data) {
         clientesData = data;
         // Invertir el orden para que el mayor quede arriba
         const reversed = [...data].reverse();
+        const totalClientes = data.length;
+
         chartTop.setOption({
-            yAxis: { data: reversed.map(d => d.cliente) },
-            series: [{ data: reversed.map(d => parseInt(d.total)) }]
+            yAxis: {
+                data: reversed.map((d, i) => {
+                    const rank = totalClientes - i;
+                    const info = getMedalInfo(rank);
+                    return `${info.medal} ${info.pos} - ${d.cliente}`;
+                })
+            },
+            series: [{
+                data: reversed.map((d, i) => ({
+                    value: parseInt(d.total),
+                    itemStyle: { color: topClientesColors[i % topClientesColors.length] },
+                    label: {
+                        formatter: function() {
+                            const rank = totalClientes - i;
+                            const info = getMedalInfo(rank);
+                            return `${info.medal} ${info.pos} - ${d.cliente}     ${parseInt(d.total).toLocaleString('es-PE')} pts`;
+                        }
+                    }
+                }))
+            }]
         });
     });
 
@@ -166,10 +378,10 @@ $(function () {
         const tipo = $('#tipoAgrupacion').val();
         const endpoint = tipo === 'mes' ? 'dashboard/compras-por-mes' : 'dashboard/compras-por-dia';
 
-        $.get(endpoint, { inicio, fin }, function (data) {
+        $.get(baseUrl + endpoint, { inicio, fin }, function (data) {
             chartCompras.setOption({
                 xAxis: { data: data.map(d => d.fecha) },
-                series: [{ data: data.map(d => d.total) }]
+                series: [{ data: data.map(d => parseInt(d.total)) }]
             });
         });
     }
@@ -178,22 +390,27 @@ $(function () {
         const tipo = $('#tipoAgrupacion').val();
         const endpoint = tipo === 'mes' ? 'dashboard/puntos-por-mes' : 'dashboard/puntos-por-dia';
 
-        $.get(endpoint, { inicio, fin }, function (data) {
+        $.get(baseUrl + endpoint, { inicio, fin }, function (data) {
             chartPuntos.setOption({
                 xAxis: { data: data.map(d => d.fecha) },
-                series: [{ data: data.map(d => d.total) }]
+                series: [{ data: data.map(d => parseInt(d.total)) }]
             });
         });
     }
 
     function cargarTopClientes(inicio = '', fin = '') {
-        $.get('dashboard/top-clientes', { inicio, fin }, function (data) {
+        $.get(baseUrl + 'dashboard/top-clientes', { inicio, fin }, function (data) {
             clientesData = data;
             // Invertir el orden para que el mayor quede arriba
             const reversed = [...data].reverse();
             chartTop.setOption({
                 yAxis: { data: reversed.map(d => d.cliente) },
-                series: [{ data: reversed.map(d => parseInt(d.total)) }]
+                series: [{
+                    data: reversed.map((d, i) => ({
+                        value: parseInt(d.total),
+                        itemStyle: { color: topClientesColors[i % topClientesColors.length] }
+                    }))
+                }]
             });
         });
     }
@@ -337,11 +554,28 @@ $(function () {
 
     // === CARGAR KPIs ADICIONALES ===
     function cargarKPIs() {
-        $.get('dashboard/kpis-resumen', function (data) {
-            $('#kpiTotalCanjes').text(data.total_canjes.toLocaleString('es-PE'));
-            $('#kpiPuntosCanjeados').text(data.puntos_canjeados.toLocaleString('es-PE'));
-            $('#kpiMontoTotal').text('S/ ' + data.monto_total_compras.toLocaleString('es-PE', { minimumFractionDigits: 2 }));
-            $('#kpiPromedioCliente').text(data.promedio_puntos_cliente.toLocaleString('es-PE'));
+        const url = baseUrl + 'dashboard/kpis-resumen';
+        console.log('Cargando KPIs desde:', url);
+
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                console.log('KPIs recibidos:', data);
+                if (data) {
+                    $('#kpiTotalCanjes').text((data.total_canjes || 0).toLocaleString('es-PE'));
+                    $('#kpiPuntosCanjeados').text((data.puntos_canjeados || 0).toLocaleString('es-PE'));
+                    $('#kpiMontoTotal').text('S/ ' + (data.monto_total_compras || 0).toLocaleString('es-PE', { minimumFractionDigits: 2 }));
+                    $('#kpiPromedioCliente').text((data.promedio_puntos_cliente || 0).toLocaleString('es-PE'));
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error cargando KPIs:', error);
+                console.error('Status:', status);
+                console.error('Response:', xhr.responseText);
+                console.error('URL intentada:', url);
+            }
         });
     }
     cargarKPIs();
@@ -386,7 +620,7 @@ $(function () {
     });
 
     function cargarDistribucionTipos(inicio = '', fin = '') {
-        $.get('dashboard/distribucion-tipos', { inicio, fin }, function (data) {
+        $.get(baseUrl + 'dashboard/distribucion-tipos', { inicio, fin }, function (data) {
             chartDistribucion.setOption({
                 series: [{
                     data: data.map((d, i) => ({
@@ -442,7 +676,7 @@ $(function () {
     });
 
     function cargarComparativaPuntos(inicio = '', fin = '') {
-        $.get('dashboard/comparativa-puntos', { inicio, fin }, function (data) {
+        $.get(baseUrl + 'dashboard/comparativa-puntos', { inicio, fin }, function (data) {
             chartComparativa.setOption({
                 series: [{
                     data: data.map((d, i) => ({
@@ -510,7 +744,7 @@ $(function () {
         const tipo = $('#tipoAgrupacion').val();
         const endpoint = tipo === 'mes' ? 'dashboard/canjes-por-mes' : 'dashboard/canjes-por-dia';
 
-        $.get(endpoint, { inicio, fin }, function (data) {
+        $.get(baseUrl + endpoint, { inicio, fin }, function (data) {
             chartCanjes.setOption({
                 title: { text: `Canjes realizados por ${tipo === 'mes' ? 'mes' : 'día'}` },
                 xAxis: { data: data.map(d => d.fecha) },
@@ -585,7 +819,7 @@ $(function () {
         const tipo = $('#tipoAgrupacion').val();
         const endpoint = tipo === 'mes' ? 'dashboard/monto-compras-por-mes' : 'dashboard/monto-compras-por-dia';
 
-        $.get(endpoint, { inicio, fin }, function (data) {
+        $.get(baseUrl + endpoint, { inicio, fin }, function (data) {
             chartMontoCompras.setOption({
                 title: { text: `Montos de compras por ${tipo === 'mes' ? 'mes' : 'día'}` },
                 xAxis: { data: data.map(d => d.fecha) },
@@ -594,6 +828,8 @@ $(function () {
                     { data: data.map(d => parseInt(d.cantidad || 0)) }
                 ]
             });
+        }).fail(function(xhr, status, error) {
+            console.error('Error cargando montos:', error);
         });
     }
     cargarMontoCompras();
@@ -646,7 +882,7 @@ $(function () {
     });
 
     function cargarActividadPorHora(inicio = '', fin = '') {
-        $.get('dashboard/actividad-por-hora', { inicio, fin }, function (data) {
+        $.get(baseUrl + 'dashboard/actividad-por-hora', { inicio, fin }, function (data) {
             // Calcular el máximo para el indicador
             const maxCompras = Math.max(...data.compras, 1);
             const maxCanjes = Math.max(...data.canjes, 1);
@@ -720,7 +956,7 @@ $(function () {
     });
 
     function cargarEstadisticasCampanias() {
-        $.get('dashboard/estadisticas-campanias', function (data) {
+        $.get(baseUrl + 'dashboard/estadisticas-campanias', function (data) {
             if (data.puntos_por_campania && data.puntos_por_campania.length > 0) {
                 chartCampanias.setOption({
                     xAxis: { data: data.puntos_por_campania.map(c => c.nombre) },
