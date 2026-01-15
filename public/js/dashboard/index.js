@@ -280,41 +280,45 @@ $(function () {
             }
         },
         grid: {
-            left: '2%',
+            left: '12%',
             right: '3%',
             top: '15%',
             bottom: '5%',
-            containLabel: true
+            containLabel: false
         },
         xAxis: {
             type: 'value',
             axisLine: { show: false },
-            axisLabel: { color: '#666' },
-            splitLine: { lineStyle: { color: '#eee', type: 'dashed' } }
+            axisLabel: { show: false },
+            splitLine: { show: false }
         },
         yAxis: {
             type: 'category',
             data: [],
             axisLine: { show: false },
-            axisLabel: { show: false },
+            axisLabel: {
+                show: true,
+                fontSize: 18,
+                fontWeight: 'bold',
+                color: '#1A6BA8',
+                formatter: function(value) {
+                    return value;
+                }
+            },
             axisTick: { show: false }
         },
         series: [{
             type: 'bar',
             data: [],
-            barWidth: '70%',
+            barWidth: '75%',
             label: {
                 show: true,
                 position: 'insideLeft',
-                formatter: function(params) {
-                    // params.name ya tiene el formato "🥇 1ro - Nombre"
-                    return params.name;
-                },
-                fontSize: 12,
+                fontSize: 15,
                 fontWeight: 'bold',
                 color: '#fff',
-                textShadowColor: 'rgba(0,0,0,0.3)',
-                textShadowBlur: 2,
+                textShadowColor: 'rgba(0,0,0,0.4)',
+                textShadowBlur: 3,
                 padding: [0, 0, 0, 10]
             },
             itemStyle: {
@@ -338,9 +342,8 @@ $(function () {
         chartTop.setOption({
             yAxis: {
                 data: reversed.map((d, i) => {
-                    const rank = totalClientes - i;
-                    const info = getMedalInfo(rank);
-                    return `${info.medal} ${info.pos} - ${d.cliente}`;
+                    // Mostrar puntos en el eje Y (a la izquierda)
+                    return parseInt(d.total).toLocaleString('es-PE') + ' pts';
                 })
             },
             series: [{
@@ -349,9 +352,10 @@ $(function () {
                     itemStyle: { color: topClientesColors[i % topClientesColors.length] },
                     label: {
                         formatter: function() {
+                            // Mostrar medalla + posición + nombre dentro de la barra
                             const rank = totalClientes - i;
                             const info = getMedalInfo(rank);
-                            return `${info.medal} ${info.pos} - ${d.cliente}     ${parseInt(d.total).toLocaleString('es-PE')} pts`;
+                            return `${info.medal} ${info.pos} - ${d.cliente}`;
                         }
                     }
                 }))
@@ -403,12 +407,27 @@ $(function () {
             clientesData = data;
             // Invertir el orden para que el mayor quede arriba
             const reversed = [...data].reverse();
+            const totalClientes = data.length;
+
             chartTop.setOption({
-                yAxis: { data: reversed.map(d => d.cliente) },
+                yAxis: {
+                    data: reversed.map((d, i) => {
+                        // Mostrar puntos en el eje Y (a la izquierda)
+                        return parseInt(d.total).toLocaleString('es-PE') + ' pts';
+                    })
+                },
                 series: [{
                     data: reversed.map((d, i) => ({
                         value: parseInt(d.total),
-                        itemStyle: { color: topClientesColors[i % topClientesColors.length] }
+                        itemStyle: { color: topClientesColors[i % topClientesColors.length] },
+                        label: {
+                            formatter: function() {
+                                // Mostrar medalla + posición + nombre dentro de la barra
+                                const rank = totalClientes - i;
+                                const info = getMedalInfo(rank);
+                                return `${info.medal} ${info.pos} - ${d.cliente}`;
+                            }
+                        }
                     }))
                 }]
             });

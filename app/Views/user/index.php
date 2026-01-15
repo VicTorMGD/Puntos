@@ -90,6 +90,35 @@
     border: none;
     color: #fff;
   }
+
+  .usuarios-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    margin-top: 25px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    width: 100%;
+  }
+
+  .usuarios-image-container img {
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 10px;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+  }
+
+  @media (max-width: 767px) {
+    .usuarios-image-container {
+      padding: 15px;
+      margin-top: 15px;
+    }
+    .usuarios-image-container img {
+      max-height: 250px;
+    }
+  }
 </style>
 
 <div class="card usuarios-card">
@@ -101,37 +130,49 @@
   </div>
 
   <div class="usuarios-card-body">
-    <div class="table-responsive">
-      <table class="table table-bordered table-hover mb-0" id="userTable">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Rol</th>
-            <th class="text-center" style="width: 130px;">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach ($users as $u): ?>
-            <tr>
-              <td><?= $u['id'] ?></td>
-              <td><?= esc($u['name']) ?></td>
-              <td><?= esc($u['email']) ?></td>
-              <td><?= esc($u['role']) ?></td>
-              <td class="text-center">
-                <a href="<?= base_url('users/edit/' . $u['id']) ?>" class="btn btn-sm btn-accion-editar mr-1">
-                  <i class="fas fa-edit"></i>
-                </a>
-                <button class="btn btn-sm btn-accion-eliminar btn-delete"
-                        data-url="<?= base_url('users/delete/' . $u['id']) ?>">
-                  <i class="fas fa-trash"></i>
-                </button>
-              </td>
-            </tr>
-          <?php endforeach ?>
-        </tbody>
-      </table>
+    <div class="row">
+      <!-- Columna de la tabla -->
+      <div class="col-lg-8 col-md-12">
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover mb-0" id="userTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th class="text-center" style="width: 130px;">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($users as $u): ?>
+                <tr>
+                  <td><?= $u['id'] ?></td>
+                  <td><?= esc($u['name']) ?></td>
+                  <td><?= esc($u['email']) ?></td>
+                  <td><?= esc($u['role']) ?></td>
+                  <td class="text-center">
+                    <a href="<?= base_url('users/edit/' . $u['id']) ?>" class="btn btn-sm btn-accion-editar mr-1">
+                      <i class="fas fa-edit"></i>
+                    </a>
+                    <button class="btn btn-sm btn-accion-eliminar btn-delete"
+                            data-url="<?= base_url('users/delete/' . $u['id']) ?>">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              <?php endforeach ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Columna de la imagen del frontis -->
+      <div class="col-lg-4 col-md-12">
+        <div class="usuarios-image-container">
+          <img src="<?= base_url('assets/img/Frontis-framacia1.png') ?>" alt="Frontis de la Farmacia">
+        </div>
+      </div>
     </div>
   </div>
 </div>

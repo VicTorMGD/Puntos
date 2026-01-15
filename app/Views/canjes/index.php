@@ -208,6 +208,30 @@
     border-radius: 10px;
     color: #1A6BA8;
   }
+
+  .canjes-image-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    margin-top: 15px;
+  }
+
+  .canjes-image-col img {
+    max-width: 100%;
+    max-height: 220px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
+  }
+
+  @media (max-width: 767px) {
+    .canjes-image-col {
+      margin-top: 10px;
+    }
+    .canjes-image-col img {
+      max-height: 150px;
+    }
+  }
 </style>
 
 <div class="card canjes-card">
@@ -246,6 +270,11 @@
             <span id="clienteTotalPuntos" class="badge badge-success" style="font-size: 1.2em; background: linear-gradient(135deg, #28a745 0%, #20c997 100%);"></span>
           </p>
           <input type="hidden" id="clienteId" value="">
+        </div>
+
+        <!-- Imagen decorativa -->
+        <div class="canjes-image-col">
+          <img src="<?= base_url('assets/img/farmaceutica2.png') ?>" alt="Ilustración de canjes">
         </div>
       </div>
 

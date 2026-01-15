@@ -331,9 +331,14 @@ class Canjes extends BaseController
             return redirect()->to('/canjes')->with('error', 'Canje no encontrado');
         }
 
+        // Obtener puntos actuales del cliente
+        $cliente = $this->clienteModel->find($canje['cliente_id']);
+        $puntosRestantes = $cliente ? (int)$cliente['puntos_acumulados'] : 0;
+
         $data = [
             'title' => 'Comprobante de Canje',
-            'canje' => $canje
+            'canje' => $canje,
+            'puntos_restantes' => $puntosRestantes
         ];
 
         return view('canjes/ticket', $data);

@@ -27,7 +27,7 @@
 
   .compras-card-body {
     background: linear-gradient(to bottom, #D4E8F5 0%, #ffffff 100%);
-    padding: 20px 22px 24px;
+    padding: 25px;
   }
 
   .compras-form-label {
@@ -119,6 +119,30 @@
     box-shadow: 0 6px 12px rgba(108, 117, 125, 0.3);
     color: #fff;
   }
+
+  .compras-image-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .compras-image-col img {
+    max-width: 100%;
+    max-height: 320px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
+  }
+
+  @media (max-width: 991px) {
+    .compras-image-col {
+      order: -1;
+      padding: 15px 20px 0;
+    }
+    .compras-image-col img {
+      max-height: 200px;
+    }
+  }
 </style>
 
 <div class="card compras-card">
@@ -127,43 +151,53 @@
   </div>
 
   <div class="compras-card-body">
-    <div class="form-group">
-      <label class="compras-form-label" for="dni">DNI del cliente</label>
-      <input
-        type="text"
-        id="dni"
-        class="form-control compras-input"
-        placeholder="Ingrese DNI (8 dígitos)"
-        maxlength="8"
-        pattern="[0-9]{8}"
-        inputmode="numeric"
-      >
-    </div>
+    <div class="row">
+      <!-- Columna del formulario -->
+      <div class="col-lg-6 col-md-12">
+        <div class="form-group">
+          <label class="compras-form-label" for="dni">DNI del cliente</label>
+          <input
+            type="text"
+            id="dni"
+            class="form-control compras-input"
+            placeholder="Ingrese DNI (8 dígitos)"
+            maxlength="8"
+            pattern="[0-9]{8}"
+            inputmode="numeric"
+          >
+        </div>
 
-    <button class="btn btn-buscar-cliente mb-3" id="buscarCliente">
-      <i class="fas fa-search mr-1"></i> Buscar
-    </button>
+        <button class="btn btn-buscar-cliente mb-3" id="buscarCliente">
+          <i class="fas fa-search mr-1"></i> Buscar
+        </button>
 
-    <hr>
+        <hr>
 
-    <div id="infoCliente" style="display:none">
-      <div class="info-cliente-box mb-3">
-        <p><strong>Cliente:</strong> <span id="datosCliente"></span></p>
-        <p><strong>Puntos actuales:</strong> <span class="puntos-actuales" id="puntosActuales"></span></p>
+        <div id="infoCliente" style="display:none">
+          <div class="info-cliente-box mb-3">
+            <p><strong>Cliente:</strong> <span id="datosCliente"></span></p>
+            <p><strong>Puntos actuales:</strong> <span class="puntos-actuales" id="puntosActuales"></span></p>
+          </div>
+
+          <div class="form-group">
+            <label class="compras-form-label" for="monto">Monto de compra</label>
+            <input type="number" id="monto" class="form-control compras-input" placeholder="Ingrese el monto">
+          </div>
+
+          <div class="mt-3">
+            <button class="btn btn-guardar-compra mr-2" id="guardarCompra">
+              <i class="fas fa-save mr-1"></i> Guardar
+            </button>
+            <button class="btn btn-imprimir-ticket" id="imprimir">
+              <i class="fas fa-print mr-1"></i> Imprimir
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label class="compras-form-label" for="monto">Monto de compra</label>
-        <input type="number" id="monto" class="form-control compras-input" placeholder="Ingrese el monto">
-      </div>
-
-      <div class="mt-3">
-        <button class="btn btn-guardar-compra mr-2" id="guardarCompra">
-          <i class="fas fa-save mr-1"></i> Guardar
-        </button>
-        <button class="btn btn-imprimir-ticket" id="imprimir">
-          <i class="fas fa-print mr-1"></i> Imprimir
-        </button>
+      <!-- Columna de la imagen -->
+      <div class="col-lg-6 col-md-12 compras-image-col">
+        <img src="<?= base_url('assets/img/farmaceutica1.png') ?>" alt="Ilustración de compras">
       </div>
     </div>
   </div>

@@ -120,6 +120,34 @@
             font-style: italic;
             font-size: 11px;
         }
+
+        .puntos-restantes {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .puntos-restantes .label {
+            font-size: 10px;
+            color: #2e7d32;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .puntos-restantes .valor {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1b5e20;
+        }
+
+        .puntos-restantes .icono {
+            font-size: 16px;
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
@@ -172,6 +200,13 @@
             <?= esc($canje['observacion']) ?>
         </div>
         <?php endif; ?>
+
+        <div class="puntos-restantes">
+            <div class="label">Sus puntos disponibles</div>
+            <div class="valor">
+                <span class="icono">⭐</span><?= number_format($puntos_restantes) ?> PUNTOS
+            </div>
+        </div>
 
         <div class="footer">
             <p>Este documento es un comprobante</p>

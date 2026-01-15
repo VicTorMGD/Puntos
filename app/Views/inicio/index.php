@@ -493,7 +493,7 @@
   <div class="inicio-row">
     <!-- Columna Izquierda: Bienvenida (8 de 12) -->
     <div class="inicio-col-welcome">
-      <div class="welcome-hero">
+      <div class="welcome-hero col-md 8">
         <div class="welcome-content">
           <div class="welcome-greeting">
             <span class="wave">👋</span>
@@ -520,8 +520,13 @@
               <div class="welcome-stat-label">Canjes Hoy</div>
             </div>
           </div>
+          
+        </div>
+        <div class="inicio-image-container col-md-4">
+          <img style="width: 200px; height: 200px;" src="<?= base_url('assets/img/farmaceutica3.png') ?>" alt="imagen-3">
         </div>
       </div>
+
     </div>
 
     <!-- Columna Derecha: Accesos Rápidos (4 de 12) -->
