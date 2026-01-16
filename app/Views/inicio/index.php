@@ -67,6 +67,49 @@
     z-index: 2;
   }
 
+  .welcome-inner-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .welcome-text-col {
+    flex: 0 0 70%;
+    max-width: 70%;
+  }
+
+  .welcome-image-col {
+    flex: 0 0 30%;
+    max-width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .welcome-image-col img {
+    max-width: 100%;
+    max-height: 250px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.2));
+  }
+
+  @media (max-width: 768px) {
+    .welcome-inner-row {
+      flex-direction: column;
+    }
+    .welcome-text-col,
+    .welcome-image-col {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+    .welcome-image-col {
+      margin-top: 20px;
+    }
+    .welcome-image-col img {
+      max-height: 150px;
+    }
+  }
+
   .welcome-greeting {
     color: rgba(255,255,255,0.9);
     font-size: 1rem;
@@ -493,37 +536,43 @@
   <div class="inicio-row">
     <!-- Columna Izquierda: Bienvenida (8 de 12) -->
     <div class="inicio-col-welcome">
-      <div class="welcome-hero col-md 8">
+      <div class="welcome-hero">
         <div class="welcome-content">
-          <div class="welcome-greeting">
-            <span class="wave">👋</span>
-            <span>¡Hola, bienvenido!</span>
-          </div>
-          <h1 class="welcome-name"><?= esc(session()->get('name') ?? 'Usuario') ?></h1>
-          <p class="welcome-subtitle">
-            Sistema de Acumulación y Canje de Puntos desarrollado exclusivamente para
-            <span class="brand-highlight">PHARMALIVET</span>.
-            Gestiona clientes, registra compras y administra recompensas de manera eficiente.
-          </p>
+          <div class="welcome-inner-row">
+            <!-- Columna de texto (70%) -->
+            <div class="welcome-text-col">
+              <div class="welcome-greeting">
+                <span class="wave">👋</span>
+                <span>¡Hola, bienvenido!</span>
+              </div>
+              <h1 class="welcome-name"><?= esc(session()->get('name') ?? 'Usuario') ?></h1>
+              <p class="welcome-subtitle">
+                Sistema de Acumulación y Canje de Puntos desarrollado exclusivamente para
+                <span class="brand-highlight">PHARMALIVET</span>.
+                Gestiona clientes, registra compras y administra recompensas de manera eficiente.
+              </p>
 
-          <div class="welcome-stats">
-            <div class="welcome-stat">
-              <div class="welcome-stat-value"><?= number_format($totalClientes) ?></div>
-              <div class="welcome-stat-label">Clientes Activos</div>
+              <div class="welcome-stats">
+                <div class="welcome-stat">
+                  <div class="welcome-stat-value"><?= number_format($totalClientes) ?></div>
+                  <div class="welcome-stat-label">Clientes Activos</div>
+                </div>
+                <div class="welcome-stat">
+                  <div class="welcome-stat-value"><?= number_format($comprasHoy) ?></div>
+                  <div class="welcome-stat-label">Compras Hoy</div>
+                </div>
+                <div class="welcome-stat">
+                  <div class="welcome-stat-value"><?= number_format($canjesHoy) ?></div>
+                  <div class="welcome-stat-label">Canjes Hoy</div>
+                </div>
+              </div>
             </div>
-            <div class="welcome-stat">
-              <div class="welcome-stat-value"><?= number_format($comprasHoy) ?></div>
-              <div class="welcome-stat-label">Compras Hoy</div>
-            </div>
-            <div class="welcome-stat">
-              <div class="welcome-stat-value"><?= number_format($canjesHoy) ?></div>
-              <div class="welcome-stat-label">Canjes Hoy</div>
+
+            <!-- Columna de imagen (30%) -->
+            <div class="welcome-image-col">
+              <img src="<?= base_url('assets/img/farmaceutica3.png') ?>" alt="Ilustración farmacéutica">
             </div>
           </div>
-          
-        </div>
-        <div class="inicio-image-container col-md-4">
-          <img style="width: 200px; height: 200px;" src="<?= base_url('assets/img/farmaceutica3.png') ?>" alt="imagen-3">
         </div>
       </div>
 
