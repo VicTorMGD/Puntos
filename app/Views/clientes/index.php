@@ -58,7 +58,73 @@
   #tablaClientes th {
     vertical-align: middle;
   }
+
+  /* Estilos del gráfico Top 5 */
+  .top5-chart-card {
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  }
+
+  .top5-chart-header {
+    background: linear-gradient(135deg, #1A6BA8 0%, #4A9DD9 100%);
+    color: #fff;
+    padding: 15px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .top5-chart-header i {
+    font-size: 1.5rem;
+  }
+
+  .top5-chart-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .top5-chart-body {
+    padding: 20px;
+    
+  }
+
+  .img-top5-chart-body {
+    width: 100%;
+    /*background: #1A6BA8;*/
+    padding: 2rem;
+    margin: 2rem 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .img-cli-top {
+    width: 85%;
+  }
+
+  #chartTop5Clientes {
+    width: 120%;
+    height: 350px;
+  }
 </style>
+
+<!-- Gráfico Top 5 Clientes
+<div class="top5-chart-card">
+  <div class="top5-chart-header">
+    <i class="fas fa-trophy"></i>
+    <h3>Top 5 Clientes con Más Puntos</h3>
+  </div>
+  <div class="top5-chart-body">
+    <div id="chartTop5Clientes"></div>
+  </div>
+</div> -->
 
 <div class="card clientes-card">
   <div class="clientes-card-header">
@@ -66,6 +132,29 @@
   </div>
 
   <div class="clientes-card-body">
+
+  <!-- Gráfico Top 5 Clientes -->
+    <div class="top5-chart-card">
+      <div class="top5-chart-header">
+        <i class="fas fa-trophy"></i>
+        <h3>Top 5 Clientes con Más Puntos</h3>
+      </div>
+      <div class="row">
+        <div class="col-md-8">
+          <div class="top5-chart-body">
+            <div id="chartTop5Clientes"></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="img-top5-chart-body">
+            <div>
+              <img class="img-cli-top" src="<?= base_url('assets/img/farmaceutica4.png') ?>" alt="Ilustración de compras">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
     <div class="table-responsive">
       <table class="table table-bordered table-hover mb-0" id="tablaClientes">
         <thead>
@@ -110,6 +199,150 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
+<!-- ECharts -->
+<script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
 <script src="<?= base_url('js/clientes/index.js') ?>"></script>
+
+<script>
+$(function() {
+    // Datos del Top 5 desde PHP
+    const top5Data = <?= json_encode($top5Clientes) ?>;
+
+    if (top5Data.length === 0) {
+        $('#chartTop5Clientes').html('<div class="text-center text-muted py-5"><i class="fas fa-users fa-3x mb-3"></i><p>No hay clientes registrados aún</p></div>');
+        return;
+    }
+
+    const chartTop5 = echarts.init(document.getElementById('chartTop5Clientes'));
+
+    // Colores dorados con intensidad decreciente (1° más intenso, 5° más claro)
+    const colors = ['#FFD700', '#FFDF33', '#FFE766', '#FFEF99', '#FFF5BF'];
+    const gradients = [
+        ['#FFD700', '#FFA500'],  // 1° - Dorado intenso
+        ['#FFDF33', '#FFB833'],  // 2° - Dorado fuerte
+        ['#FFE766', '#FFCC66'],  // 3° - Dorado medio
+        ['#FFEF99', '#FFDD88'],  // 4° - Dorado claro
+        ['#FFF5BF', '#FFE8A0']   // 5° - Dorado muy suave
+    ];
+
+    // Medallas y posiciones
+    const medals = ['🥇', '🥈', '🥉', '🏅', '🏅'];
+
+    // Preparar datos - ordenados de mayor a menor
+    const maxValue = Math.max(...top5Data.map(d => parseInt(d.total)));
+
+    // Crear nombres completos con medalla
+    const nombresCompletos = top5Data.map((d, i) => {
+        return `${medals[i]}  ${d.nombres} ${d.apellidos}`;
+    });
+
+    const option = {
+        tooltip: {
+            trigger: 'item',
+            backgroundColor: 'rgba(255, 255, 255, 0.98)',
+            borderColor: '#ffc107',
+            borderWidth: 3,
+            padding: 15,
+            textStyle: { color: '#333', fontSize: 14 },
+            formatter: function(params) {
+                // Corregir índice invertido (los datos están reversed en el gráfico)
+                const realIdx = top5Data.length - 1 - params.dataIndex;
+                const cliente = top5Data[realIdx];
+                const nombreCompleto = cliente.nombres + ' ' + cliente.apellidos;
+                const posiciones = ['1er', '2do', '3er', '4to', '5to'];
+                return `<div style="text-align: center;">
+                    <div style="font-size: 28px; margin-bottom: 8px;">${medals[realIdx]}</div>
+                    <div style="font-size: 16px; font-weight: bold; color: #1A6BA8; margin-bottom: 5px;">${posiciones[realIdx]} Lugar</div>
+                    <div style="font-size: 14px; color: #555; margin-bottom: 10px;">${nombreCompleto}</div>
+                    <div style="font-size: 22px; font-weight: bold; color: #000000;">
+                        ${parseInt(cliente.total).toLocaleString('es-PE')} pts
+                    </div>
+                </div>`;
+            }
+        },
+        grid: {
+            left: '28%',
+            right: '12%',
+            top: '5%',
+            bottom: '5%',
+            containLabel: false
+        },
+        xAxis: {
+            type: 'value',
+            max: maxValue * 1.2,
+            axisLine: { show: false },
+            axisTick: { show: false },
+            axisLabel: { show: false },
+            splitLine: { show: false }
+        },
+        yAxis: {
+            type: 'category',
+            data: nombresCompletos.slice().reverse(),
+            inverse: false,
+            axisLine: { show: false },
+            axisTick: { show: false },
+            axisLabel: {
+                show: true,
+                fontSize: 18,
+                fontWeight: '600',
+                color: '#333',
+                width: 250,
+                overflow: 'truncate',
+                formatter: function(value) {
+                    return value;
+                }
+            }
+        },
+        series: [{
+            name: 'Puntos',
+            type: 'bar',
+            data: top5Data.map((d, i) => ({
+                value: parseInt(d.total),
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                        { offset: 0, color: gradients[i][0] },
+                        { offset: 1, color: gradients[i][1] }
+                    ]),
+                    borderRadius: [0, 25, 25, 0],
+                    shadowColor: 'rgba(0, 0, 0, 0.15)',
+                    shadowBlur: 8,
+                    shadowOffsetX: 2,
+                    shadowOffsetY: 2
+                }
+            })).reverse(),
+            barWidth: '55%',
+            label: {
+                show: true,
+                position: 'right',
+                distance: 10,
+                fontSize: 15,
+                fontWeight: 'bold',
+                color: '#1A6BA8',
+                formatter: function(params) {
+                    return params.value.toLocaleString('es-PE') + ' pts';
+                }
+            },
+            emphasis: {
+                itemStyle: {
+                    shadowBlur: 15,
+                    shadowColor: 'rgba(0, 0, 0, 0.3)'
+                }
+            },
+            animationDelay: function(idx) {
+                return idx * 200;
+            }
+        }],
+        animationEasing: 'elasticOut',
+        animationDuration: 1500
+    };
+
+    chartTop5.setOption(option);
+
+    // Responsive
+    $(window).on('resize', function() {
+        chartTop5.resize();
+    });
+});
+</script>
 <?= $this->endSection() ?>
 

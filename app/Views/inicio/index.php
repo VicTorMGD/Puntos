@@ -74,13 +74,13 @@
   }
 
   .welcome-text-col {
-    flex: 0 0 70%;
-    max-width: 70%;
+    flex: 0 0 60%;
+    max-width: 60%;
   }
 
   .welcome-image-col {
-    flex: 0 0 30%;
-    max-width: 30%;
+    flex: 0 0 40%;
+    max-width: 40%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -187,6 +187,11 @@
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+  }
+
+  .imagen-inicio {
+    margin-top: 4rem;
+    width: 20rem;
   }
 
   /* ============================================
@@ -570,7 +575,7 @@
 
             <!-- Columna de imagen (30%) -->
             <div class="welcome-image-col">
-              <img src="<?= base_url('assets/img/farmaceutica3.png') ?>" alt="Ilustración farmacéutica">
+              <img class="imagen-inicio" src="<?= base_url('assets/img/farmaceutica3.png') ?>" alt="Ilustración farmacéutica">
             </div>
           </div>
         </div>

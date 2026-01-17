@@ -16,8 +16,16 @@ class ClientesController extends BaseController
 
         $clientes = $clienteModel->getClientesConPuntos();
 
+        // Obtener top 5 clientes con más puntos para el gráfico
+        $top5Clientes = $clienteModel->select('id, nombres, apellidos, puntos_acumulados as total')
+            ->where('estado', 1)
+            ->orderBy('puntos_acumulados', 'DESC')
+            ->limit(5)
+            ->findAll();
+
         return view('clientes/index', [
-            'clientes' => $clientes
+            'clientes' => $clientes,
+            'top5Clientes' => $top5Clientes
         ]);
     }
     public function edit($id)

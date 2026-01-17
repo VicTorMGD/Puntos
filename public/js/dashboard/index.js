@@ -713,7 +713,10 @@ $(function () {
     const chartCanjes = echarts.init(document.getElementById('chartCanjes'));
 
     chartCanjes.setOption({
-        title: { text: 'Canjes realizados por día' },
+        title: {
+            text: 'Canjes realizados por día',
+            top: 5
+        },
         tooltip: {
             trigger: 'axis',
             axisPointer: { type: 'cross' },
@@ -727,12 +730,13 @@ $(function () {
         },
         legend: {
             data: ['Cantidad', 'Puntos Canjeados'],
-            top: 30
+            top: 35
         },
         grid: {
             left: '3%',
             right: '4%',
             bottom: '3%',
+            top: 70,
             containLabel: true
         },
         xAxis: { type: 'category', data: [] },
@@ -780,7 +784,10 @@ $(function () {
     const chartMontoCompras = echarts.init(document.getElementById('chartMontoCompras'));
 
     chartMontoCompras.setOption({
-        title: { text: 'Montos de compras por día' },
+        title: {
+            text: 'Montos de compras por día',
+            top: 5
+        },
         tooltip: {
             trigger: 'axis',
             formatter: function(params) {
@@ -796,12 +803,13 @@ $(function () {
         },
         legend: {
             data: ['Monto (S/)', 'Cantidad'],
-            top: 30
+            top: 35
         },
         grid: {
             left: '3%',
             right: '4%',
             bottom: '3%',
+            top: 70,
             containLabel: true
         },
         xAxis: { type: 'category', data: [] },
