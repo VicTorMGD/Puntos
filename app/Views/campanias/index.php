@@ -183,6 +183,76 @@
   .regla-info strong {
     color: #1A6BA8;
   }
+
+  /* Responsive adjustments */
+  @media (max-width: 991.98px) {
+    .campanias-card-header {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+    .campanias-card-header h3 {
+      font-size: 1.2rem;
+    }
+    .campania-activa-box .col-md-2 {
+      justify-content: center !important;
+      margin-top: 10px;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .campanias-card-body {
+      padding: 16px 18px;
+    }
+    .campania-activa-box {
+      padding: 15px;
+    }
+    .campania-activa-box h4 {
+      font-size: 1.1rem;
+    }
+    .campania-activa-box h5 {
+      font-size: 1rem;
+    }
+    .regla-info {
+      padding: 8px 12px;
+      font-size: 0.9rem;
+    }
+    .btn-nueva-campania {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+    #campaniasTable thead th {
+      font-size: 0.8rem;
+      padding: 10px 6px;
+    }
+    #campaniasTable tbody td {
+      font-size: 0.8rem;
+      padding: 10px 6px;
+    }
+    .section-title {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .campanias-card-header h3 {
+      font-size: 1.1rem;
+    }
+    .campanias-card-body {
+      padding: 14px 15px;
+    }
+    .campania-activa-box .col-md-5 {
+      text-align: center;
+    }
+    .regla-info {
+      margin-bottom: 8px;
+    }
+    .btn-editar-campania,
+    .btn-cerrar-campania {
+      padding: 6px 12px;
+      font-size: 0.85rem;
+    }
+  }
 </style>
 
 <div class="card campanias-card">
@@ -198,20 +268,20 @@
     <?php if ($campaniaActiva): ?>
     <div class="campania-activa-box">
       <h4><i class="fas fa-star mr-2"></i>Campaña Activa</h4>
-      <div class="row">
-        <div class="col-md-5">
+      <div class="row g-3 align-items-center">
+        <div class="col-12 col-lg-4">
           <h5><?= esc($campaniaActiva['nombre']) ?></h5>
           <p class="text-muted mb-0"><?= esc($campaniaActiva['descripcion'] ?? 'Sin descripción') ?></p>
         </div>
-        <div class="col-md-5">
-          <div class="row">
-            <div class="col-6">
+        <div class="col-12 col-lg-6">
+          <div class="row g-2">
+            <div class="col-12 col-sm-6">
               <div class="regla-info">
                 <strong>Regla base:</strong><br>
                 <span><?= $campaniaActiva['puntos_por_monto'] ?> punto(s) por cada S/ <?= number_format($campaniaActiva['monto_base'], 2) ?></span>
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-sm-6">
               <div class="regla-info">
                 <strong>Reglas especiales:</strong><br>
                 <?php if ($campaniaActiva['puntos_dobles_finsemana']): ?>
@@ -227,7 +297,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-2 d-flex align-items-center justify-content-end">
+        <div class="col-12 col-lg-2 d-flex align-items-center justify-content-center justify-content-lg-end">
           <a href="<?= base_url('campanias/editar/' . $campaniaActiva['id']) ?>" class="btn btn-editar-campania mr-2">
             <i class="fas fa-edit"></i>
           </a>

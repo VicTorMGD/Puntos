@@ -10,22 +10,6 @@
     min-height: calc(100vh - 150px);
   }
 
-  .inicio-row {
-    display: flex;
-    gap: 24px;
-    margin-bottom: 24px;
-  }
-
-  .inicio-col-welcome {
-    flex: 0 0 66.666%;
-    max-width: 66.666%;
-  }
-
-  .inicio-col-shortcuts {
-    flex: 0 0 calc(33.333% - 24px);
-    max-width: calc(33.333% - 24px);
-  }
-
   /* ============================================
      SECCIÓN DE BIENVENIDA (HERO)
      ============================================ */
@@ -67,25 +51,6 @@
     z-index: 2;
   }
 
-  .welcome-inner-row {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .welcome-text-col {
-    flex: 0 0 60%;
-    max-width: 60%;
-  }
-
-  .welcome-image-col {
-    flex: 0 0 40%;
-    max-width: 40%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   .welcome-image-col img {
     max-width: 100%;
     max-height: 250px;
@@ -93,20 +58,18 @@
     filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.2));
   }
 
-  @media (max-width: 768px) {
-    .welcome-inner-row {
-      flex-direction: column;
+  @media (max-width: 991.98px) {
+    .welcome-image-col img {
+      max-height: 180px;
     }
-    .welcome-text-col,
-    .welcome-image-col {
-      flex: 0 0 100%;
-      max-width: 100%;
+  }
+
+  @media (max-width: 767.98px) {
+    .welcome-image-col img {
+      max-height: 150px;
     }
     .welcome-image-col {
       margin-top: 20px;
-    }
-    .welcome-image-col img {
-      max-height: 150px;
     }
   }
 
@@ -473,17 +436,7 @@
      RESPONSIVE
      ============================================ */
 
-  @media (max-width: 992px) {
-    .inicio-row {
-      flex-direction: column;
-    }
-
-    .inicio-col-welcome,
-    .inicio-col-shortcuts {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-
+  @media (max-width: 991.98px) {
     .shortcuts-panel {
       height: auto;
     }
@@ -495,17 +448,17 @@
 
     .shortcut-item {
       flex: 1 1 calc(50% - 5px);
-      min-width: 200px;
+      min-width: 180px;
     }
   }
 
-  @media (max-width: 576px) {
+  @media (max-width: 767.98px) {
     .welcome-hero {
       padding: 25px 20px;
     }
 
     .welcome-name {
-      font-size: 1.7rem;
+      font-size: 1.8rem;
     }
 
     .welcome-subtitle {
@@ -514,15 +467,21 @@
 
     .welcome-stats {
       gap: 10px;
+      justify-content: center;
     }
 
     .welcome-stat {
       padding: 10px 14px;
-      min-width: 100px;
+      min-width: 90px;
+      flex: 1;
     }
 
     .welcome-stat-value {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
+    }
+
+    .welcome-stat-label {
+      font-size: 0.7rem;
     }
 
     .shortcut-item {
@@ -533,19 +492,71 @@
       flex-direction: column;
       align-items: flex-start;
     }
+
+    .campaign-details {
+      width: 100%;
+    }
+
+    .campaign-detail {
+      font-size: 0.85rem;
+      padding: 6px 12px;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .welcome-hero {
+      padding: 20px 15px;
+    }
+
+    .welcome-name {
+      font-size: 1.5rem;
+    }
+
+    .welcome-subtitle {
+      font-size: 0.9rem;
+    }
+
+    .welcome-stat {
+      min-width: 80px;
+      padding: 8px 10px;
+    }
+
+    .welcome-stat-value {
+      font-size: 1.2rem;
+    }
+
+    .shortcuts-header h3 {
+      font-size: 1rem;
+    }
+
+    .shortcut-title {
+      font-size: 0.9rem;
+    }
+
+    .shortcut-desc {
+      font-size: 0.7rem;
+    }
+
+    .campaign-text h3 {
+      font-size: 1.1rem;
+    }
+
+    .campaign-text h4 {
+      font-size: 0.85rem;
+    }
   }
 </style>
 
 <div class="inicio-container">
   <!-- Fila Principal: Bienvenida + Accesos Rápidos -->
-  <div class="inicio-row">
+  <div class="row g-4 mb-4">
     <!-- Columna Izquierda: Bienvenida (8 de 12) -->
-    <div class="inicio-col-welcome">
-      <div class="welcome-hero">
+    <div class="col-12 col-lg-8">
+      <div class="welcome-hero h-100">
         <div class="welcome-content">
-          <div class="welcome-inner-row">
-            <!-- Columna de texto (70%) -->
-            <div class="welcome-text-col">
+          <div class="row align-items-center">
+            <!-- Columna de texto -->
+            <div class="col-12 col-md-7 col-lg-8">
               <div class="welcome-greeting">
                 <span class="wave">👋</span>
                 <span>¡Hola, bienvenido!</span>
@@ -573,19 +584,18 @@
               </div>
             </div>
 
-            <!-- Columna de imagen (30%) -->
-            <div class="welcome-image-col">
+            <!-- Columna de imagen -->
+            <div class="col-12 col-md-5 col-lg-4 welcome-image-col text-center d-none d-md-flex align-items-center justify-content-center">
               <img class="imagen-inicio" src="<?= base_url('assets/img/farmaceutica3.png') ?>" alt="Ilustración farmacéutica">
             </div>
           </div>
         </div>
       </div>
-
     </div>
 
     <!-- Columna Derecha: Accesos Rápidos (4 de 12) -->
-    <div class="inicio-col-shortcuts">
-      <div class="shortcuts-panel">
+    <div class="col-12 col-lg-4">
+      <div class="shortcuts-panel h-100">
         <div class="shortcuts-header">
           <div class="shortcuts-header-icon">
             <i class="fas fa-rocket"></i>

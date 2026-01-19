@@ -224,12 +224,57 @@
     filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
   }
 
-  @media (max-width: 767px) {
+  /* Responsive adjustments */
+  @media (max-width: 991.98px) {
+    .canjes-card-header {
+      padding: 14px 18px;
+    }
+    .canjes-card-header h3 {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .canjes-card-body {
+      padding: 16px 18px;
+    }
     .canjes-image-col {
       margin-top: 10px;
     }
     .canjes-image-col img {
       max-height: 150px;
+    }
+    .campania-item-card .card-body {
+      padding: 12px 15px;
+    }
+    .campania-item-card h5 {
+      font-size: 1rem;
+    }
+    .btn-canjear-item,
+    .btn-ajustar-item {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+    .info-cliente-box {
+      padding: 14px 16px;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .canjes-card-header h3 {
+      font-size: 1.1rem;
+    }
+    .canjes-card-body {
+      padding: 14px 15px;
+    }
+    .canjes-image-col {
+      display: none;
+    }
+    .btn-buscar-canje {
+      width: 100%;
+    }
+    .modal-dialog {
+      margin: 10px;
     }
   }
 </style>
@@ -247,9 +292,9 @@
     </div>
     <?php endif; ?>
 
-    <div class="row">
+    <div class="row g-4">
       <!-- Panel de búsqueda -->
-      <div class="col-md-4">
+      <div class="col-12 col-md-5 col-lg-4">
         <div class="form-group">
           <label class="canjes-form-label" for="documento">DNI del Cliente</label>
           <input type="text" class="form-control canjes-input" id="documento"
@@ -273,13 +318,13 @@
         </div>
 
         <!-- Imagen decorativa -->
-        <div class="canjes-image-col">
+        <div class="canjes-image-col d-none d-md-flex">
           <img src="<?= base_url('assets/img/farmaceutica2.png') ?>" alt="Ilustración de canjes">
         </div>
       </div>
 
       <!-- Panel de puntos por campaña -->
-      <div class="col-md-8">
+      <div class="col-12 col-md-7 col-lg-8">
         <div id="panelPuntos" style="display: none;">
           <h5 class="mb-3" style="color: #1A6BA8; font-weight: 600;"><i class="fas fa-coins mr-2"></i>Puntos por Campaña</h5>
           <div id="listaPuntosCampania">

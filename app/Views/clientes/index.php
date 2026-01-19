@@ -96,7 +96,6 @@
 
   .img-top5-chart-body {
     width: 100%;
-    /*background: #1A6BA8;*/
     padding: 2rem;
     margin: 2rem 1rem;
     display: flex;
@@ -107,11 +106,80 @@
 
   .img-cli-top {
     width: 85%;
+    max-width: 300px;
   }
 
   #chartTop5Clientes {
-    width: 120%;
+    width: 100%;
     height: 350px;
+    min-height: 280px;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 991.98px) {
+    .clientes-card-header {
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
+    }
+    .clientes-card-header h2 {
+      font-size: 1.25rem;
+    }
+    .top5-chart-header h3 {
+      font-size: 1.1rem;
+    }
+    #chartTop5Clientes {
+      height: 300px;
+    }
+    .img-top5-chart-body {
+      padding: 1rem;
+      margin: 1rem 0;
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .clientes-card-header {
+      padding: 14px 18px;
+    }
+    .clientes-card-body {
+      padding: 14px 16px;
+    }
+    .top5-chart-header {
+      padding: 12px 16px;
+    }
+    .top5-chart-body {
+      padding: 15px;
+    }
+    #chartTop5Clientes {
+      height: 250px;
+      min-height: 220px;
+    }
+    .img-top5-chart-body {
+      display: none;
+    }
+    #tablaClientes thead th {
+      font-size: 0.85rem;
+      padding: 10px 8px;
+    }
+    #tablaClientes tbody td {
+      font-size: 0.85rem;
+      padding: 10px 8px;
+    }
+    .btn-sm {
+      padding: 0.35rem 0.5rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .clientes-card-header h2 {
+      font-size: 1.1rem;
+    }
+    #chartTop5Clientes {
+      height: 220px;
+      min-height: 200px;
+    }
   }
 </style>
 
@@ -139,13 +207,13 @@
         <i class="fas fa-trophy"></i>
         <h3>Top 5 Clientes con Más Puntos</h3>
       </div>
-      <div class="row">
-        <div class="col-md-8">
+      <div class="row g-0">
+        <div class="col-12 col-lg-8">
           <div class="top5-chart-body">
             <div id="chartTop5Clientes"></div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-12 col-lg-4 d-none d-lg-block">
           <div class="img-top5-chart-body">
             <div>
               <img class="img-cli-top" src="<?= base_url('assets/img/farmaceutica4.png') ?>" alt="Ilustración de compras">

@@ -143,6 +143,78 @@
     padding: 20px 25px;
     border-radius: 0 0 18px 18px;
   }
+
+  /* Responsive adjustments */
+  @media (max-width: 991.98px) {
+    .campania-card-header {
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+    }
+    .campania-card-header h3 {
+      font-size: 1.2rem;
+    }
+    .ayuda-box {
+      margin-top: 20px;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .campania-card-body {
+      padding: 18px;
+    }
+    .campania-form-label {
+      font-size: 0.95rem;
+    }
+    .campania-input {
+      font-size: 1rem;
+      padding: 12px 14px;
+    }
+    .section-title {
+      font-size: 1rem;
+    }
+    .multiplicador-box {
+      padding: 12px;
+    }
+    .footer-actions {
+      padding: 15px 18px;
+    }
+    .btn-crear-campania,
+    .btn-volver-campania {
+      width: 100%;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .footer-actions .btn-volver-campania {
+      margin-left: 0 !important;
+    }
+    .ayuda-box {
+      padding: 15px;
+    }
+    .ayuda-box h5 {
+      font-size: 1.1rem;
+    }
+    .ayuda-box h6 {
+      font-size: 0.95rem;
+    }
+    .ayuda-box p {
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .campania-card-header h3 {
+      font-size: 1.1rem;
+    }
+    .campania-card-body {
+      padding: 15px;
+    }
+    .alert-warning-custom,
+    .alert-info-custom {
+      padding: 12px 15px;
+      font-size: 0.9rem;
+    }
+  }
 </style>
 
 <div class="card campania-card">
@@ -174,8 +246,8 @@
       </div>
       <?php endif; ?>
 
-      <div class="row">
-        <div class="col-md-8">
+      <div class="row g-4">
+        <div class="col-12 col-lg-8">
           <!-- Datos básicos -->
           <div class="form-group">
             <label class="campania-form-label" for="nombre">Nombre de la campaña <span class="text-danger">*</span></label>
@@ -192,8 +264,8 @@
 
           <h5 class="section-title mt-4"><i class="fas fa-calculator mr-2"></i>Regla Base de Puntos</h5>
 
-          <div class="row">
-            <div class="col-md-6">
+          <div class="row g-3">
+            <div class="col-12 col-sm-6">
               <div class="form-group">
                 <label class="campania-form-label" for="puntos_por_monto">Puntos a otorgar <span class="text-danger">*</span></label>
                 <input type="number" class="form-control campania-input" id="puntos_por_monto" name="puntos_por_monto"
@@ -201,7 +273,7 @@
                 <small class="form-text text-muted">Cantidad de puntos que se otorgan</small>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-12 col-sm-6">
               <div class="form-group">
                 <label class="campania-form-label" for="monto_base">Por cada S/ <span class="text-danger">*</span></label>
                 <input type="number" class="form-control campania-input" id="monto_base" name="monto_base"
@@ -244,8 +316,8 @@
           </div>
 
           <div id="multiplicador_campos" style="display: none;" class="multiplicador-box">
-            <div class="row">
-              <div class="col-md-6">
+            <div class="row g-3">
+              <div class="col-12 col-sm-6">
                 <div class="form-group mb-0">
                   <label class="campania-form-label" for="multiplicador_monto_minimo">Monto mínimo de compra (S/)</label>
                   <input type="number" class="form-control campania-input" id="multiplicador_monto_minimo"
@@ -253,7 +325,7 @@
                          min="1" step="0.01">
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-12 col-sm-6">
                 <div class="form-group mb-0">
                   <label class="campania-form-label" for="multiplicador_valor">Multiplicador</label>
                   <select class="form-control campania-input" id="multiplicador_valor" name="multiplicador_valor">
@@ -271,7 +343,7 @@
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-12 col-lg-4">
           <div class="ayuda-box">
             <h5><i class="fas fa-lightbulb mr-2"></i>Ayuda</h5>
 

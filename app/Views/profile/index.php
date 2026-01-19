@@ -91,9 +91,9 @@
         </div>
     <?php endif; ?>
 
-    <div class="row">
+    <div class="row g-4">
         <!-- Columna izquierda: Avatar -->
-        <div class="col-md-4">
+        <div class="col-12 col-lg-4">
             <div class="card profile-card">
                 <div class="card-body box-profile">
                     <div class="text-center">
@@ -148,7 +148,7 @@
         </div>
 
         <!-- Columna derecha: Datos y contraseña -->
-        <div class="col-md-8">
+        <div class="col-12 col-lg-8">
             <!-- Datos personales -->
             <div class="card profile-card">
                 <div class="profile-card-header">
@@ -262,6 +262,66 @@
 /* Custom file input */
 .custom-file-label::after {
     content: "Buscar";
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    .profile-card-header .card-title {
+        font-size: 1.15rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .profile-card-header {
+        padding: 14px 18px;
+    }
+    .profile-card-body {
+        padding: 16px;
+    }
+    .avatar-initials {
+        width: 120px !important;
+        height: 120px !important;
+        font-size: 3rem !important;
+    }
+    .profile-user-img {
+        width: 120px !important;
+        height: 120px !important;
+    }
+    .profile-username {
+        font-size: 1.2rem;
+    }
+    .btn-guardar,
+    .btn-cambiar {
+        width: 100%;
+    }
+    .card-footer {
+        padding: 15px 16px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .profile-card-header .card-title {
+        font-size: 1.05rem;
+    }
+    .profile-card-body {
+        padding: 14px;
+    }
+    .avatar-initials {
+        width: 100px !important;
+        height: 100px !important;
+        font-size: 2.5rem !important;
+    }
+    .profile-user-img {
+        width: 100px !important;
+        height: 100px !important;
+    }
+    .form-group label {
+        font-size: 0.95rem;
+    }
+    .form-control {
+        font-size: 1rem;
+        padding: 10px 12px;
+    }
 }
 </style>
 

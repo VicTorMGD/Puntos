@@ -209,6 +209,103 @@
     background-color: #6f42c1;
     color: #fff;
   }
+
+  /* Responsive adjustments */
+  @media (max-width: 991.98px) {
+    .puntos-card-header h3 {
+      font-size: 1.2rem;
+    }
+    .total-general .numero {
+      font-size: 2rem;
+    }
+    .puntos-display {
+      flex-wrap: wrap;
+    }
+    .puntos-item {
+      min-width: 80px;
+      flex: 1;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .puntos-card-header {
+      padding: 14px 18px;
+    }
+    .puntos-card-body {
+      padding: 14px 16px;
+    }
+    .total-general {
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+    .total-general .numero {
+      font-size: 1.8rem;
+    }
+    .total-general .label {
+      font-size: 0.85rem;
+    }
+    .info-puntos {
+      padding: 12px 14px;
+    }
+    .campania-card {
+      padding: 12px 15px;
+    }
+    .campania-nombre {
+      font-size: 1rem;
+    }
+    .puntos-item {
+      padding: 8px 10px;
+      min-width: 70px;
+    }
+    .puntos-item .numero {
+      font-size: 1.2rem;
+    }
+    .puntos-item .label {
+      font-size: 0.7rem;
+    }
+    .nav-tabs .nav-link {
+      padding: 8px 12px;
+      font-size: 0.85rem;
+    }
+    .table-styled thead th,
+    .table-styled tbody td {
+      font-size: 0.8rem;
+      padding: 8px 6px;
+    }
+    .btn-volver {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .puntos-card-header h3 {
+      font-size: 1.1rem;
+    }
+    .total-general .numero {
+      font-size: 1.5rem;
+    }
+    .puntos-display {
+      gap: 10px;
+    }
+    .puntos-item {
+      min-width: 60px;
+      padding: 6px 8px;
+    }
+    .puntos-item .numero {
+      font-size: 1rem;
+    }
+    .nav-tabs {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .nav-tabs .nav-link {
+      white-space: nowrap;
+      font-size: 0.8rem;
+      padding: 6px 10px;
+    }
+  }
 </style>
 
 <a href="<?= site_url('clientes') ?>" class="btn btn-volver">
@@ -228,14 +325,14 @@
 
   <div class="puntos-card-body">
     <!-- Resumen Total -->
-    <div class="row mb-4">
-      <div class="col-md-4">
-        <div class="total-general">
+    <div class="row g-3 mb-4">
+      <div class="col-12 col-lg-4">
+        <div class="total-general h-100">
           <div class="numero"><?= number_format($cliente['puntos_acumulados']) ?></div>
           <div class="label">Puntos Totales Disponibles</div>
         </div>
       </div>
-      <div class="col-md-8">
+      <div class="col-12 col-lg-8">
         <div class="info-puntos h-100 d-flex align-items-center">
           <div>
             <strong><i class="fas fa-info-circle"></i> Información del Cliente</strong>

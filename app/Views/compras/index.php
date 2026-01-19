@@ -134,13 +134,69 @@
     filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
   }
 
-  @media (max-width: 991px) {
+  /* Responsive adjustments */
+  @media (max-width: 991.98px) {
+    .compras-card-header {
+      padding: 14px 18px;
+    }
+    .compras-card-header h3 {
+      font-size: 1.2rem;
+    }
     .compras-image-col {
       order: -1;
       padding: 15px 20px 0;
     }
     .compras-image-col img {
       max-height: 200px;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .compras-card-body {
+      padding: 18px;
+    }
+    .compras-image-col {
+      padding: 10px 15px 0;
+    }
+    .compras-image-col img {
+      max-height: 160px;
+    }
+    .compras-form-label {
+      font-size: 0.95rem;
+    }
+    .compras-input {
+      font-size: 1rem;
+      padding: 12px 14px;
+    }
+    .btn-buscar-cliente,
+    .btn-guardar-compra,
+    .btn-imprimir-ticket {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .info-cliente-box {
+      padding: 14px 16px;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .compras-card-header h3 {
+      font-size: 1.1rem;
+    }
+    .compras-card-body {
+      padding: 15px;
+    }
+    .compras-image-col {
+      display: none;
+    }
+    .mt-3 {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .btn-guardar-compra,
+    .btn-imprimir-ticket {
+      margin-right: 0 !important;
     }
   }
 </style>
@@ -151,9 +207,9 @@
   </div>
 
   <div class="compras-card-body">
-    <div class="row">
+    <div class="row g-4">
       <!-- Columna del formulario -->
-      <div class="col-lg-6 col-md-12">
+      <div class="col-12 col-lg-6">
         <div class="form-group">
           <label class="compras-form-label" for="dni">DNI del cliente</label>
           <input
@@ -196,7 +252,7 @@
       </div>
 
       <!-- Columna de la imagen -->
-      <div class="col-lg-6 col-md-12 compras-image-col">
+      <div class="col-12 col-lg-6 compras-image-col d-none d-md-flex">
         <img src="<?= base_url('assets/img/farmaceutica1.png') ?>" alt="Ilustración de compras">
       </div>
     </div>

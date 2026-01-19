@@ -110,7 +110,7 @@
   }
 
   /* ===== MEJORAS RESPONSIVE PARA MÓVILES ===== */
-  @media (max-width: 768px) {
+  @media (max-width: 767.98px) {
     /* Header más grande en móviles */
     .edit-clientes-card-header {
       padding: 20px 16px;
@@ -174,7 +174,7 @@
   }
 
   /* Mejoras para móviles muy pequeños */
-  @media (max-width: 480px) {
+  @media (max-width: 575.98px) {
     .edit-clientes-card-header h2 {
       font-size: 1.4rem;
     }

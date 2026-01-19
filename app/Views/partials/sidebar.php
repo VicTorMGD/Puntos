@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #105285 !important;">
   <a href="<?= base_url('inicio') ?>" class="brand-link">
     <div style="display: flex; align-items: center; justify-content: center; padding: 5px;">
       <div class="pharmalivet-brand-btn" style="display: flex; align-items: center; background: linear-gradient(90deg, #ff6b35 0%, #ffa500 100%); border-radius: 50px; padding: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); width: 100%; max-width: 280px; transition: all 0.3s ease;">
