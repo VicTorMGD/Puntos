@@ -97,6 +97,39 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     border-left: 4px solid #dc3545;
   }
+
+  /* Estilos responsive */
+  @media (max-width: 991.98px) {
+    .user-card-header h2 {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .user-card-body {
+      padding: 15px;
+    }
+    .form-wrapper {
+      padding: 15px;
+    }
+    .btn-registrar,
+    .btn-cancelar {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .user-card-header {
+      padding: 12px 15px;
+    }
+    .user-card-header h2 {
+      font-size: 1rem;
+    }
+    .user-card-body {
+      padding: 12px;
+    }
+  }
 </style>
 
 <div class="card user-card">

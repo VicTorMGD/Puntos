@@ -232,6 +232,63 @@
     padding: 20px 22px;
     border-radius: 0 0 18px 18px;
   }
+
+  /* Estilos responsive */
+  @media (max-width: 991.98px) {
+    .gestionar-card-header h3 {
+      font-size: 1.1rem;
+    }
+    .gestionar-card-header {
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .gestionar-card-body {
+      padding: 15px;
+    }
+    .info-campania-box .row {
+      flex-direction: column;
+      text-align: center;
+    }
+    .info-campania-box .col-md-4 {
+      margin-top: 10px;
+    }
+    .btn-migrar-todos,
+    .btn-eliminar-todos {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .footer-actions {
+      padding: 15px;
+    }
+    #puntosTable th:nth-child(2),
+    #puntosTable td:nth-child(2),
+    #puntosTable th:nth-child(4),
+    #puntosTable td:nth-child(4) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .gestionar-card-header {
+      padding: 12px 15px;
+    }
+    .gestionar-card-header h3 {
+      font-size: 1rem;
+    }
+    .gestionar-card-body {
+      padding: 12px;
+    }
+    .btn-migrar-puntos,
+    .btn-eliminar-puntos {
+      display: block;
+      width: 100%;
+      margin-bottom: 5px;
+    }
+  }
 </style>
 
 <div class="card gestionar-card">

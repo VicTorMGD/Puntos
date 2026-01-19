@@ -97,6 +97,69 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     border-left: 4px solid #dc3545;
   }
+
+  .usuarios-image-container{
+    padding: 4%;
+    /*background: #1A6BA8;*/
+  }
+
+  .img-user-edit{
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 10px;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.76));
+  }
+
+  /* Estilos responsive */
+  @media (max-width: 991.98px) {
+    .user-card-header h2 {
+      font-size: 1.2rem;
+    }
+
+    .usuarios-image-container {
+      margin-top: 20px;
+    }
+
+    .img-user-edit {
+      max-height: 300px;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .user-card-body {
+      padding: 15px;
+    }
+
+    .form-wrapper {
+      padding: 15px;
+    }
+
+    .btn-actualizar,
+    .btn-cancelar {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .usuarios-image-container {
+      display: none;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .user-card-header {
+      padding: 12px 15px;
+    }
+
+    .user-card-header h2 {
+      font-size: 1rem;
+    }
+
+    .user-card-body {
+      padding: 12px;
+    }
+  }
+
 </style>
 
 <div class="card user-card">
@@ -115,33 +178,41 @@
       </div>
     <?php endif ?>
 
-    <div class="form-wrapper">
-      <form action="<?= base_url('users/update/' . $user['id']) ?>" method="post">
-        <?= csrf_field() ?>
-        <div class="mb-3">
-          <label>Nombre</label>
-          <input type="text" name="name" class="form-control" value="<?= old('name', $user['name']) ?>" required>
+    <div class="row g-0">
+      <div class="col-12 col-lg-6">
+        <form action="<?= base_url('users/update/' . $user['id']) ?>" method="post">
+          <?= csrf_field() ?>
+          <div class="mb-3">
+            <label>Nombre</label>
+            <input type="text" name="name" class="form-control" value="<?= old('name', $user['name']) ?>" required>
+          </div>
+          <div class="mb-3">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" value="<?= old('email', $user['email']) ?>" required>
+          </div>
+          <div class="mb-3">
+            <label>Rol</label>
+            <select name="role" class="form-control" required>
+              <option value="administrador" <?= old('role', $user['role']) == 'administrador' ? 'selected' : '' ?>>Administrador</option>
+              <option value="vendedor" <?= old('role', $user['role']) == 'vendedor' ? 'selected' : '' ?>>Vendedor</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label>Contraseña (dejar en blanco si no se desea cambiar)</label>
+            <input type="password" name="password" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-actualizar">Actualizar</button>
+          <a href="<?= base_url('users') ?>" class="btn btn-cancelar">Cancelar</a>
+        </form>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <div class="usuarios-image-container">
+              <img class="img-user-edit" src="<?= base_url('assets/img/img-1-usuarios.jpg') ?>" alt="Imagen de unos usuarios de la farmacia">
+            </div>            
         </div>
-        <div class="mb-3">
-          <label>Email</label>
-          <input type="email" name="email" class="form-control" value="<?= old('email', $user['email']) ?>" required>
-        </div>
-        <div class="mb-3">
-          <label>Rol</label>
-          <select name="role" class="form-control" required>
-            <option value="administrador" <?= old('role', $user['role']) == 'administrador' ? 'selected' : '' ?>>Administrador</option>
-            <option value="vendedor" <?= old('role', $user['role']) == 'vendedor' ? 'selected' : '' ?>>Vendedor</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label>Contraseña (dejar en blanco si no se desea cambiar)</label>
-          <input type="password" name="password" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-actualizar">Actualizar</button>
-        <a href="<?= base_url('users') ?>" class="btn btn-cancelar">Cancelar</a>
-      </form>
-    </div>
-  </div>
+      </div>
+    </div>  
 </div>
 
 <?= $this->endSection() ?>

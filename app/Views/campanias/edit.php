@@ -129,6 +129,50 @@
     padding: 20px 25px;
     border-radius: 0 0 18px 18px;
   }
+
+  /* Estilos responsive */
+  @media (max-width: 991.98px) {
+    .campania-card-header h3 {
+      font-size: 1.1rem;
+    }
+    .campania-card-header {
+      flex-direction: column;
+      gap: 10px;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .campania-card-body {
+      padding: 15px;
+    }
+    .info-box {
+      margin-top: 20px;
+    }
+    .btn-guardar-campania,
+    .btn-volver-campania {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .footer-actions {
+      padding: 15px;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .campania-card-header {
+      padding: 12px 15px;
+    }
+    .campania-card-header h3 {
+      font-size: 1rem;
+    }
+    .campania-card-body {
+      padding: 12px;
+    }
+    .multiplicador-box {
+      padding: 10px;
+    }
+  }
 </style>
 
 <div class="card campania-card">

@@ -1,9 +1,24 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
-<h2>Categorías</h2>
-<a href="<?= base_url('categories/create') ?>" class="btn btn-success mb-3">Nueva Categoría</a>
+<style>
+  @media (max-width: 767.98px) {
+    .page-header h2 { font-size: 1.3rem; }
+    .btn-action { width: 100%; margin-bottom: 8px; }
+    #categoryTable th:nth-child(1),
+    #categoryTable td:nth-child(1) { display: none; }
+  }
+  @media (max-width: 575.98px) {
+    .page-header h2 { font-size: 1.1rem; }
+  }
+</style>
 
+<div class="page-header d-flex flex-wrap justify-content-between align-items-center mb-3">
+  <h2 class="mb-2 mb-md-0">Categorías</h2>
+  <a href="<?= base_url('categories/create') ?>" class="btn btn-success btn-action">Nueva Categoría</a>
+</div>
+
+<div class="table-responsive">
 <table class="table table-bordered table-hover" id="categoryTable">
     <thead class="table-dark">
         <tr>
@@ -27,6 +42,7 @@
         <?php endforeach ?>
     </tbody>
 </table>
+</div>
 
 <?= $this->endSection() ?>
 

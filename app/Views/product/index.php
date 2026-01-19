@@ -1,16 +1,48 @@
 <?= $this->extend('layouts/main') ?>
 <?= $this->section('content') ?>
 
-<h2>Productos</h2>
-<a href="<?= base_url('products/create') ?>" class="btn btn-success mb-3">Nuevo Producto</a>
+<style>
+  /* Estilos responsive para productos */
+  @media (max-width: 767.98px) {
+    .page-header h2 {
+      font-size: 1.3rem;
+    }
+    .btn-action {
+      width: 100%;
+      margin-bottom: 8px;
+    }
+    #productTable th:nth-child(1),
+    #productTable td:nth-child(1) {
+      display: none;
+    }
+  }
+  @media (max-width: 575.98px) {
+    .page-header h2 {
+      font-size: 1.1rem;
+    }
+    #productTable th:nth-child(4),
+    #productTable td:nth-child(4),
+    #productTable th:nth-child(5),
+    #productTable td:nth-child(5) {
+      display: none;
+    }
+  }
+</style>
 
-<a href="<?= base_url('export/products') ?>" class="btn btn-outline-primary mb-3">
-    <i class="fas fa-file-excel"></i> Exportar a Excel
-</a>
-<a href="<?= base_url('export/products-pdf') ?>" class="btn btn-outline-danger mb-3">
-    <i class="fas fa-file-pdf"></i> Exportar a PDF
-</a>
+<div class="page-header d-flex flex-wrap justify-content-between align-items-center mb-3">
+  <h2 class="mb-2 mb-md-0">Productos</h2>
+  <div class="d-flex flex-wrap gap-2">
+    <a href="<?= base_url('products/create') ?>" class="btn btn-success btn-action">Nuevo Producto</a>
+    <a href="<?= base_url('export/products') ?>" class="btn btn-outline-primary btn-action">
+      <i class="fas fa-file-excel"></i> Exportar a Excel
+    </a>
+    <a href="<?= base_url('export/products-pdf') ?>" class="btn btn-outline-danger btn-action">
+      <i class="fas fa-file-pdf"></i> Exportar a PDF
+    </a>
+  </div>
+</div>
 
+<div class="table-responsive">
 <table class="table table-bordered table-hover" id="productTable">
     <thead class="table-dark">
         <tr>
@@ -46,6 +78,7 @@
         <?php endforeach ?>
     </tbody>
 </table>
+</div>
 
 <?= $this->endSection() ?>
 

@@ -61,6 +61,39 @@
     font-weight: 700;
     color: #1A6BA8;
   }
+
+  /* Estilos responsive */
+  @media (max-width: 767.98px) {
+    .cliente-card-header h3 {
+      font-size: 1.2rem;
+    }
+    .cliente-card-body {
+      padding: 15px;
+    }
+    .cliente-info-box {
+      padding: 15px;
+    }
+    .cliente-info-item strong {
+      display: block;
+      width: 100%;
+      margin-bottom: 5px;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .cliente-card-header {
+      padding: 12px 15px;
+    }
+    .cliente-card-header h3 {
+      font-size: 1rem;
+    }
+    .cliente-card-body {
+      padding: 12px;
+    }
+    .puntos-destacado {
+      font-size: 1.3rem;
+    }
+  }
 </style>
 
 <div class="card cliente-card">

@@ -183,16 +183,7 @@
   }
 </style>
 
-<!-- Gráfico Top 5 Clientes
-<div class="top5-chart-card">
-  <div class="top5-chart-header">
-    <i class="fas fa-trophy"></i>
-    <h3>Top 5 Clientes con Más Puntos</h3>
-  </div>
-  <div class="top5-chart-body">
-    <div id="chartTop5Clientes"></div>
-  </div>
-</div> -->
+
 
 <div class="card clientes-card">
   <div class="clientes-card-header">

@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title><?= $title ?? 'Pharmalivet' ?></title>
   <link rel="shortcut icon" type="image/x-icon" href="<?= base_url('logo_pharmalivet.ico') ?>">
   <link rel="icon" type="image/x-icon" href="<?= base_url('logo_pharmalivet.ico') ?>">
@@ -14,13 +15,98 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
-    /* Estilos responsive para el sidebar */
+    /* ========================================
+       LAYOUT FIJO: Navbar y Sidebar estáticos
+       ======================================== */
 
-    /* En pantallas pequeñas (tablets y móviles) */
+    /* Navbar fijo en la parte superior */
+    .main-header.navbar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 1030;
+      height: 57px;
+      left: 0;
+      margin-left: 0;
+      transition: margin-left 0.3s ease-in-out;
+    }
+
+    /* En desktop: navbar comienza después del sidebar */
+    @media (min-width: 992px) {
+      .main-header.navbar {
+        margin-left: 250px;
+        left: 0;
+      }
+
+      body.sidebar-collapse .main-header.navbar {
+        margin-left: 4.6rem;
+      }
+    }
+
+    /* Sidebar fijo en el lado izquierdo */
+    .main-sidebar {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 100vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      z-index: 1038;
+    }
+
+    /* Scrollbar personalizado para el sidebar */
+    .main-sidebar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .main-sidebar::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .main-sidebar::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 3px;
+    }
+
+    .main-sidebar::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    /* Content wrapper con margen para compensar sidebar y navbar fijos */
+    .content-wrapper {
+      margin-top: 57px !important;
+      min-height: calc(100vh - 57px) !important;
+    }
+
+    @media (min-width: 992px) {
+      .content-wrapper {
+        margin-left: 250px !important;
+      }
+
+      body.sidebar-collapse .content-wrapper {
+        margin-left: 4.6rem !important;
+      }
+    }
+
+    /* Wrapper sin altura mínima fija */
+    .wrapper {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ========================================
+       RESPONSIVE: Tablets y móviles
+       ======================================== */
     @media (max-width: 991px) {
+      /* Navbar ocupa todo el ancho en móviles */
+      .main-header.navbar {
+        left: 0 !important;
+      }
+
       /* Ocultar sidebar por defecto en móviles */
       body:not(.sidebar-open) .main-sidebar {
-        margin-left: -250px;
+        transform: translateX(-250px);
       }
 
       /* Asegurar que el contenido ocupe todo el ancho cuando el sidebar está oculto */
@@ -30,10 +116,7 @@
 
       /* Cuando el sidebar está abierto, mostrarlo sobre el contenido (overlay) */
       body.sidebar-open .main-sidebar {
-        margin-left: 0;
-        position: fixed;
-        height: 100vh;
-        z-index: 1040;
+        transform: translateX(0);
         box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
       }
 
@@ -56,20 +139,22 @@
 
       /* Transiciones suaves */
       .main-sidebar {
-        transition: margin-left 0.3s ease-in-out;
+        transition: transform 0.3s ease-in-out;
       }
     }
 
-    /* En pantallas grandes (desktop) */
+    /* ========================================
+       DESKTOP: Pantallas grandes
+       ======================================== */
     @media (min-width: 992px) {
       /* Sidebar siempre visible */
       .main-sidebar {
-        margin-left: 0 !important;
+        transform: translateX(0) !important;
       }
 
-      /* Mostrar botón hamburguesa solo si se desea */
+      /* Cuando está colapsado */
       body.sidebar-collapse .main-sidebar {
-        margin-left: 0;
+        width: 4.6rem !important;
       }
     }
 
