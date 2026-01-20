@@ -94,11 +94,16 @@ copy "app\Views\user\index.php" "%DESTINO%\app\Views\user\"
 
 echo Copiando imagenes...
 copy "public\assets\img\Frontis-framacia1.PNG" "%DESTINO%\public\assets\img\"
+copy "public\assets\img\bienvenida.png" "%DESTINO%\public\assets\img\"
+copy "public\assets\img\boticarios.png" "%DESTINO%\public\assets\img\"
 copy "public\assets\img\farmaceutica1.PNG" "%DESTINO%\public\assets\img\"
 copy "public\assets\img\farmaceutica2.PNG" "%DESTINO%\public\assets\img\"
 copy "public\assets\img\farmaceutica3.PNG" "%DESTINO%\public\assets\img\"
 copy "public\assets\img\farmaceutica4.PNG" "%DESTINO%\public\assets\img\"
 copy "public\assets\img\img-1-usuarios.jpg" "%DESTINO%\public\assets\img\"
+copy "public\assets\img\puntos.png" "%DESTINO%\public\assets\img\"
+copy "public\assets\img\ranking.png" "%DESTINO%\public\assets\img\"
+copy "public\assets\img\registro.png" "%DESTINO%\public\assets\img\"
 copy "public\assets\img\xFrontis-framacia1.PNG" "%DESTINO%\public\assets\img\"
 
 echo Copiando JavaScript...
@@ -107,7 +112,7 @@ copy "public\js\dashboard\index.js" "%DESTINO%\public\js\dashboard\"
 echo.
 echo ============================================
 echo   COPIA COMPLETADA!
-echo   Total: 40 archivos
+echo   Total: 45 archivos
 echo   Destino: %DESTINO%
 echo ============================================
 echo.
