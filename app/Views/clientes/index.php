@@ -90,28 +90,31 @@
   }
 
   .top5-chart-body {
-    padding: 20px;
-    
+    padding: 15px 20px;
   }
 
-  .img-top5-chart-body {
-    width: 100%;
-    padding: 2rem;
-    margin: 2rem 1rem;
+  .top5-chart-col {
     display: flex;
     align-items: center;
-    flex-direction: row;
-    justify-content: flex-start;
+  }
+
+  .top5-img-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
   }
 
   .img-cli-top {
-    width: 85%;
-    max-width: 300px;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
   }
 
   #chartTop5Clientes {
     width: 100%;
-    height: 350px;
+    height: 320px;
     min-height: 280px;
   }
 
@@ -131,10 +134,8 @@
     #chartTop5Clientes {
       height: 300px;
     }
-    .img-top5-chart-body {
-      padding: 1rem;
-      margin: 1rem 0;
-      justify-content: center;
+    .top5-img-col {
+      display: none;
     }
   }
 
@@ -152,11 +153,8 @@
       padding: 15px;
     }
     #chartTop5Clientes {
-      height: 250px;
-      min-height: 220px;
-    }
-    .img-top5-chart-body {
-      display: none;
+      height: 280px;
+      min-height: 250px;
     }
     #tablaClientes thead th {
       font-size: 0.85rem;
@@ -177,8 +175,11 @@
       font-size: 1.1rem;
     }
     #chartTop5Clientes {
-      height: 220px;
-      min-height: 200px;
+      height: 280px;
+      min-height: 260px;
+    }
+    .top5-chart-header h3 {
+      font-size: 1rem;
     }
   }
 </style>
@@ -198,17 +199,13 @@
         <i class="fas fa-trophy"></i>
         <h3>Top 5 Clientes con Más Puntos</h3>
       </div>
-      <div class="row g-0">
-        <div class="col-12 col-lg-8">
-          <div class="top5-chart-body">
+      <div class="top5-chart-body">
+        <div class="row g-0 align-items-center">
+          <div class="col-lg-8 col-12 top5-chart-col">
             <div id="chartTop5Clientes"></div>
           </div>
-        </div>
-        <div class="col-12 col-lg-4 d-none d-lg-block">
-          <div class="img-top5-chart-body">
-            <div>
-              <img class="img-cli-top" src="<?= base_url('assets/img/farmaceutica4.png') ?>" alt="Ilustración de compras">
-            </div>
+          <div class="col-lg-4 top5-img-col">
+            <img class="img-cli-top" src="<?= base_url('assets/img/ranking.png') ?>" alt="Ilustración ranking">
           </div>
         </div>
       </div>
@@ -275,7 +272,6 @@ $(function() {
     const chartTop5 = echarts.init(document.getElementById('chartTop5Clientes'));
 
     // Colores dorados con intensidad decreciente (1° más intenso, 5° más claro)
-    const colors = ['#FFD700', '#FFDF33', '#FFE766', '#FFEF99', '#FFF5BF'];
     const gradients = [
         ['#FFD700', '#FFA500'],  // 1° - Dorado intenso
         ['#FFDF33', '#FFB833'],  // 2° - Dorado fuerte
@@ -290,115 +286,138 @@ $(function() {
     // Preparar datos - ordenados de mayor a menor
     const maxValue = Math.max(...top5Data.map(d => parseInt(d.total)));
 
-    // Crear nombres completos con medalla
-    const nombresCompletos = top5Data.map((d, i) => {
-        return `${medals[i]}  ${d.nombres} ${d.apellidos}`;
-    });
+    // Detectar si es móvil
+    function isMobile() {
+        return window.innerWidth <= 575;
+    }
 
-    const option = {
-        tooltip: {
-            trigger: 'item',
-            backgroundColor: 'rgba(255, 255, 255, 0.98)',
-            borderColor: '#ffc107',
-            borderWidth: 3,
-            padding: 15,
-            textStyle: { color: '#333', fontSize: 14 },
-            formatter: function(params) {
-                // Corregir índice invertido (los datos están reversed en el gráfico)
-                const realIdx = top5Data.length - 1 - params.dataIndex;
-                const cliente = top5Data[realIdx];
-                const nombreCompleto = cliente.nombres + ' ' + cliente.apellidos;
-                const posiciones = ['1er', '2do', '3er', '4to', '5to'];
-                return `<div style="text-align: center;">
-                    <div style="font-size: 28px; margin-bottom: 8px;">${medals[realIdx]}</div>
-                    <div style="font-size: 16px; font-weight: bold; color: #1A6BA8; margin-bottom: 5px;">${posiciones[realIdx]} Lugar</div>
-                    <div style="font-size: 14px; color: #555; margin-bottom: 10px;">${nombreCompleto}</div>
-                    <div style="font-size: 22px; font-weight: bold; color: #000000;">
-                        ${parseInt(cliente.total).toLocaleString('es-PE')} pts
-                    </div>
-                </div>`;
+    // Función para obtener opciones según el tamaño de pantalla
+    function getChartOption() {
+        const mobile = isMobile();
+
+        // Crear nombres según el dispositivo
+        const nombresDisplay = top5Data.map((d, i) => {
+            if (mobile) {
+                // En móvil: solo medalla y primer nombre
+                const primerNombre = d.nombres.split(' ')[0];
+                return `${medals[i]} ${primerNombre}`;
+            } else {
+                // En desktop: medalla + nombre completo
+                return `${medals[i]}  ${d.nombres} ${d.apellidos} `;
             }
-        },
-        grid: {
-            left: '28%',
-            right: '12%',
-            top: '5%',
-            bottom: '5%',
-            containLabel: false
-        },
-        xAxis: {
-            type: 'value',
-            max: maxValue * 1.2,
-            axisLine: { show: false },
-            axisTick: { show: false },
-            axisLabel: { show: false },
-            splitLine: { show: false }
-        },
-        yAxis: {
-            type: 'category',
-            data: nombresCompletos.slice().reverse(),
-            inverse: false,
-            axisLine: { show: false },
-            axisTick: { show: false },
-            axisLabel: {
-                show: true,
-                fontSize: 18,
-                fontWeight: '600',
-                color: '#333',
-                width: 250,
-                overflow: 'truncate',
-                formatter: function(value) {
-                    return value;
-                }
-            }
-        },
-        series: [{
-            name: 'Puntos',
-            type: 'bar',
-            data: top5Data.map((d, i) => ({
-                value: parseInt(d.total),
-                itemStyle: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
-                        { offset: 0, color: gradients[i][0] },
-                        { offset: 1, color: gradients[i][1] }
-                    ]),
-                    borderRadius: [0, 25, 25, 0],
-                    shadowColor: 'rgba(0, 0, 0, 0.15)',
-                    shadowBlur: 8,
-                    shadowOffsetX: 2,
-                    shadowOffsetY: 2
-                }
-            })).reverse(),
-            barWidth: '55%',
-            label: {
-                show: true,
-                position: 'right',
-                distance: 10,
-                fontSize: 15,
-                fontWeight: 'bold',
-                color: '#1A6BA8',
+        });
+
+        return {
+            tooltip: {
+                trigger: 'item',
+                backgroundColor: 'rgba(255, 255, 255, 0.98)',
+                borderColor: '#ffc107',
+                borderWidth: 3,
+                padding: 15,
+                textStyle: { color: '#333', fontSize: 14 },
                 formatter: function(params) {
-                    return params.value.toLocaleString('es-PE') + ' pts';
+                    const realIdx = top5Data.length - 1 - params.dataIndex;
+                    const cliente = top5Data[realIdx];
+                    const nombreCompleto = cliente.nombres + ' ' + cliente.apellidos;
+                    const posiciones = ['1er', '2do', '3er', '4to', '5to'];
+                    return `<div style="text-align: center;">
+                        <div style="font-size: 28px; margin-bottom: 8px;">${medals[realIdx]}</div>
+                        <div style="font-size: 16px; font-weight: bold; color: #1A6BA8; margin-bottom: 5px;">${posiciones[realIdx]} Lugar</div>
+                        <div style="font-size: 14px; color: #555; margin-bottom: 10px;">${nombreCompleto}</div>
+                        <div style="font-size: 22px; font-weight: bold; color: #000000;">
+                            ${parseInt(cliente.total).toLocaleString('es-PE')} pts
+                        </div>
+                    </div>`;
                 }
             },
-            emphasis: {
-                itemStyle: {
-                    shadowBlur: 15,
-                    shadowColor: 'rgba(0, 0, 0, 0.3)'
+            grid: {
+                left: mobile ? '3%' : '3%',
+                right: mobile ? '3%' : '3%',
+                top: mobile ? '8%' : '5%',
+                bottom: mobile ? '3%' : '5%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value',
+                max: maxValue * 1.15,
+                axisLine: { show: false },
+                axisTick: { show: false },
+                axisLabel: { show: false },
+                splitLine: { show: false }
+            },
+            yAxis: {
+                type: 'category',
+                data: nombresDisplay.slice().reverse(),
+                inverse: false,
+                axisLine: { show: false },
+                axisTick: { show: false },
+                axisLabel: {
+                    show: true,
+                    fontSize: mobile ? 13 : 15,
+                    fontWeight: '600',
+                    color: '#333',
+                    width: mobile ? 100 : 200,
+                    overflow: 'truncate'
                 }
             },
-            animationDelay: function(idx) {
-                return idx * 200;
-            }
-        }],
-        animationEasing: 'elasticOut',
-        animationDuration: 1500
-    };
+            series: [{
+                name: 'Puntos',
+                type: 'bar',
+                data: top5Data.map((d, i) => ({
+                    value: parseInt(d.total),
+                    itemStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+                            { offset: 0, color: gradients[i][0] },
+                            { offset: 1, color: gradients[i][1] }
+                        ]),
+                        borderRadius: [0, 15, 15, 0],
+                        shadowColor: 'rgba(0, 0, 0, 0.15)',
+                        shadowBlur: mobile ? 4 : 8,
+                        shadowOffsetX: 2,
+                        shadowOffsetY: 2
+                    }
+                })).reverse(),
+                barWidth: mobile ? '50%' : '60%',
+                label: {
+                    show: true,
+                    position: mobile ? 'insideRight' : 'insideRight',
+                    distance: mobile ? 5 : 8,
+                    fontSize: mobile ? 11 : 14,
+                    fontWeight: 'bold',
+                    color: '#333',
+                    formatter: function(params) {
+                        return params.value.toLocaleString('es-PE') + ' pts';
+                    }
+                },
+                emphasis: {
+                    itemStyle: {
+                        shadowBlur: 15,
+                        shadowColor: 'rgba(0, 0, 0, 0.3)'
+                    }
+                },
+                animationDelay: function(idx) {
+                    return idx * 200;
+                }
+            }],
+            animationEasing: 'elasticOut',
+            animationDuration: 1500
+        };
+    }
 
-    chartTop5.setOption(option);
+    // Inicializar con las opciones adecuadas
+    chartTop5.setOption(getChartOption());
 
-    // Responsive
+    // Variable para detectar cambio de modo
+    let wasMobile = isMobile();
+
+    // Responsive - actualizar opciones cuando cambia el tamaño
     $(window).on('resize', function() {
+        const nowMobile = isMobile();
+        // Solo actualizar opciones si cambió entre móvil y desktop
+        if (nowMobile !== wasMobile) {
+            chartTop5.setOption(getChartOption(), true);
+            wasMobile = nowMobile;
+        }
         chartTop5.resize();
     });
 });

@@ -88,4 +88,7 @@
       </ul>
     </nav>
   </div>
+  <div class="img-sidebar" style="display:flex;justify-content:center;">
+    <img src="<?= base_url('assets/img/ranking.png') ?>" alt="Logo" style="width: 60%; height: 60%; padding: 0px; margin: 0px; ">
+  </div>
 </aside>

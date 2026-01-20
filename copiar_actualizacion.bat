@@ -7,7 +7,7 @@ echo ============================================
 echo.
 
 REM Configura aqui la ruta destino (USB o carpeta)
-set DESTINO=D:\Puntos_Actualizacion2
+set DESTINO=D:\Puntos_Actualizacion3
 
 echo Destino: %DESTINO%
 echo.

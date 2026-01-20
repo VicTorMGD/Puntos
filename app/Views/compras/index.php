@@ -253,7 +253,7 @@
 
       <!-- Columna de la imagen -->
       <div class="col-12 col-lg-6 compras-image-col d-none d-md-flex">
-        <img src="<?= base_url('assets/img/farmaceutica1.png') ?>" alt="Ilustración de compras">
+        <img src="<?= base_url('assets/img/registro.png') ?>" alt="Ilustración de compras">
       </div>
     </div>
   </div>

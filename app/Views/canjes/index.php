@@ -311,7 +311,7 @@
           <h4 id="clienteNombre" class="mb-2" style="color: #333;"></h4>
           <p class="mb-1"><strong style="color: #1A6BA8;">DNI:</strong> <span id="clienteDni"></span></p>
           <p class="mb-0">
-            <strong style="color: #1A6BA8;">Total Puntos:</strong>
+            <strong style="color: #1A6BA8;">Total Puntos: &nbsp;&nbsp;</strong>
             <span id="clienteTotalPuntos" class="badge badge-success" style="font-size: 1.2em; background: linear-gradient(135deg, #28a745 0%, #20c997 100%);"></span>
           </p>
           <input type="hidden" id="clienteId" value="">
@@ -319,14 +319,14 @@
 
         <!-- Imagen decorativa -->
         <div class="canjes-image-col d-none d-md-flex">
-          <img src="<?= base_url('assets/img/farmaceutica2.png') ?>" alt="Ilustración de canjes">
+          <img src="<?= base_url('assets/img/puntos.png') ?>" alt="Ilustración de canjes">
         </div>
       </div>
 
       <!-- Panel de puntos por campaña -->
       <div class="col-12 col-md-7 col-lg-8">
         <div id="panelPuntos" style="display: none;">
-          <h5 class="mb-3" style="color: #1A6BA8; font-weight: 600;"><i class="fas fa-coins mr-2"></i>Puntos por Campaña</h5>
+          <h5 class="mb-3" style="color: #1A6BA8; font-weight: 600;"><i class="fas fa-coins mr-2 mt-3"></i>Puntos por Campaña</h5>
           <div id="listaPuntosCampania">
             <!-- Se llena dinámicamente -->
           </div>
@@ -525,7 +525,7 @@ function mostrarPuntosPorCampania() {
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-md-5">
-                            <h5 class="mb-1" style="color: #1A6BA8; font-weight: 600;">${pc.campania_nombre} ${estadoBadge}</h5>
+                            <h5 class="mb-1" style="color: #1A6BA8; font-weight: 600;">${pc.campania_nombre} &nbsp;&nbsp;&nbsp;  ${estadoBadge}</h5>
                             <small class="text-muted">ID: ${pc.campania_id}</small>
                         </div>
                         <div class="col-md-3 text-center">

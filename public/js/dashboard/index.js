@@ -1014,6 +1014,38 @@ $(function () {
         a.click();
     });
 
+    $('#exportDistribucionTipos').on('click', function () {
+        const url = chartDistribucion.getDataURL({ type: 'png', pixelRatio: 2, backgroundColor: '#fff' });
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'distribucion-movimientos.png';
+        a.click();
+    });
+
+    $('#exportComparativaPuntos').on('click', function () {
+        const url = chartComparativa.getDataURL({ type: 'png', pixelRatio: 2, backgroundColor: '#fff' });
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'balance-puntos.png';
+        a.click();
+    });
+
+    $('#exportActividadHora').on('click', function () {
+        const url = chartActividad.getDataURL({ type: 'png', pixelRatio: 2, backgroundColor: '#fff' });
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'actividad-por-hora.png';
+        a.click();
+    });
+
+    $('#exportCampanias').on('click', function () {
+        const url = chartCampanias.getDataURL({ type: 'png', pixelRatio: 2, backgroundColor: '#fff' });
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'puntos-por-campania.png';
+        a.click();
+    });
+
     // === ACTUALIZAR FILTROS PARA INCLUIR NUEVOS GRÁFICOS ===
     const originalFiltrar = $('#btnFiltrar').off('click').on('click', function () {
         const inicio = $('#fechaInicio').val();

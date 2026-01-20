@@ -52,8 +52,9 @@
   }
 
   .welcome-image-col img {
-    max-width: 100%;
-    max-height: 250px;
+    margin-top: 4rem;
+    max-width: 130%;
+    max-height: 300px;
     object-fit: contain;
     filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.2));
   }
@@ -152,10 +153,7 @@
     letter-spacing: 0.5px;
   }
 
-  .imagen-inicio {
-    margin-top: 4rem;
-    width: 20rem;
-  }
+ 
 
   /* ============================================
      PANEL DE ACCESOS DIRECTOS (SIDEBAR)
@@ -586,7 +584,7 @@
 
             <!-- Columna de imagen -->
             <div class="col-12 col-md-5 col-lg-4 welcome-image-col text-center d-none d-md-flex align-items-center justify-content-center">
-              <img class="imagen-inicio" src="<?= base_url('assets/img/farmaceutica3.png') ?>" alt="Ilustración farmacéutica">
+              <img class="imagen-inicio" src="<?= base_url('assets/img/bienvenida.png') ?>" alt="Ilustración farmacéutica">
             </div>
           </div>
         </div>

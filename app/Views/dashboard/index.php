@@ -252,7 +252,7 @@
       </select>
     </div>
     <div class="col-6 col-sm-3 col-lg-2 d-flex align-items-end">
-      <button id="btnFiltrar" class="btn btn-filtrar w-100">
+      <button id="btnFiltrar" class="btn btn-filtrar w-100 mt-3">
         <i class="fas fa-filter mr-1"></i> Filtrar
       </button>
     </div>
@@ -389,6 +389,9 @@
         <i class="fas fa-chart-pie mr-2"></i>Distribución de Movimientos
       </h4>
       <div id="chartDistribucionTipos" style="height:300px; min-height:250px;"></div>
+      <button class="btn btn-exportar" id="exportDistribucionTipos">
+        <i class="fas fa-download mr-1"></i> Exportar Distribución
+      </button>
     </div>
   </div>
   <div class="col-12 col-lg-6">
@@ -397,6 +400,9 @@
         <i class="fas fa-ring mr-2"></i>Balance de Puntos
       </h4>
       <div id="chartComparativaPuntos" style="height:300px; min-height:250px;"></div>
+      <button class="btn btn-exportar" id="exportComparativaPuntos">
+        <i class="fas fa-download mr-1"></i> Exportar Balance
+      </button>
     </div>
   </div>
 </div>
@@ -439,6 +445,9 @@
         <i class="fas fa-clock mr-2"></i>Actividad por Hora del Día
       </h4>
       <div id="chartActividadHora" style="height:320px; min-height:260px;"></div>
+      <button class="btn btn-exportar" id="exportActividadHora">
+        <i class="fas fa-download mr-1"></i> Exportar Actividad por Hora
+      </button>
     </div>
   </div>
   <div class="col-12 col-lg-6">
@@ -447,6 +456,9 @@
         <i class="fas fa-bullhorn mr-2"></i>Puntos por Campaña
       </h4>
       <div id="chartCampanias" style="height:320px; min-height:260px;"></div>
+      <button class="btn btn-exportar" id="exportCampanias">
+        <i class="fas fa-download mr-1"></i> Exportar Campañas
+      </button>
     </div>
   </div>
 </div>
