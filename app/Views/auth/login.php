@@ -147,8 +147,9 @@
   }
 
   .alert-custom-danger {
-    background-color: #fff5f5;
-    border-left: 4px solid #dc3545;
+    background-color: #dc3545;
+    color: #ffffff;
+    border-left: 4px solid #a71d2a;
     border-radius: 8px;
     padding: 12px;
     margin-bottom: 15px;
