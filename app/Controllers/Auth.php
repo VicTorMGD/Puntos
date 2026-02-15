@@ -20,8 +20,16 @@ class Auth extends Controller
         $password = $this->request->getPost('password');
 
         $user = $userModel->where('email', $email)->first();
+        $isAjax = $this->request->isAJAX();
 
         if (!$user || !password_verify($password, $user['password'])) {
+            if ($isAjax) {
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'Credenciales inválidas',
+                    'csrf_hash' => csrf_hash()
+                ]);
+            }
             return redirect()->back()->with('error', 'Credenciales inválidas');
         }
 
@@ -40,6 +48,14 @@ class Auth extends Controller
             'session_token' => $sessionToken,
             'logged_in' => true
         ]);
+
+        if ($isAjax) {
+            return $this->response->setJSON([
+                'success' => true,
+                'redirect' => base_url('compras'),
+                'csrf_hash' => csrf_hash()
+            ]);
+        }
 
         return redirect()->to('/compras');
     }

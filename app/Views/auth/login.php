@@ -207,6 +207,96 @@
       padding: 30px 35px 35px;
     }
   }
+
+  /* Splash Overlay */
+  #splashOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: linear-gradient(135deg, #1B5E7C 0%, #105285 50%, #87CEEB 100%);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  #splashOverlay.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  #splashOverlay.fade-out {
+    opacity: 0;
+  }
+
+  .splash-logo {
+    width: 140px;
+    height: auto;
+    margin-bottom: 30px;
+    animation: splashPulse 1.5s ease-in-out infinite;
+    filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.3));
+  }
+
+  .splash-text {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 0 20px;
+    opacity: 0;
+    animation: splashFadeUp 0.8s ease-out 0.3s forwards;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .splash-spinner {
+    margin-top: 25px;
+    opacity: 0;
+    animation: splashFadeUp 0.8s ease-out 0.6s forwards;
+  }
+
+  .splash-spinner .dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    margin: 0 5px;
+    animation: splashBounce 1.4s ease-in-out infinite;
+  }
+
+  .splash-spinner .dot:nth-child(1) { animation-delay: 0s; }
+  .splash-spinner .dot:nth-child(2) { animation-delay: 0.2s; }
+  .splash-spinner .dot:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes splashPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  @keyframes splashFadeUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes splashBounce {
+    0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+    40% { transform: scale(1); opacity: 1; }
+  }
+
+  @media (min-width: 576px) {
+    .splash-logo {
+      width: 180px;
+      margin-bottom: 35px;
+    }
+    .splash-text {
+      font-size: 1.5rem;
+    }
+  }
 </style>
 
 <div class="card login-card">
@@ -268,19 +358,106 @@
     </div>
 </div>
 
+<!-- Splash Overlay -->
+<div id="splashOverlay">
+  <img src="<?= base_url('assets/img/pharmalivet.png') ?>" alt="Pharmalivet" class="splash-logo">
+  <div class="splash-text">Ingresando al sistema de Puntos PHARMALIVET</div>
+  <div class="splash-spinner">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</div>
+
+<?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
 <script>
+(function() {
   // Toggle show/hide password
-  (function(){
-    const btn = document.getElementById('togglePassword');
-    const pwd = document.getElementById('password');
-    if (!btn || !pwd) return;
-    btn.addEventListener('click', function(){
-      const type = pwd.getAttribute('type') === 'password' ? 'text' : 'password';
+  var btn = document.getElementById('togglePassword');
+  var pwd = document.getElementById('password');
+  if (btn && pwd) {
+    btn.addEventListener('click', function() {
+      var type = pwd.getAttribute('type') === 'password' ? 'text' : 'password';
       pwd.setAttribute('type', type);
       this.querySelector('i').classList.toggle('fa-eye');
       this.querySelector('i').classList.toggle('fa-eye-slash');
     });
-  })();
-</script>
+  }
 
+  // AJAX Login con Splash
+  var $form = $('form[action*="login"]');
+  var $submitBtn = $form.find('.btn-login');
+  var isSubmitting = false;
+
+  $form.on('submit', function(e) {
+    e.preventDefault();
+    if (isSubmitting) return;
+    isSubmitting = true;
+
+    var originalText = $submitBtn.html();
+    $submitBtn.html('<i class="fas fa-spinner fa-spin"></i> Verificando...').prop('disabled', true);
+
+    // Limpiar errores previos de AJAX
+    $form.find('.ajax-error').remove();
+
+    $.ajax({
+      url: $form.attr('action'),
+      method: 'POST',
+      data: $form.serialize(),
+      dataType: 'json',
+      success: function(response) {
+        if (response.success) {
+          // Mostrar splash
+          var $splash = $('#splashOverlay');
+          $splash.addClass('active');
+
+          // Después de 2.5s, fade-out y redirigir
+          setTimeout(function() {
+            $splash.addClass('fade-out');
+            setTimeout(function() {
+              window.location.href = response.redirect;
+            }, 500);
+          }, 4500);
+        } else {
+          // Login fallido: mostrar error
+          showError(response.message || 'Credenciales inválidas');
+          // Actualizar CSRF token para reintento
+          if (response.csrf_hash) {
+            $form.find('input[name="csrf_test_name"]').val(response.csrf_hash);
+          }
+          resetBtn();
+        }
+      },
+      error: function(xhr) {
+        if (xhr.status === 403) {
+          showError('La sesión ha expirado. Recargando página...');
+          setTimeout(function() { window.location.reload(); }, 1500);
+        } else if (xhr.status === 0) {
+          showError('Error de conexión. Verifique su internet.');
+          resetBtn();
+        } else {
+          showError('Error inesperado. Intente nuevamente.');
+          resetBtn();
+        }
+      }
+    });
+
+    function showError(message) {
+      $form.find('.ajax-error').remove();
+      $form.find('.mb-3').first().before(
+        '<div class="alert alert-danger alert-custom-danger small ajax-error" role="alert">' + message + '</div>'
+      );
+    }
+
+    function resetBtn() {
+      $submitBtn.html(originalText).prop('disabled', false);
+      isSubmitting = false;
+    }
+  });
+})();
+</script>
 <?= $this->endSection() ?>

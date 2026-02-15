@@ -49,5 +49,8 @@
   <div class="login-box">
     <?= $this->renderSection('content') ?>
   </div>
+
+  <script src="<?= base_url('AdminLTE/plugins/jquery/jquery.min.js') ?>"></script>
+  <?= $this->renderSection('scripts') ?>
 </body>
 </html>
