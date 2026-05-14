@@ -88,6 +88,10 @@ $routes->post('perfil/password', 'Profile::changePassword', ['filter' => 'auth']
 // Ruta para servir archivos de uploads (avatars)
 $routes->get('uploads/avatars/(:any)', 'Uploads::avatar/$1');
 
+// Rutas del módulo Configuración (solo administradores)
+$routes->get('configuracion', 'ConfiguracionController::index', ['filter' => 'auth']);
+$routes->post('configuracion/guardar', 'ConfiguracionController::guardar', ['filter' => 'auth']);
+
 // Rutas del módulo Campañas (solo administradores)
 $routes->get('campanias', 'Campanias::index', ['filter' => 'auth']);
 $routes->get('campanias/crear', 'Campanias::create', ['filter' => 'auth']);

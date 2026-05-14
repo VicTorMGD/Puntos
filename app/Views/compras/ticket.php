@@ -10,10 +10,20 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+        /*
         body {
             font-family: 'Courier New', monospace;
             font-size: 12px;
+            width: 80mm;
+            margin: 0 auto;
+            padding: 10px;
+            background: #fff;
+        }
+        */
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 600;
             width: 80mm;
             margin: 0 auto;
             padding: 10px;
@@ -38,14 +48,14 @@
         }
 
         .header h2 {
-            font-size: 14px;
-            font-weight: normal;
+            font-size: 16px;
+            font-weight: bold;
         }
 
         .section {
             margin-bottom: 10px;
             padding-bottom: 10px;
-            border-bottom: 1px dashed #ccc;
+            border-bottom: 1px dashed #000;
         }
 
         .section:last-child {
@@ -72,8 +82,10 @@
             font-weight: bold;
             text-align: center;
             padding: 10px 0;
-            background: #f0f0f0;
+            background: #fff;
+            border: 1px solid #000;
             margin: 8px 0;
+            color: #000;
         }
 
         .puntos-generados {
@@ -81,45 +93,47 @@
             font-weight: bold;
             text-align: center;
             padding: 12px 0;
-            border: 2px solid #28a745;
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 2px solid #000;
+            background: #fff;
             margin: 10px 0;
-            color: #1b5e20;
+            color: #000;
         }
 
         .campania-info {
-            background: #e3f2fd;
-            border: 1px solid #90caf9;
+            background: #fff;
+            border: 1px solid #000;
             border-radius: 5px;
             padding: 8px;
             margin: 10px 0;
             font-size: 11px;
+            color: #000;
         }
 
         .campania-info .titulo {
             font-weight: bold;
-            color: #1565c0;
+            color: #000;
             margin-bottom: 5px;
             font-size: 12px;
         }
 
         .campania-info .regla {
-            color: #1976d2;
+            color: #000;
             margin-bottom: 3px;
         }
 
         .desglose {
-            background: #fff8e1;
-            border: 1px solid #ffcc80;
+            background: #fff;
+            border: 1px solid #000;
             border-radius: 5px;
             padding: 8px;
             margin: 10px 0;
             font-size: 11px;
+            color: #000;
         }
 
         .desglose .titulo {
             font-weight: bold;
-            color: #e65100;
+            color: #000;
             margin-bottom: 5px;
             font-size: 12px;
         }
@@ -127,45 +141,48 @@
         .desglose .item {
             margin-bottom: 5px;
             padding-left: 10px;
+            color: #000;
         }
 
         .desglose .item::before {
             content: ">";
             margin-right: 5px;
-            color: #ff9800;
+            color: #000;
         }
 
         .potenciador {
-            background: #fce4ec;
-            border: 1px solid #f48fb1;
+            background: #fff;
+            border: 1px solid #000;
             border-radius: 5px;
             padding: 8px;
             margin: 8px 0;
             font-size: 11px;
+            color: #000;
         }
 
         .potenciador .titulo {
             font-weight: bold;
-            color: #c2185b;
+            color: #000;
             margin-bottom: 3px;
         }
 
         .potenciador .detalle {
-            color: #ad1457;
+            color: #000;
         }
 
         .puntos-acumulados {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            border: 2px solid #4caf50;
+            background: #fff;
+            border: 2px solid #000;
             border-radius: 8px;
             padding: 12px;
             margin-top: 12px;
             text-align: center;
+            color: #000;
         }
 
         .puntos-acumulados .label {
             font-size: 10px;
-            color: #2e7d32;
+            color: #000;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 5px;
@@ -174,7 +191,7 @@
         .puntos-acumulados .valor {
             font-size: 20px;
             font-weight: bold;
-            color: #1b5e20;
+            color: #000;
         }
 
         .footer {
@@ -183,6 +200,7 @@
             margin-top: 15px;
             padding-top: 10px;
             border-top: 1px dashed #000;
+            color: #000;
         }
 
         .footer p {
@@ -203,7 +221,7 @@
             width: 100%;
             padding: 10px;
             margin-top: 15px;
-            background: #28a745;
+            background: #000;
             color: white;
             border: none;
             cursor: pointer;
@@ -211,7 +229,7 @@
         }
 
         .btn-print:hover {
-            background: #218838;
+            background: #333;
         }
     </style>
 </head>
@@ -250,7 +268,7 @@
 
         <?php if (!empty($campania_nombre)): ?>
         <div class="campania-info">
-            <div class="titulo">Campana: <?= esc($campania_nombre) ?></div>
+            <div class="titulo">Campaña: <?= esc($campania_nombre) ?></div>
             <?php if (!empty($desglose['regla_base'])): ?>
             <div class="regla"><?= $desglose['regla_base'] ?></div>
             <?php endif; ?>
@@ -292,6 +310,13 @@
                 <?= number_format($puntos_acumulados) ?> PUNTOS
             </div>
         </div>
+
+        <?php if (!empty($observacion_texto)): ?>
+        <div style="border: 1px solid #000; border-radius: 5px; padding: 8px; margin: 10px 0; font-size: 11px; color: #000;">
+            <strong>Observación:</strong><br>
+            <?= esc($observacion_texto) ?>
+        </div>
+        <?php endif; ?>
 
         <div class="footer">
             <p>Este documento es un comprobante</p>

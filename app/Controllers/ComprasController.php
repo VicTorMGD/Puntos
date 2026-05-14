@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Services\PuntosService;
 use App\Models\PuntosModel;
+use App\Models\ConfiguracionModel;
 
 class ComprasController extends BaseController
 {
@@ -95,7 +96,7 @@ class ComprasController extends BaseController
         ]);
     }
 
-
+    /*
     public function ticket($compraId)
     {
         $db = db_connect();
@@ -127,6 +128,48 @@ class ComprasController extends BaseController
         // Calcular desglose de puntos para mostrar al cliente
         $desglosePuntos = $this->calcularDesglosePuntos($data);
         $data['desglose'] = $desglosePuntos;
+
+        return view('compras/ticket', $data);
+    }
+    */
+
+    public function ticket($compraId)
+    {
+        $db = db_connect();
+
+        $data = $db->table('compras c')
+        ->select('
+            c.*,
+            cl.nombres,
+            cl.apellidos,
+            cl.numero_documento,
+            cl.puntos_acumulados,
+            camp.nombre as campania_nombre,
+            camp.monto_base,
+            camp.puntos_por_monto,
+            camp.puntos_dobles_finsemana,
+            camp.multiplicador_monto_minimo,
+            camp.multiplicador_valor
+        ')
+        ->join('clientes cl', 'cl.id = c.cliente_id')
+        ->join('campanias camp', 'camp.id = c.campania_id', 'left')
+        ->where('c.id', $compraId)
+        ->get()
+        ->getRowArray();
+
+        if (!$data) {
+            return redirect()->to('/compras')->with('error', 'Compra no encontrada');
+        }
+
+        $desglosePuntos = $this->calcularDesglosePuntos($data);
+        $data['desglose'] = $desglosePuntos;
+
+        // Observación desde configuración
+        $configModel = new ConfiguracionModel();
+        $config = $configModel->getModulo('tickets');
+        $data['observacion_texto']     = ($config['observacion_en_compra'] === '1')
+                                            ? ($config['observacion_texto'] ?? '')
+                                            : '';
 
         return view('compras/ticket', $data);
     }
@@ -198,6 +241,7 @@ class ComprasController extends BaseController
     /**
      * Genera un ticket solo con los puntos actuales del cliente (sin compra)
      */
+    /*
     public function ticketCliente($clienteId)
     {
         $db = db_connect();
@@ -216,5 +260,29 @@ class ComprasController extends BaseController
         
         return view('compras/ticket_cliente', $data);
     }
+    */
+    public function ticketCliente($clienteId)
+    {
+        $db = db_connect();
 
+        $data = $db->table('clientes')
+            ->select('nombres, apellidos, numero_documento, puntos_acumulados')
+            ->where('id', $clienteId)
+            ->get()->getRowArray();
+
+        if (!$data) {
+            return 'Cliente no encontrado';
+        }
+
+        $data['fecha_consulta'] = date('Y-m-d H:i:s');
+
+        // Observación desde configuración
+        $configModel = new ConfiguracionModel();
+        $config = $configModel->getModulo('tickets');
+        $data['observacion_texto'] = ($config['observacion_en_consulta'] === '1')
+                                        ? ($config['observacion_texto'] ?? '')
+                                        : '';
+
+        return view('compras/ticket_cliente', $data);
+    }
 }

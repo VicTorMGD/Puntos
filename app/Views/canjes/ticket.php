@@ -12,8 +12,9 @@
         }
 
         body {
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 600;
             width: 80mm;
             margin: 0 auto;
             padding: 10px;
@@ -38,14 +39,14 @@
         }
 
         .header h2 {
-            font-size: 14px;
-            font-weight: normal;
+            font-size: 16px;
+            font-weight: bold;
         }
 
         .section {
             margin-bottom: 10px;
             padding-bottom: 10px;
-            border-bottom: 1px dashed #ccc;
+            border-bottom: 1px dashed #000;
         }
 
         .section:last-child {
@@ -102,7 +103,7 @@
             width: 100%;
             padding: 10px;
             margin-top: 15px;
-            background: #28a745;
+            background: #000;
             color: white;
             border: none;
             cursor: pointer;
@@ -110,11 +111,12 @@
         }
 
         .btn-print:hover {
-            background: #218838;
+            background: #333;
         }
 
         .observacion {
-            background: #f5f5f5;
+            background: #fff;
+            border: 1px solid #000;
             padding: 8px;
             margin-top: 10px;
             font-style: italic;
@@ -122,17 +124,18 @@
         }
 
         .puntos-restantes {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            border: 2px solid #4caf50;
+            background: #fff;
+            border: 2px solid #000;
             border-radius: 8px;
             padding: 12px;
             margin-top: 12px;
             text-align: center;
+            color: #000;
         }
 
         .puntos-restantes .label {
             font-size: 10px;
-            color: #2e7d32;
+            color: #000;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 5px;
@@ -141,7 +144,7 @@
         .puntos-restantes .valor {
             font-size: 20px;
             font-weight: bold;
-            color: #1b5e20;
+            color: #000;
         }
 
         .puntos-restantes .icono {
@@ -207,6 +210,13 @@
                 <span class="icono">⭐</span><?= number_format($puntos_restantes) ?> PUNTOS
             </div>
         </div>
+
+        <?php if (!empty($observacion_texto)): ?>
+        <div style="border: 1px solid #000; border-radius: 5px; padding: 8px; margin: 10px 0; font-size: 11px; color: #000;">
+            <strong>Observación:</strong><br>
+            <?= esc($observacion_texto) ?>
+        </div>
+        <?php endif; ?>
 
         <div class="footer">
             <p>Este documento es un comprobante</p>

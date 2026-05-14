@@ -320,6 +320,29 @@ class Canjes extends BaseController
         }
     }
 
+    // /**
+    //  * Genera el ticket de canje
+    //  */
+    // public function ticket($canjeId)
+    // {
+    //     $canje = $this->canjeModel->getCanjeConDetalles($canjeId);
+
+    //     if (!$canje) {
+    //         return redirect()->to('/canjes')->with('error', 'Canje no encontrado');
+    //     }
+
+    //     // Obtener puntos actuales del cliente
+    //     $cliente = $this->clienteModel->find($canje['cliente_id']);
+    //     $puntosRestantes = $cliente ? (int)$cliente['puntos_acumulados'] : 0;
+
+    //     $data = [
+    //         'title' => 'Comprobante de Canje',
+    //         'canje' => $canje,
+    //         'puntos_restantes' => $puntosRestantes
+    //     ];
+
+    //     return view('canjes/ticket', $data);
+    // }
     /**
      * Genera el ticket de canje
      */
@@ -335,10 +358,18 @@ class Canjes extends BaseController
         $cliente = $this->clienteModel->find($canje['cliente_id']);
         $puntosRestantes = $cliente ? (int)$cliente['puntos_acumulados'] : 0;
 
+        // Observación desde configuración
+        $configModel = new \App\Models\ConfiguracionModel();
+        $config = $configModel->getModulo('tickets');
+        $observacionTexto = ($config['observacion_en_canje'] === '1')
+                                ? ($config['observacion_texto'] ?? '')
+                                : '';
+
         $data = [
-            'title' => 'Comprobante de Canje',
-            'canje' => $canje,
-            'puntos_restantes' => $puntosRestantes
+            'title'             => 'Comprobante de Canje',
+            'canje'             => $canje,
+            'puntos_restantes'  => $puntosRestantes,
+            'observacion_texto' => $observacionTexto
         ];
 
         return view('canjes/ticket', $data);

@@ -83,6 +83,15 @@
               <p>Usuarios</p>
             </a>
           </li>
+
+          <!-- Configuración (solo admin) -->
+          <li class="nav-item">
+            <a href="<?= base_url('configuracion') ?>"
+               class="nav-link <?= uri_string() == 'configuracion' ? 'active' : '' ?>">
+              <i class="nav-icon fas fa-crow"></i>
+              <p>Configuración</p>
+            </a>
+          </li>
         <?php endif; ?>
 
       </ul>
