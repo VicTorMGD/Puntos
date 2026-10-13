@@ -312,8 +312,8 @@
         </div>
 
         <?php if (!empty($observacion_texto)): ?>
-        <div style="border: 1px solid #000; border-radius: 5px; padding: 8px; margin: 10px 0; font-size: 11px; color: #000;">
-            <strong>Observación:</strong><br>
+        <div style="border: 1px solid #000; border-radius: 5px; padding: 8px; margin: 10px 0; font-size: 11px; color: #000; text-align: center;">
+            <!-- <strong>Observación:</strong><br> -->
             <?= esc($observacion_texto) ?>
         </div>
         <?php endif; ?>
